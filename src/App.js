@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
+import * as ReadableAPI from './utils/ReadableAPI'
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  state = {
+    categories: []
+  }
+
+  componentDidMount() {
+    ReadableAPI.getAll().then((categories) => {
+      this.setState({ categories });
+
+      console.log(categories);
+      console.log(this.state.categories);
+    });
+  }
+
   render() {
     return (
       <div className="App">
