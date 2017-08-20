@@ -31,7 +31,7 @@ function category(state = initialCategoriesState, action) {
 				[category]: {
 					...state[category],
 					[post]: post.body
-				};
+				}
 			};
 		case REMOVE_POST:
 			return {
@@ -39,7 +39,7 @@ function category(state = initialCategoriesState, action) {
 				[category]: {
 					...state[category],
 					[post]: null
-				};
+				}
 			};
 		default:
 			return state;
