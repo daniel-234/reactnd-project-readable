@@ -10,28 +10,31 @@ import {
 // undefined and then we will go ahead and set
 // our initial state to this object.
 const initialCategoriesState = {
-	react: null,
-	redux: null,
-	udacity: null
+	react: [],
+	redux: [],
+	udacity: []
 };
 
-// Reducer that will set the state to the
-// constant defined above if the state is
-// undefined.
+// Reducer that will set the state to the constant defined
+// above if the state is undefined.
 function category(state = initialCategoriesState, action) {
 	// Take some properties from our action.
 	const { category, post } = action;
 
-	// Specify how our state will change based on those
-	// actions.
+	// Specify how our state will change based on those actions.
 	switch(action.type) {
 		case ADD_POST:
 			return {
+				// Using object spread syntax, return the same state that
+				// we had before.
 				...state,
-				[category]: {
+				// Modify the specific category passed by the action.
+				[category]: [
+					// state at this specific category is going to remain the same.
 					...state[category],
-					[post]: post.body
-				}
+					// Just add the given post.
+					post
+				]
 			};
 		case REMOVE_POST:
 			return {
