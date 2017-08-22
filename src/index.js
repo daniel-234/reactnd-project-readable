@@ -5,12 +5,22 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
 import reducer from './reducers';
+import { Provider } from 'react-redux';
 
 const store = createStore(
 	reducer,
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-// Pass store as prop to the App Component.
-ReactDOM.render(<App store={store}/>, document.getElementById('root'));
+// Use the `react-redux` bindings to make connecting the Redux store
+// with the React components a lot easier.
+// Wrap the main root component inside of Provider and pass it the store.
+// This way whenever any of the components that the App renders or App itself
+// needs access to Redux store or needs to dispatch an action, it will be able
+// to do that more easily.
+ReactDOM.render(
+	<Provider store={store}>
+		<App />
+	</Provider>,
+	document.getElementById('root'));
 registerServiceWorker();
