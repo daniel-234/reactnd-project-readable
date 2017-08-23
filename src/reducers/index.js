@@ -17,7 +17,7 @@ const initialCategoriesState = {
 
 // Reducer that will set the state to the constant defined
 // above if the state is undefined.
-function category(state = initialCategoriesState, action) {
+function categoryPosts(state = initialCategoriesState, action) {
 	// Take some properties from our action.
 	const { category, post } = action;
 
@@ -49,4 +49,4 @@ function category(state = initialCategoriesState, action) {
 	}
 }
 
-export default category;
+export default categoryPosts;
