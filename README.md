@@ -26,3 +26,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * [Stackoverflow - Warning: Unknown DOM property class. Did you mean className?](https://stackoverflow.com/questions/30968113/warning-unknown-dom-property-class-did-you-mean-classname)
 * [CSS Tricks - React forms using refs](https://css-tricks.com/react-forms-using-refs/)
 * [Gosha Arinich - Controlled vs uncontrolled inputs React](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/)
+* [Stackoverflow - Clearing my form inputs after submission](https://stackoverflow.com/questions/14589193/clearing-my-form-inputs-after-submission)
