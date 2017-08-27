@@ -48,20 +48,6 @@ class App extends Component {
               <button type='button' onClick={this.submitPost}>Submit</button>
             </div>
           </form>
-
-
-          {
-            /*
-              <input
-            type='text'
-            ref={(input) => this.input = input}
-            placeholder="Write a post about React"
-          />
-          <button onClick={this.submitPost}>Submit</button>
-            */
-          }
-
-
       </div>
     );
   }

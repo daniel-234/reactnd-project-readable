@@ -1,52 +1,83 @@
-// Import both the constants from actions.
+// Import the actions that need to be handled.
 import {
 	ADD_POST,
-	ADD_COMMENT
+	// ADD_COMMENT
 } from '../actions';
 
-// Shape of our initial state.
-// The first time our reducer is called,
-// it's going to be called with a state of
-// undefined and then we will go ahead and set
-// our initial state to this object.
-const initialCategoriesState = {
-	react: [],
-	redux: [],
-	udacity: []
+/*
+ * Initial state of the application.
+ *
+ * Following the Redux documentation, it was found that the shape
+ * of the application state had to adhere to the rules of normalizing
+ * data.
+ * This way, although more components are connected, each one is
+ * responsible for looking up its own data.
+ * To avoid reducers having to deal with large amounts of data and to
+ * optimize UI performance, connected parent components will simply pass
+ * item ids to connected children.
+ * To organize normalized data in state as suggested in the Redux guide,
+ * it was followed the pattern of putting the relational 'tables' under
+ * a common parent key, named 'entities'.
+ */
+const initialState = {
+	selectedCategory: 'react',
+	entities: {
+		posts: {},
+		comments: {}
+	},
+	postsByCategory: {
+		react: {
+			items: []
+		},
+		redux: {
+			items: []
+		},
+		udacity: {
+			items: []
+		}
+	}
 };
 
-// Reducer that will set the state to the constant defined
-// above if the state is undefined.
-function categoryPosts(state = initialCategoriesState, action) {
-	// Take some properties from our action.
-	const { category, post } = action;
+/*
+ * Define reducers to handle the imported actions.
+ * A reducer is a pure function that takes the previous state and an
+ * action and returns the next state.
+ */
 
-	// Specify how our state will change based on those actions.
-	switch(action.type) {
+// Handle the ADD_POST action.
+function addPost(state = initialState, action) {
+	// Take properties from the action through object destructuring.
+	const { post } = action;
+	/*
+	 * See 'Handling More Actions' paragraph in the 'Reducer' section
+	 * in the Redux documentation.
+	 */
+	switch (action.type) {
 		case ADD_POST:
+			/*
+			 * `We don't mutate state. We create a copy of it. Using the
+			 * object spread operator, we can write { ...state, ...newState}`.
+			 * [Reducers section in the Redux documentation]
+			 */
 			return {
-				// Using object spread syntax, return the same state that
-				// we had before.
+				// Return the previous state (copying its enumerable properties).
 				...state,
-				// Modify the specific category passed by the action.
-				[category]: [
-					// state at this specific category is going to remain the same.
-					...state[category],
-					// Just add the given post.
-					post
-				]
+				// Modify the `entities` property with the passed in value.
+				entities: {
+					// Return the previous `entities` property from state.
+					...state.entities,
+					// Modify the `posts` property with the passed in value.
+					posts: {
+						// Return the previous `posts` property from state.
+						...state.entities.posts,
+						// Add the new post passed by the action.
+						post
+					}
+				}
 			};
-		// case REMOVE_POST:
-		// 	return {
-		// 		...state,
-		// 		[category]: {
-		// 			...state[category],
-		// 			[post]: null
-		// 		}
-		// 	};
 		default:
 			return state;
 	}
 }
 
-export default categoryPosts;
+export default addPost;
