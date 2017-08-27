@@ -1,7 +1,7 @@
 // Import both the constants from actions.
 import {
 	ADD_POST,
-	REMOVE_POST
+	ADD_COMMENT
 } from '../actions';
 
 // Shape of our initial state.
@@ -36,14 +36,14 @@ function categoryPosts(state = initialCategoriesState, action) {
 					post
 				]
 			};
-		case REMOVE_POST:
-			return {
-				...state,
-				[category]: {
-					...state[category],
-					[post]: null
-				}
-			};
+		// case REMOVE_POST:
+		// 	return {
+		// 		...state,
+		// 		[category]: {
+		// 			...state[category],
+		// 			[post]: null
+		// 		}
+		// 	};
 		default:
 			return state;
 	}

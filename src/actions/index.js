@@ -1,20 +1,24 @@
-// Define constants to avoid relying on string comparisons everywhere.
-export const ADD_POST = 'ADD_POST';
-export const REMOVE_POST = 'REMOVE_POST';
+/*
+ * Action types.
+ */
 
-// Action creator to add a post to a specific category.
-export function addPost({ category, post }) {
+export const ADD_POST = 'ADD_POST';
+export const ADD_COMMENT = 'ADD_COMMENT';
+
+/*
+ * Action creators.
+ */
+
+export function addPost({ post }) {
 	return {
 		type: ADD_POST,
-		category,
 		post
 	};
 };
 
-// Action creator to delete a specific post.
-export function removePost({ post }) {
+export function addComment({ comment }) {
 	return {
-		type: REMOVE_POST,
-		post
+		type: ADD_COMMENT,
+		comment
 	};
 };
