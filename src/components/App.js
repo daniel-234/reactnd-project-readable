@@ -5,7 +5,7 @@ import '.././App.css';
 
 class App extends Component {
   submitPost = () => {
-
+    console.log(this.form.title);
     this.props.displayPost({
       category: 'react',
       post: {

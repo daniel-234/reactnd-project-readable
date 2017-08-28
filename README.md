@@ -21,6 +21,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 * [Stackoverflow - How to add an element to an array in Redux](https://stackoverflow.com/questions/40911194/how-do-i-add-an-element-to-array-in-reducer-of-react-native-redux)
+* [Stackoverflow - Adding multiple objects to the store in Redux](https://stackoverflow.com/questions/42463609/adding-multiple-objects-to-the-store-in-redux)
 * Resources I used to build the form:
 * [MDN - Your first HTML form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)
 * [Stackoverflow - Warning: Unknown DOM property class. Did you mean className?](https://stackoverflow.com/questions/30968113/warning-unknown-dom-property-class-did-you-mean-classname)

@@ -10,9 +10,11 @@ export const ADD_COMMENT = 'ADD_COMMENT';
  */
 
 export function addPost({ post }) {
+	var id = Math.random() * 1000;
 	return {
 		type: ADD_POST,
-		post
+		post,
+		id
 	};
 };
 

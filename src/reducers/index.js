@@ -47,7 +47,10 @@ const initialState = {
 // Handle the ADD_POST action.
 function addPost(state = initialState, action) {
 	// Take properties from the action through object destructuring.
-	const { post } = action;
+	console.log(action);
+	const { post, id } = action;
+	console.log(id);
+	console.log(action.post);
 	/*
 	 * See 'Handling More Actions' paragraph in the 'Reducer' section
 	 * in the Redux documentation.
@@ -71,7 +74,7 @@ function addPost(state = initialState, action) {
 						// Return the previous `posts` property from state.
 						...state.entities.posts,
 						// Add the new post passed by the action.
-						post
+						[id]: post
 					}
 				}
 			};
