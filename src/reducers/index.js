@@ -1,3 +1,6 @@
+import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
+
 // Import the actions that need to be handled.
 import {
 	ADD_POST,
@@ -83,4 +86,8 @@ function addPost(state = initialState, action) {
 	}
 }
 
-export default addPost;
+// export default addPost;
+export default combineReducers({
+	addPost,
+	form: formReducer
+});
