@@ -27,6 +27,15 @@ class App extends Component {
           <h1>Readable App</h1>
         </div>
         <h2>Add a post</h2>
+        {
+          /*
+           * `onSubmit` prop passed from the App Container to the
+           * PostForm Component.
+           * The Component will look for it in its prop to know
+           * what `handleSubmit` will do with the values passed
+           * by the user in the form.
+           */
+        }
         <PostForm onSubmit={this.submit} />
       </div>
     );

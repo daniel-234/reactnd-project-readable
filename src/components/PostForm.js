@@ -5,6 +5,17 @@ let PostForm = props => {
 	const { handleSubmit } = props;
 
 	return (
+    /*
+     * "Redux form provides a special `handleSubmit` function that we
+     * give to the form on submit.
+     * There are two different ways to use the `handleSubmit`.
+     * You can just pass `handleSubmit`, in which case Redux will just
+     * look for a `onSubmit` prop that was given to your Component by
+     * its Container and we'll use it for submitting.
+     * If, instead, you want self-contained submission inside of your
+     * form Component, you can give it your own function and it will use
+     * that instead".
+     */
 		<form onSubmit={ handleSubmit }>
       <div>
         <label htmlFor="title">Title:</label>
@@ -16,9 +27,9 @@ let PostForm = props => {
       </div>
       <div>
         <label htmlFor='body'>Body:</label>
-        <Field name='body' component='input' type='textarea' />
+        <Field name='body' component='textarea' />
       </div>
-      <button type='submit'>Submit</button>
+      <button className='button' type='submit'>Submit</button>
 		</form>
 	)
 }
@@ -28,6 +39,16 @@ const afterSubmit = (result, dispatch) => (
 	dispatch(reset('posts'))
 );
 
+/*
+ * Decorate PostForm with `reduxForm` decorator.
+ * We give the `reduxForm` decorator the name of our form and that is
+ * going to be used as the key for our form data in the Redux store. So
+ * it needs to be unique for this form.
+ * The `reduxForm` function gives back a decorator which can be used to
+ * decorate our Component.
+ * What that does is it creates what's called a higher-order Component
+ * that wraps our form Component and can provide it props and functionality.
+ */
 PostForm = reduxForm({
 	form: 'posts',
 	onSubmitSuccess: afterSubmit

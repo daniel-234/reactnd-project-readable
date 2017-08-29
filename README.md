@@ -38,4 +38,5 @@ Here a list of the resources that helped me most:
 * [Hackernoon - Using forms in React-Redux: tips and tricks](https://hackernoon.com/using-forms-in-react-redux-tips-and-tricks-48ad9c7522f6)
 * [Medium - Using Redux to handle user input](https://medium.com/@jtbennett/using-redux-form-to-handle-user-input-1392826f2c6d)
 * [Redux-form docs: Getting started with redux-form](http://redux-form.com/6.0.0-alpha.4/docs/GettingStarted.md/)
+* [Erik Rasmussen - Abstracting Form State with Redux Form](https://www.youtube.com/watch?v=eDTi7lYR1VU&feature=youtu.be)
 * [Stackoverflow - Clear 'redux-form' after submitting](https://stackoverflow.com/questions/42551955/clear-redux-form-fields-after-submitting)
