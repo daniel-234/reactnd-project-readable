@@ -33,14 +33,19 @@ label {
   display: inline-block;
   width: 90px;
   text-align: right;
+  padding-right: 3px;
 }
 
-input {
+input, select {
   padding: 1.5px;
 }
 
 input, textarea {
   width: 300px;
+}
+
+select {
+  width: 307px;
 }
 
 textarea {

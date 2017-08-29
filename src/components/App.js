@@ -13,8 +13,11 @@ class App extends Component {
       post: {
         title: values.title,
         author: values.author,
+        category: values.category,
         body: values.body
       }
+
+
     });
   }
 

@@ -18,15 +18,24 @@ let PostForm = props => {
      */
 		<form onSubmit={ handleSubmit }>
       <div>
-        <label htmlFor="title">Title:</label>
+        <label>Title</label>
         <Field name='title' component='input' type='text' />
       </div>
       <div>
-        <label htmlFor='author'>Author:</label>
+        <label>Author</label>
         <Field name='author' component='input' type='text' />
       </div>
       <div>
-        <label htmlFor='body'>Body:</label>
+        <label>Category</label>
+        <Field name='category' component='select'>
+          <option></option>
+          <option value='react'>React</option>
+          <option value='redux'>Redux</option>
+          <option value='udacity'>Udacity</option>
+        </Field>
+      </div>
+      <div>
+        <label>Body</label>
         <Field name='body' component='textarea' />
       </div>
       <button className='button' type='submit'>Submit</button>
