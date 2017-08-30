@@ -4,7 +4,7 @@ import { reducer as formReducer } from 'redux-form';
 // Import the actions that need to be handled.
 import {
 	ADD_POST,
-	// ADD_COMMENT
+	ADD_COMMENT
 } from '../actions';
 
 /*
@@ -25,9 +25,12 @@ import {
 const initialState = {
 	selectedCategory: 'react',
 	entities: {
-		posts: {},
+		posts: {
+			comments: []
+		},
 		comments: {}
 	},
+	allPosts: [],
 	postsByCategory: {
 		react: {
 			items: []
@@ -47,8 +50,8 @@ const initialState = {
  * action and returns the next state.
  */
 
-// Handle the ADD_POST action.
-function addPost(state = initialState, action) {
+// Post reducer.
+function post(state = initialState, action) {
 	// Take properties from the action through object destructuring.
 	console.log(action);
 	const { post, id } = action;
@@ -71,15 +74,23 @@ function addPost(state = initialState, action) {
 				// Modify the `entities` property with the passed in value.
 				entities: {
 					// Return the previous `entities` property from state.
-					...state.entities,
+
+					// ...state.entities,
+
 					// Modify the `posts` property with the passed in value.
 					posts: {
 						// Return the previous `posts` property from state.
 						...state.entities.posts,
 						// Add the new post passed by the action.
-						[id]: post
+						[id]: post,
+						comments: state.entities.posts.comments.concat(id)
+					},
+					comments: {
+						...state.entities.comments,
+						[id]: post.comment
 					}
 				},
+				allPosts: state.allPosts.concat(id),
 				// Assign the post id to the right category.
 				postsByCategory: {
 					// Return the previous categories.
@@ -97,7 +108,31 @@ function addPost(state = initialState, action) {
 	}
 }
 
+// Comment reducer.
+// function comment(state = initialState, action) {
+// 	const { comment, id } = action;
+// 	switch(action.type) {
+// 		case ADD_COMMENT:
+// 			return {
+// 				...state,
+// 				entities: {
+// 					posts: {
+// 						...state.entities.posts,
+// 						comments: state.entities.comments.concat(id)
+// 					},
+// 					comments: {
+// 						...state.entities.comments,
+// 						[id]: comment
+// 					}
+// 				}
+// 			}
+// 		default:
+// 			return state;
+// 	}
+// }
+
 export default combineReducers({
-	addPost,
+	post,
+	// comment,
 	form: formReducer
 });

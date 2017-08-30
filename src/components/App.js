@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost } from '../actions';
+import { addPost, addComment } from '../actions';
 import PostForm from './PostForm';
 import { reset } from 'redux-form';
 
@@ -14,15 +14,28 @@ class App extends Component {
         title: values.title,
         author: values.author,
         category: values.category,
-        body: values.body
+        body: values.body,
+        comment: values.comment
       }
 
 
     });
   }
 
+  getAllPosts = () => {
+    // console.log(this.props.posts.post.allPosts);
+    const allPosts = this.props.posts.post.allPosts;
+    console.log(this.props.posts.post.entities.posts);
+    console.log(this.props.posts);
+    console.log(allPosts);
+
+    return allPosts;
+    // })
+  }
+
+
   render() {
-    console.log(this.props);
+    // this.getAllPosts();
 
     return (
       <div className="App">
@@ -39,7 +52,7 @@ class App extends Component {
            * by the user in the form.
            */
         }
-        <PostForm onSubmit={this.submit} />
+        <PostForm onSubmit={this.submit} getPosts={this.getAllPosts} />
       </div>
     );
   }
@@ -48,9 +61,9 @@ class App extends Component {
 // Takes the current store state and returns it as props.
 // TODO
 // Refactor argument and argument name
-function mapStateToProps(categoryPosts) {
+function mapStateToProps(posts) {
   return {
-    categoryPosts
+    posts
   }
 }
 

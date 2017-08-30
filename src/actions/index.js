@@ -13,7 +13,7 @@ export const ADD_COMMENT = 'ADD_COMMENT';
  */
 
 export function addPost({ post }) {
-	var id = generateUUID();
+	const id = generateUUID();
 	return {
 		type: ADD_POST,
 		post,
@@ -22,8 +22,10 @@ export function addPost({ post }) {
 };
 
 export function addComment({ comment }) {
+	const id = generateUUID();
 	return {
 		type: ADD_COMMENT,
-		comment
+		comment,
+		id
 	};
 };

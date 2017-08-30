@@ -2,8 +2,8 @@ import React from 'react';
 import { Field, reduxForm, reset } from 'redux-form';
 
 let PostForm = props => {
-	const { handleSubmit } = props;
-
+	const { handleSubmit, getPosts } = props;
+  console.log(getPosts());
 	return (
     /*
      * "Redux form provides a special `handleSubmit` function that we
@@ -37,6 +37,26 @@ let PostForm = props => {
       <div>
         <label>Body</label>
         <Field name='body' component='textarea' />
+      </div>
+      <div>
+        <label>Post</label>
+        <Field name='allPosts' component='select'>
+          <option></option>
+          {getPosts().map((postId, index) => (
+            <option
+              key={index}
+              name={postId}
+              value={postId}
+            >
+              {String(postId)}
+            </option>
+          ))}
+        </Field>
+
+      </div>
+      <div>
+        <label>Comment</label>
+        <Field name='comment' component='textarea' />
       </div>
       <button className='button' type='submit'>Submit</button>
 		</form>
