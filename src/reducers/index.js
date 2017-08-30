@@ -79,6 +79,17 @@ function addPost(state = initialState, action) {
 						// Add the new post passed by the action.
 						[id]: post
 					}
+				},
+				// Assign the post id to the right category.
+				postsByCategory: {
+					// Return the previous categories.
+					...state.postsByCategory,
+					// Get the category key from the post.
+					[post.category]: {
+						// Add the new id to the items collection.
+						items: state.postsByCategory[post.category].items.concat(id)
+					}
+
 				}
 			};
 		default:
@@ -86,7 +97,6 @@ function addPost(state = initialState, action) {
 	}
 }
 
-// export default addPost;
 export default combineReducers({
 	addPost,
 	form: formReducer
