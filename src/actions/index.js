@@ -1,3 +1,6 @@
+// ID generator function.
+import generateUUID from '../utils/generateID.js';
+
 /*
  * Action types.
  */
@@ -10,7 +13,7 @@ export const ADD_COMMENT = 'ADD_COMMENT';
  */
 
 export function addPost({ post }) {
-	var id = Math.random() * 1000;
+	var id = generateUUID();
 	return {
 		type: ADD_POST,
 		post,
