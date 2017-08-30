@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addPost, addComment } from '../actions';
 import PostForm from './PostForm';
+import CommentForm from './CommentForm';
 import { reset } from 'redux-form';
 
 import '.././App.css';
 
 class App extends Component {
-  submit = (values) => {
+  submitPost = (values) => {
     console.log(values);
     this.props.displayPost({
       post: {
@@ -15,10 +16,18 @@ class App extends Component {
         author: values.author,
         category: values.category,
         body: values.body,
-        comment: values.comment
+        // comment: values.comment
       }
+    });
+  }
 
-
+  submitComment = (values) => {
+    console.log(values);
+    console.log(this.props);
+    this.props.displayComment({
+      comment: {
+        body: values.comment
+      }
     });
   }
 
@@ -52,7 +61,9 @@ class App extends Component {
            * by the user in the form.
            */
         }
-        <PostForm onSubmit={this.submit} getPosts={this.getAllPosts} />
+        <PostForm onSubmit={this.submitPost} />
+        <h2>Add a comment</h2>
+        <CommentForm onSubmit={this.submitComment} getPosts={this.getAllPosts} />
       </div>
     );
   }
@@ -69,7 +80,8 @@ function mapStateToProps(posts) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    displayPost: (data) => dispatch(addPost(data))
+    displayPost: (data) => dispatch(addPost(data)),
+    displayComment: (data) => dispatch(addComment(data))
   }
 }
 

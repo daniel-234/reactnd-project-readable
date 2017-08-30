@@ -1,9 +1,10 @@
 import React from 'react';
 import { Field, reduxForm, reset } from 'redux-form';
 
-let PostForm = props => {
-	const { handleSubmit } = props;
-  // console.log(getPosts());
+let CommentForm = props => {
+	const { handleSubmit, getPosts } = props;
+  console.log(handleSubmit);
+  console.log(getPosts());
 	return (
     /*
      * "Redux form provides a special `handleSubmit` function that we
@@ -18,25 +19,24 @@ let PostForm = props => {
      */
 		<form onSubmit={ handleSubmit }>
       <div>
-        <label>Title</label>
-        <Field name='title' component='input' type='text' />
-      </div>
-      <div>
-        <label>Author</label>
-        <Field name='author' component='input' type='text' />
-      </div>
-      <div>
-        <label>Category</label>
-        <Field name='category' component='select'>
+        <label>Post</label>
+        <Field name='allPosts' component='select'>
           <option></option>
-          <option value='react'>React</option>
-          <option value='redux'>Redux</option>
-          <option value='udacity'>Udacity</option>
+          {getPosts().map((postId, index) => (
+            <option
+              key={index}
+              name={postId}
+              value={postId}
+            >
+              {String(postId)}
+            </option>
+          ))}
         </Field>
+
       </div>
       <div>
-        <label>Body</label>
-        <Field name='body' component='textarea' />
+        <label>Comment</label>
+        <Field name='comment' component='textarea' />
       </div>
       <button className='button' type='submit'>Submit</button>
 		</form>
@@ -58,9 +58,9 @@ const afterSubmit = (result, dispatch) => (
  * What that does is it creates what's called a higher-order Component
  * that wraps our form Component and can provide it props and functionality.
  */
-PostForm = reduxForm({
+CommentForm = reduxForm({
 	form: 'posts',
 	onSubmitSuccess: afterSubmit
-})(PostForm)
+})(CommentForm)
 
-export default PostForm;
+export default CommentForm;

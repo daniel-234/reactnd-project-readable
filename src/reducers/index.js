@@ -83,12 +83,14 @@ function post(state = initialState, action) {
 						...state.entities.posts,
 						// Add the new post passed by the action.
 						[id]: post,
-						comments: state.entities.posts.comments.concat(id)
+
+
+						// comments: state.entities.posts.comments.concat(id)
 					},
-					comments: {
-						...state.entities.comments,
-						[id]: post.comment
-					}
+					// comments: {
+					// 	...state.entities.comments,
+					// 	[id]: post.comment
+					// }
 				},
 				allPosts: state.allPosts.concat(id),
 				// Assign the post id to the right category.
@@ -109,30 +111,30 @@ function post(state = initialState, action) {
 }
 
 // Comment reducer.
-// function comment(state = initialState, action) {
-// 	const { comment, id } = action;
-// 	switch(action.type) {
-// 		case ADD_COMMENT:
-// 			return {
-// 				...state,
-// 				entities: {
-// 					posts: {
-// 						...state.entities.posts,
-// 						comments: state.entities.comments.concat(id)
-// 					},
-// 					comments: {
-// 						...state.entities.comments,
-// 						[id]: comment
-// 					}
-// 				}
-// 			}
-// 		default:
-// 			return state;
-// 	}
-// }
+function comment(state = initialState, action) {
+	const { comment, id } = action;
+	switch(action.type) {
+		case ADD_COMMENT:
+			return {
+				...state,
+				entities: {
+					posts: {
+						...state.entities.posts,
+						comments: state.entities.posts.comments.concat(id)
+					},
+					comments: {
+						...state.entities.comments,
+						[id]: comment
+					}
+				}
+			}
+		default:
+			return state;
+	}
+}
 
 export default combineReducers({
 	post,
-	// comment,
+	comment,
 	form: formReducer
 });
