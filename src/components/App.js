@@ -27,27 +27,34 @@ class App extends Component {
     this.props.displayComment({
       comment: {
         body: values.comment
-      }
+      },
+      postId: values.allPosts
     });
+    // this.props.addToPost({
+    //   console.log(values);
+    // })
   }
 
   getAllPosts = () => {
     console.log(this.props);
-    // console.log(this.props.posts.post.allPosts);
-    // const allPosts = this.props.posts.post.allPosts;
+    console.log(this.props.posts.allPosts);
+
+    const allPosts = this.props.posts.allPosts;
+
     // console.log(this.props.posts.post.entities.posts);
     // console.log(this.props.posts);
     // console.log(allPosts);
 
-    // return allPosts;
+    return allPosts;
     // })
 
-    return ['a', 'b', 'c'];
+    // return ['a', 'b', 'c'];
   }
 
 
   render() {
     // this.getAllPosts();
+    console.log(this.props);
 
     return (
       <div className="App">
@@ -75,14 +82,16 @@ class App extends Component {
 // Takes the current store state and returns it as props.
 function mapStateToProps(posts) {
   return {
-    posts
+    posts,
+    refactored: posts.allPosts
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     displayPost: (data) => dispatch(addPost(data)),
-    displayComment: (data) => dispatch(addComment(data))
+    displayComment: (data) => dispatch(addComment(data)),
+    // addToPost: (data) => dispatch(addCommentToPost(data))
   }
 }
 
