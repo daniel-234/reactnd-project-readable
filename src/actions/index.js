@@ -7,6 +7,17 @@ import generateUUID from '../utils/generateID.js';
 
 export const ADD_POST = 'ADD_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
+export const SET_CATEGORY = 'SET_CATEGORY';
+
+/*
+ * Other constants.
+ */
+
+export const allCategories = {
+	REACT: 'REACT',
+	REDUX: 'REDUX',
+	UDACITY: 'UDACITY'
+};
 
 /*
  * Action creators.
@@ -27,5 +38,12 @@ export function addComment({ comment }) {
 		type: ADD_COMMENT,
 		comment,
 		id
+	};
+};
+
+export function setCategory(category) {
+	return {
+		type: SET_CATEGORY,
+		category
 	};
 };

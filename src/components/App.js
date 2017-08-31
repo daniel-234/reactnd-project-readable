@@ -33,13 +33,15 @@ class App extends Component {
 
   getAllPosts = () => {
     // console.log(this.props.posts.post.allPosts);
-    const allPosts = this.props.posts.post.allPosts;
-    console.log(this.props.posts.post.entities.posts);
-    console.log(this.props.posts);
-    console.log(allPosts);
+    // const allPosts = this.props.posts.post.allPosts;
+    // console.log(this.props.posts.post.entities.posts);
+    // console.log(this.props.posts);
+    // console.log(allPosts);
 
-    return allPosts;
+    // return allPosts;
     // })
+
+    return ['a', 'b', 'c'];
   }
 
 
