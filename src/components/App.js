@@ -32,6 +32,7 @@ class App extends Component {
   }
 
   getAllPosts = () => {
+    console.log(this.props);
     // console.log(this.props.posts.post.allPosts);
     // const allPosts = this.props.posts.post.allPosts;
     // console.log(this.props.posts.post.entities.posts);
@@ -72,8 +73,6 @@ class App extends Component {
 }
 
 // Takes the current store state and returns it as props.
-// TODO
-// Refactor argument and argument name
 function mapStateToProps(posts) {
   return {
     posts

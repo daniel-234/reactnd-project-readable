@@ -55,7 +55,7 @@ const initialState = {
 // Extract the React category.
 const { REACT } = allCategories;
 
-// Define a reducer managing just visibilityFilter.
+// Define a reducer managing selectCategory.
 function category(state = 'react', action) {
 	switch (action.type) {
 		case SET_CATEGORY:
@@ -84,66 +84,11 @@ function post(state = initialState.entities.posts, action) {
 			 * [Reducers section in the Redux documentation]
 			 */
 			return {
-
-
-				// Modify the `posts` property with the passed in value.
-				posts: {
-					// Return the previous `posts` property from state.
-					...state,
-					// Add the new post passed by the action.
-					[id]: post,
-				}
-			}
-
-
-
-			// 		// comments: state.entities.posts.comments.concat(id)
-			// 	},
-			// 	comments: {
-			// 		...state.entities.comments,
-			// 		[id]: post.comment
-			// 	}
-
-
-
-			// 	// Return the previous state (copying its enumerable properties).
-			// 	...state,
-			// 	// Modify the `entities` property with the passed in value.
-			// 	entities: {
-			// 		// Return the previous `entities` property from state.
-
-			// 		// ...state.entities,
-
-			// 		// Modify the `posts` property with the passed in value.
-			// 		posts: {
-			// 			// Return the previous `posts` property from state.
-			// 			...state.entities.posts,
-			// 			// Add the new post passed by the action.
-			// 			[id]: post,
-
-
-			// 			// comments: state.entities.posts.comments.concat(id)
-			// 		},
-			// 		comments: {
-			// 			...state.entities.comments,
-			// 			[id]: post.comment
-			// 		}
-			// 	},
-			// 	allPosts: state.allPosts.concat(id),
-			// 	// Assign the post id to the right category.
-			// 	postsByCategory: {
-			// 		// Return the previous categories.
-			// 		...state.postsByCategory,
-			// 		// Get the category key from the post.
-			// 		[post.category]: {
-			// 			// Add the new id to the items collection.
-			// 			items: state.postsByCategory[post.category].items.concat(id)
-			// 		}
-
-			// 	}
-			// };
-
-
+				// Pass the previous state from posts.
+				...state,
+				// Add the new post passed by the action.
+				[id]: post
+			};
 		default:
 			return state;
 	}
@@ -155,57 +100,69 @@ function comment(state = initialState.entities.comments, action) {
 	switch (action.type) {
 		case ADD_COMMENT:
 			return {
-
-				// ...state,
-				// entities: {
-				// 	posts: {
-				// 		...state.entities.posts,
-				// 		comments: state.entities.posts.comments.concat(id)
-				// 	},
-
-					comments: {
-						...state,
-						[id]: comment
-					}
-				};
-			// }
-		default:
-			return state;
-	}
-}
-
-const entities = combineReducers({
-	posts: post,
-	comments: comment
-});
-
-function allPosts(state = initialState.allPosts, action) {
-	const { post, id } = action;
-	switch (action.type) {
-		case ADD_POST:
-			return {
-				allPosts: initialState.allPosts.concat(id)
+				// Pass the previous state from comments.
+				...state,
+				// Add the new comment passed by the action.
+				[id]: comment
 			};
 		default:
 			return state;
 	}
 }
 
+// Combine reducers to compose the entities slice of state.
+const entities = combineReducers({
+	posts: post,
+	comments: comment
+});
 
-function postsByCategory(state = initialState.postsByCategory, action) {
+// AllPosts reducer.
+function allPosts(state = initialState.allPosts, action) {
+	const { post, id } = action;
 	switch (action.type) {
+		case ADD_POST:
+			// Return a new `allPosts` array.
+			return [
+				// Pass the previous state.
+				...state,
+				// Add the id of the new post.
+				id
+			];
 		default:
 			return state;
 	}
 }
 
+// Assign the given post id to its category.
+function postsByCategory(state = initialState.postsByCategory, action) {
+	const { post, id } = action;
+	switch (action.type) {
+		case ADD_POST:
+			// Return a new `postsByCategory` object.
+			return {
+				// Pass the previous state.
+				...state,
+				// Select the post category.
+				[post.category]: {
+					// Assign it an `items` property key.
+					items: [
+						// Pass it the old `items` array elements.
+						...state[post.category].items,
+						// Add the new post id.
+						id
+					]
+				}
+			};
+		default:
+			return state;
+	}
+}
+
+// Combine all the reducers responsible for separate portions of the state.
 export default combineReducers({
 	selectedCategory: category,
 	entities,
 	allPosts,
 	postsByCategory,
-
-	// post,
-	// comment,
 	form: formReducer
 });
