@@ -6,8 +6,7 @@ import {
 	allCategories,
 	ADD_POST,
 	ADD_COMMENT,
-	SET_CATEGORY,
-	ADD_COMMENT_TO_POST
+	SET_CATEGORY
 } from '../actions';
 
 /*
@@ -28,9 +27,7 @@ import {
 const initialState = {
 	selectedCategory: allCategories.REACT,
 	entities: {
-		posts: {
-			// comments: []
-		},
+		posts: {},
 		comments: {}
 	},
 	allPosts: [],
@@ -66,27 +63,16 @@ function category(state = 'react', action) {
 	}
 }
 
-// TODO
-// Delete commented out code. Added and removed code while studying
-// the Redux docs about updating normalized data, while working on
-// posts and comments.
-// Updating a comment should push a comment id in the related post
-// and that has forced me to work on the slice reducer composition.
-
-// Post reducer.
+// Post reducer. Pass the posts object from entities as its state slice.
 function post(state = initialState.entities.posts, action) {
-	// Take properties from the action through object destructuring.
 	console.log(action);
-	// const { post, id } = action;
-
-	console.log(action.id);
-	console.log(action.post);
 	/*
 	 * See 'Handling More Actions' paragraph in the 'Reducer' section
 	 * in the Redux documentation.
 	 */
 	switch (action.type) {
 		case ADD_POST:
+			// Take properties from the action through object destructuring.
 			const { post, id } = action;
 			/*
 			 * `We don't mutate state. We create a copy of it. Using the
@@ -99,105 +85,38 @@ function post(state = initialState.entities.posts, action) {
 				// Add the new post passed by the action.
 				[id]: {
 					...post,
+					/* Add a `comments` porperty to the post object to handle all
+					 * the comments related to that post.
+					 */
 					comments: []
 				}
 			};
 		case ADD_COMMENT:
+			// Take properties from the action through object destructuring.
 			const { comment, postId, commentId } = action;
-
-			// if (state[postId].comments.length > 0) {
 				return {
 				...state,
+				// Get the post correspondent to the given post id.
 				[postId]: {
+					// Pass it the previous state.
 					...state[postId],
+					// Take the comments property.
 					comments: [
+						// Pass it the comments that were previously in the array.
 						...state[postId].comments,
+						// Add the new comment id.
 						commentId
-						// commentId
 					]
-					// comments: [
-					// 	...state[postId].comments,
-					// 	commentId
-					// ]   //,
-					// postId
 				}
-
-				// ...state,
-				// [postId]: {
-				// 	...state[postId],
-				// 	comments: [
-				// 		...state[postId].comments,
-				// 		commentId
-				// 	]
-				// }
-
-					// ...state.comments,
-					// commentId
-				// ]
-			}
-		// }
-		// else {
-		// 	return commentId;
-		// }
-
-			// return {
-			// 	...state,
-			// 	[postId]: {
-			// 		...state[postId],
-			// 		comments: [
-			// 			...state[postId].comments
-			// 			// commentId
-			// 		]
-			// 		// comments: [
-			// 		// 	...state[postId].comments,
-			// 		// 	commentId
-			// 		// ]   //,
-			// 		// postId
-			// 	}
-
-			// 	// ...state,
-			// 	// [postId]: {
-			// 	// 	...state[postId],
-			// 	// 	comments: [
-			// 	// 		...state[postId].comments,
-			// 	// 		commentId
-			// 	// 	]
-			// 	// }
-
-			// 		// ...state.comments,
-			// 		// commentId
-			// 	// ]
-			// } : return {
-			// 	commentId
-			// }
+			};
 		default:
 			return state;
 	}
 }
 
-// function commentsToPost(state = [], action) {
-// 	const { comment, id } = action;
-// 	switch (action.type) {
-// 		case ADD_COMMENT:
-// 			return [
-// 				...state,
-// 					id
-// 				];
-// 		default:
-// 			return state;
-// 	}
-// }
-
-// const postReducer = combineReducers({
-// 	postEntry,
-// 	// commentsToPost
-// });
-
 // Comment reducer.
 function comment(state = initialState.entities.comments, action) {
 	const { comment, postId, commentId } = action;
-
-	// const post = state.posts[postId];
 
 	switch (action.type) {
 		case ADD_COMMENT:
@@ -206,48 +125,17 @@ function comment(state = initialState.entities.comments, action) {
 				...state,
 				// Add the new comment passed by the action.
 				[commentId]: comment
-
-
-				// posts: {
-				// 	...state,
-				// 	[id]: {
-				// 		...state,
-				// 		comments: [
-				// 			...state,
-				// 			comment
-				// 		]
-				// 	}
-				// },
-				// comments: {
-				// 	...state,
-				// 	[id]: comment
-				// }
 			};
 		default:
 			return state;
 	}
 }
 
-// function allComments(state = initialState.entities.posts.comments, action) {
-// 	const { comment, id } = action;
-// 	switch (action.type) {
-// 		case ADD_COMMENT:
-// 			return [
-// 				...state,
-// 				id
-// 			]
-// 		default:
-// 			return state;
-// 	}
-// }
-
 // Combine reducers to compose the entities slice of state.
 const entities = combineReducers({
 	posts: post,
 	comments: comment
 });
-
-// function entities(state = {}, action)
 
 // AllPosts reducer.
 function allPosts(state = initialState.allPosts, action) {

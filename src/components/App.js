@@ -8,52 +8,56 @@ import { reset } from 'redux-form';
 import '.././App.css';
 
 class App extends Component {
+  // Triggered by onSubmit in the post form.
   submitPost = (values) => {
     console.log(values);
+    /*
+     * Call the `displayPost` property function passed
+     * to props by `mapDispatchToProps`.
+     * Get the values from the post form and dispatch the
+     * action `addPost` from the reducer passing the post
+     * object as argument.
+     */
     this.props.displayPost({
       post: {
         title: values.title,
         author: values.author,
         category: values.category,
         body: values.body,
-        // comment: values.comment
       }
     });
   }
 
+  // Triggered by onSubmit in the comment form.
   submitComment = (values) => {
     console.log(values);
     console.log(this.props);
+    /*
+     * Call the `displayComment` property function passed
+     * to props by `mapDispatchToProps`.
+     * Get the values from the comment form and dispatch the
+     * action `addComment` from the reducer passing the comment
+     * object and the related post id as arguments.
+     */
     this.props.displayComment({
       comment: {
         body: values.comment
       },
       postId: values.allPosts
     });
-    // this.props.addToPost({
-    //   console.log(values);
-    // })
   }
 
+  // Get all the submitted posts from any category.
   getAllPosts = () => {
     console.log(this.props);
     console.log(this.props.posts.allPosts);
 
     const allPosts = this.props.posts.allPosts;
-
-    // console.log(this.props.posts.post.entities.posts);
-    // console.log(this.props.posts);
-    // console.log(allPosts);
-
     return allPosts;
-    // })
-
-    // return ['a', 'b', 'c'];
   }
 
 
   render() {
-    // this.getAllPosts();
     console.log(this.props);
 
     return (
@@ -82,16 +86,15 @@ class App extends Component {
 // Takes the current store state and returns it as props.
 function mapStateToProps(posts) {
   return {
-    posts,
-    refactored: posts.allPosts
+    posts
   }
 }
 
+// Dispatch actions to the store.
 function mapDispatchToProps(dispatch) {
   return {
     displayPost: (data) => dispatch(addPost(data)),
     displayComment: (data) => dispatch(addComment(data)),
-    // addToPost: (data) => dispatch(addCommentToPost(data))
   }
 }
 
