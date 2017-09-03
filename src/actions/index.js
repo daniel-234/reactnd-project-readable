@@ -24,8 +24,9 @@ const headers = {
 export const ADD_POST = 'ADD_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const SET_CATEGORY = 'SET_CATEGORY';
-export const REQUEST_ALL_POSTS = 'REQUEST_ALL_POSTS';
+// export const REQUEST_ALL_POSTS = 'REQUEST_ALL_POSTS';
 export const RECEIVE_ALL_POSTS = 'RECEIVE_ALL_POSTS';
+export const RECEIVE_ALL_COMMENTS = 'RECEIVE_ALL_COMMENTS';
 
 /*
  * Other constants.
@@ -41,35 +42,50 @@ export const allCategories = {
  * Action creators.
  */
 
+
+// TODO delete because it's been replaced
 /*
  * Action that takes as argument an object passed from the
  * post form with the post properties.
  */
-export function addPost({ post }) {
-	const id = generateUUID();
+export function addPost(post) {
+	// const id = generateUUID();
 	return {
 		type: ADD_POST,
 		post,
-		id
+		// id
 	};
 };
 
 
 // TODO delete - unused
-export function requestAllPosts() {
-	return {
-		type: REQUEST_ALL_POSTS
-	};
-};
+// export function requestAllPosts() {
+// 	return {
+// 		type: REQUEST_ALL_POSTS
+// 	};
+// };
 
 
 
 export function receiveAllPosts(data) {
+	let dataObj = {};
+	for (var i = 0; i < data.length; i++) {
+		dataObj[data[i].id] = data[i];
+	}
+	console.log(dataObj);
 	return {
 		type: RECEIVE_ALL_POSTS,
-		allPosts: data.map(post => post)
+		// allPosts: data.map(post => post)
+		// allPosts: data.map(post => {
+		// 	post.id = post;
+
+		// })
+		dataObj,
+		allPosts: data.map(post => post.id)
 	}
 }
+
+
 
 export function fetchAllPosts() {
 	return function(dispatch) {
@@ -95,6 +111,64 @@ export function addNewPost(post) {
 			},
 			body: JSON.stringify({ ...post, id: id })
 		}).then(res => res.json())
+			// .then(dispatch(addPost({ ...post, id: id })))
+			// .then(data => console.log(data))
+	}
+}
+
+/*
+
+`POST /comments`
+  **USAGE:**
+    Add a comment to a post
+
+*/
+
+export function receiveAllComments(data) {
+	console.log(data);
+	let dataObj = {};
+	for (var i = 0; i < data.length; i++) {
+		dataObj[data[i].id] = data[i];
+	}
+	console.log(dataObj);
+
+	return {
+		type: RECEIVE_ALL_COMMENTS,
+		dataObj
+	}
+}
+
+
+/*
+`GET /posts/:id/comments`
+  **USAGE:**
+    Get all the comments for a single post
+*/
+
+
+export function fetchAllComments() {
+	return function(dispatch) {
+		return fetch(`${api}/posts/8xf0y6ziyjabvozdd253nd/comments`, { headers })
+	    .then(
+	    	res => res.json(),
+	    	error => console.log('An error occurred', error))
+	    .then(data => dispatch(receiveAllComments(data)))
+	}
+}
+
+export function addNewComment(comment) {
+	return function(dispatch) {
+		const id = generateUUID();
+		console.log(comment);
+		return fetch(`${api}/comments`, {
+			method: `POST`,
+			headers: {
+				...headers,
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ ...comment, id: id })
+		}).then(res => res.json())
+			.then(data => console.log(data))
 	}
 }
 

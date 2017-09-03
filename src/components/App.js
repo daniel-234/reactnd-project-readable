@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost, addComment, fetchAllPosts, addNewPost } from '../actions';
+// TODO delete old actions
+import { addPost, addComment, fetchAllPosts, fetchAllComments, addNewPost, addNewComment } from '../actions';
 import PostForm from './PostForm';
 import CommentForm from './CommentForm';
 import { reset } from 'redux-form';
@@ -15,6 +16,7 @@ class App extends Component {
     //   // dispatch(fetchAllPosts());
     // }
     this.props.getAllPosts();
+    this.props.getAllComments();
     console.log(this.props);
   }
 
@@ -39,6 +41,7 @@ class App extends Component {
     });
 
     this.props.getAllPosts();
+    this.props.getAllComments();
   }
 
   // Triggered by onSubmit in the comment form.
@@ -53,11 +56,17 @@ class App extends Component {
      * object and the related post id as arguments.
      */
     this.props.displayComment({
-      comment: {
-        body: values.comment
-      },
-      postId: values.allPosts
+      // comment: {
+        body: values.comment,
+        // parentId: values.allPosts
+
+        // Hardcode the comment to a given post
+        parentId: '8xf0y6ziyjabvozdd253nd'
+      // },
+      // postId: values.allPosts
     });
+
+    this.props.getAllComments();
   }
 
   // Get all the submitted posts from any category.
@@ -108,8 +117,9 @@ function mapStateToProps(posts) {
 function mapDispatchToProps(dispatch) {
   return {
     displayPost: (data) => dispatch(addNewPost(data)),
-    displayComment: (data) => dispatch(addComment(data)),
-    getAllPosts: () => dispatch(fetchAllPosts())
+    displayComment: (data) => dispatch(addNewComment(data)),
+    getAllPosts: () => dispatch(fetchAllPosts()),
+    getAllComments: () => dispatch(fetchAllComments())
   }
 }
 

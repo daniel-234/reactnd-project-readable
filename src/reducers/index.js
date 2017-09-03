@@ -7,7 +7,8 @@ import {
 	ADD_POST,
 	ADD_COMMENT,
 	SET_CATEGORY,
-	RECEIVE_ALL_POSTS
+	RECEIVE_ALL_POSTS,
+	RECEIVE_ALL_COMMENTS
 } from '../actions';
 
 /*
@@ -68,16 +69,22 @@ function category(state = 'react', action) {
 // initialState.entities.posts
 
 // Post reducer. Pass the posts object from entities as its state slice.
-function post(state = {}, action) {
-	console.log(action);
+function post(state = initialState.entities.posts, action) {
+	console.log(action.dataObj);
 	/*
 	 * See 'Handling More Actions' paragraph in the 'Reducer' section
 	 * in the Redux documentation.
 	 */
 	switch (action.type) {
+		case RECEIVE_ALL_POSTS:
+			const posts = action.dataObj;
+			return {
+				...posts
+			};
 		case ADD_POST:
 			// Take properties from the action through object destructuring.
-			const { post, id } = action;
+			const { post } = action;
+			console.log(action);
 			/*
 			 * `We don't mutate state. We create a copy of it. Using the
 			 * object spread operator, we can write { ...state, ...newState}`.
@@ -86,20 +93,22 @@ function post(state = {}, action) {
 			return {
 				// Pass the previous state from posts.
 
-				// ...state,
+
 				// Add the new post passed by the action.
 
 
 				...state,
-				[id]: {
-				...post,
-				id: id
-			}
-
 				// [id]: {
+				// ...post,
+				// id: id
+
+
+			// }
+
+				// [post.id]: {
 				// 	...post,
-				// 	 Add a `comments` porperty to the post object to handle all
-				// 	 * the comments related to that post.
+				// 	 // Add a `comments` porperty to the post object to handle all
+				// 	 // the comments related to that post.
 
 				// 	comments: []
 				// }
@@ -131,8 +140,15 @@ function post(state = {}, action) {
 // Comment reducer.
 function comment(state = initialState.entities.comments, action) {
 	const { comment, postId, commentId } = action;
+	// console.log(action);
 
 	switch (action.type) {
+		case RECEIVE_ALL_COMMENTS:
+			const comments = action.dataObj;
+			// console.log(action);
+			return {
+				...comments
+			}
 		case ADD_COMMENT:
 			return {
 				// Pass the previous state from comments.
