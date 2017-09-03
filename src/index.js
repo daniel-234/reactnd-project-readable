@@ -3,13 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { fetchAllPosts } from './actions';
 import reducer from './reducers';
 import { Provider } from 'react-redux';
 
 const store = createStore(
 	reducer,
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	applyMiddleware(
+		thunkMiddleware
+	)
+	// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 // Use the `react-redux` bindings to make connecting the Redux store
@@ -24,3 +29,7 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById('root'));
 registerServiceWorker();
+
+// store
+// 	.dispatch(fetchAllPosts())
+// 	.then(() => console.log(store.getState()));

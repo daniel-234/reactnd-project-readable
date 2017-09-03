@@ -1,6 +1,22 @@
 // ID generator function.
 import generateUUID from '../utils/generateID.js';
 
+
+const api = process.env.REACT_APP_PROJECT_READABLE_API_URL || 'http://localhost:5001'
+
+let token = localStorage.token
+
+if (!token)
+  token = localStorage.token = Math.random().toString(36).substr(-8)
+
+const headers = {
+  'Accept': 'application/json',
+  'Authorization': token
+}
+
+
+
+
 /*
  * Action types.
  */
@@ -8,6 +24,8 @@ import generateUUID from '../utils/generateID.js';
 export const ADD_POST = 'ADD_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const SET_CATEGORY = 'SET_CATEGORY';
+export const REQUEST_ALL_POSTS = 'REQUEST_ALL_POSTS';
+export const RECEIVE_ALL_POSTS = 'RECEIVE_ALL_POSTS';
 
 /*
  * Other constants.
@@ -35,6 +53,61 @@ export function addPost({ post }) {
 		id
 	};
 };
+
+export function requestAllPosts() {
+	return {
+		type: REQUEST_ALL_POSTS
+	};
+};
+
+export function receiveAllPosts(data) {
+	return {
+		type: RECEIVE_ALL_POSTS,
+		allPosts: data.map(post => post.title)
+	}
+}
+
+export function fetchAllPosts() {
+	return function(dispatch) {
+		dispatch(requestAllPosts());
+
+		return fetch(`${api}/posts`, { headers })
+	    .then(
+	    	res => res.json(),
+	    	error => console.log('An error occurred', error))
+	    .then(data => dispatch(receiveAllPosts(data)))
+	}
+}
+
+
+
+// app.get('/posts', (req, res) => {
+//     posts.getAll(req.token)
+//       .then(
+//           (data) => res.send(data),
+//           (error) => {
+//               console.error(error)
+//               res.status(500).send({
+//                  error: 'There was an error.'
+//           })
+//         }
+//       )
+// })
+
+// app.get('/categories', (req, res) => {
+//     categories.getAll(req.token)
+//       .then(
+//           (data) => res.send(data),
+//           (error) => {
+//               console.error(error)
+//               res.status(500).send({
+//                   error: 'There was an error.'
+//               })
+//           }
+//       )
+// })
+
+
 
 /*
  * Action that takes as arguments a comment and a post id

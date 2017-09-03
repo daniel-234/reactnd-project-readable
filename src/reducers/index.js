@@ -6,7 +6,8 @@ import {
 	allCategories,
 	ADD_POST,
 	ADD_COMMENT,
-	SET_CATEGORY
+	SET_CATEGORY,
+	RECEIVE_ALL_POSTS
 } from '../actions';
 
 /*
@@ -137,8 +138,14 @@ const entities = combineReducers({
 	comments: comment
 });
 
+
+
+// TODO delete.
+
+// Old reducer that populated the `allPosts` array synchronously
+// without querying the API.
 // AllPosts reducer.
-function allPosts(state = initialState.allPosts, action) {
+function receiveAllPosts(state = initialState.allPosts, action) {
 	const { post, id } = action;
 	switch (action.type) {
 		case ADD_POST:
@@ -148,6 +155,20 @@ function allPosts(state = initialState.allPosts, action) {
 				...state,
 				// Add the id of the new post.
 				id
+			];
+		default:
+			return state;
+	}
+}
+
+
+
+// Reducer that queries the API.
+function allPosts(state = [], action) {
+	switch(action.type) {
+		case RECEIVE_ALL_POSTS:
+			return [
+				...action.allPosts
 			];
 		default:
 			return state;
@@ -184,6 +205,7 @@ export default combineReducers({
 	selectedCategory: category,
 	entities,
 	allPosts,
+	// receiveAllPosts,
 	postsByCategory,
 	form: formReducer
 });

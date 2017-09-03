@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost, addComment } from '../actions';
+import { addPost, addComment, fetchAllPosts } from '../actions';
 import PostForm from './PostForm';
 import CommentForm from './CommentForm';
 import { reset } from 'redux-form';
@@ -8,6 +8,16 @@ import { reset } from 'redux-form';
 import '.././App.css';
 
 class App extends Component {
+  componentDidMount() {
+    console.log(this.props);
+
+    // this.props.requestAllPosts();
+    //   // dispatch(fetchAllPosts());
+    // }
+    this.props.getAllPosts();
+    console.log(this.props);
+  }
+
   // Triggered by onSubmit in the post form.
   submitPost = (values) => {
     console.log(values);
@@ -48,12 +58,13 @@ class App extends Component {
   }
 
   // Get all the submitted posts from any category.
-  getAllPosts = () => {
+  getThePosts = () => {
     console.log(this.props);
     console.log(this.props.posts.allPosts);
 
     const allPosts = this.props.posts.allPosts;
     return allPosts;
+    // return ['1', '2', '3'];
   }
 
 
@@ -77,7 +88,7 @@ class App extends Component {
         }
         <PostForm onSubmit={this.submitPost} />
         <h2>Add a comment</h2>
-        <CommentForm onSubmit={this.submitComment} getPosts={this.getAllPosts} />
+        <CommentForm onSubmit={this.submitComment} getPosts={this.getThePosts} />
       </div>
     );
   }
@@ -95,6 +106,7 @@ function mapDispatchToProps(dispatch) {
   return {
     displayPost: (data) => dispatch(addPost(data)),
     displayComment: (data) => dispatch(addComment(data)),
+    getAllPosts: () => dispatch(fetchAllPosts())
   }
 }
 
