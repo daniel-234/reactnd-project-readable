@@ -5,6 +5,4 @@ const generateUUID = function uuidv4() {
   });
 }
 
-console.log(generateUUID);
-
 export default generateUUID;

@@ -43,7 +43,7 @@ export const allCategories = {
  * Add a new post to the server, giving as its body the properties
  * returned from the spread operator plus the generated id.
  */
-export function addNewPost(post) {
+export function addPost(post) {
 	return function(dispatch) {
 		// Generate a UUID for this post.
 		const id = generateUUID();
@@ -62,7 +62,7 @@ export function addNewPost(post) {
  * Add a new comment to the server, giving as its body the properties
  * returned from the spread operator plus the generated id.
  */
-export function addNewComment(comment) {
+export function addComment(comment) {
 	return function(dispatch) {
 		// Generate a UUID for this comment.
 		const id = generateUUID();

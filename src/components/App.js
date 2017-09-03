@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // TODO delete old actions
-import { addPost, addComment, fetchAllPosts, fetchAllComments, addNewPost, addNewComment } from '../actions';
+import { addPost, addComment, fetchAllPosts, fetchAllComments } from '../actions';
 import PostForm from './PostForm';
 import CommentForm from './CommentForm';
 import { reset } from 'redux-form';
@@ -28,7 +28,7 @@ class App extends Component {
      * action `addPost` from the reducer passing the post
      * object as argument.
      */
-    this.props.displayPost({
+    this.props.setPostValues({
         title: values.title,
         author: values.author,
         category: values.category,
@@ -52,7 +52,7 @@ class App extends Component {
      * action `addComment` from the reducer passing the comment
      * object and the related post id as arguments.
      */
-    this.props.displayComment({
+    this.props.setCommentValues({
         body: values.comment,
         // For now just add comments to the same post.
         // TODO change it.
@@ -104,8 +104,8 @@ function mapStateToProps(posts) {
 // Dispatch actions to the store.
 function mapDispatchToProps(dispatch) {
   return {
-    displayPost: (data) => dispatch(addNewPost(data)),
-    displayComment: (data) => dispatch(addNewComment(data)),
+    setPostValues: (data) => dispatch(addPost(data)),
+    setCommentValues: (data) => dispatch(addComment(data)),
     getAllPosts: () => dispatch(fetchAllPosts()),
     getAllComments: () => dispatch(fetchAllComments())
   }
