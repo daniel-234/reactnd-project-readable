@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost, addComment, fetchAllPosts } from '../actions';
+import { addPost, addComment, fetchAllPosts, addNewPost } from '../actions';
 import PostForm from './PostForm';
 import CommentForm from './CommentForm';
 import { reset } from 'redux-form';
@@ -29,13 +29,16 @@ class App extends Component {
      * object as argument.
      */
     this.props.displayPost({
-      post: {
+      // {
         title: values.title,
         author: values.author,
         category: values.category,
         body: values.body,
-      }
+        // id: 'aaccccc'
+      // }
     });
+
+    this.props.getAllPosts();
   }
 
   // Triggered by onSubmit in the comment form.
@@ -104,7 +107,7 @@ function mapStateToProps(posts) {
 // Dispatch actions to the store.
 function mapDispatchToProps(dispatch) {
   return {
-    displayPost: (data) => dispatch(addPost(data)),
+    displayPost: (data) => dispatch(addNewPost(data)),
     displayComment: (data) => dispatch(addComment(data)),
     getAllPosts: () => dispatch(fetchAllPosts())
   }

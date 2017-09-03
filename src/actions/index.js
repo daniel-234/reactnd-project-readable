@@ -54,22 +54,26 @@ export function addPost({ post }) {
 	};
 };
 
+
+// TODO delete - unused
 export function requestAllPosts() {
 	return {
 		type: REQUEST_ALL_POSTS
 	};
 };
 
+
+
 export function receiveAllPosts(data) {
 	return {
 		type: RECEIVE_ALL_POSTS,
-		allPosts: data.map(post => post.title)
+		allPosts: data.map(post => post)
 	}
 }
 
 export function fetchAllPosts() {
 	return function(dispatch) {
-		dispatch(requestAllPosts());
+		// dispatch(requestAllPosts());
 
 		return fetch(`${api}/posts`, { headers })
 	    .then(
@@ -78,6 +82,81 @@ export function fetchAllPosts() {
 	    .then(data => dispatch(receiveAllPosts(data)))
 	}
 }
+
+export function addNewPost(post) {
+	return function(dispatch) {
+		// dispatch(addPost({ post }));
+		const id = generateUUID();
+		return fetch(`${api}/posts`, {
+			method: `POST`,
+			headers: {
+				...headers,
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ ...post, id: id })
+		}).then(res => res.json())
+	}
+}
+
+
+
+// app.post('/posts', bodyParser.json(), (req, res) => {
+//     posts.add(req.token, req.body)
+//       .then(
+//           (data) => res.send(data),
+//           (error) => {
+//               console.error(error)
+//               res.status(500).send({
+//                  error: 'There was an error.'
+//           })
+//         }
+//       )
+// })
+
+// export const update = (book, shelf) =>
+//   fetch(`${api}/books/${book.id}`, {
+//     method: 'PUT',
+//     headers: {
+//       ...headers,
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({ shelf })
+//   }).then(res => res.json())
+
+// export const search = (query, maxResults) =>
+//   fetch(`${api}/search`, {
+//     method: 'POST',
+//     headers: {
+//       ...headers,
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify({ query, maxResults })
+//   }).then(res => res.json())
+//     .then(data => data.books)
+
+// export const remove = (contact) =>
+//   fetch(`${api}/contacts/${contact.id}`, { method: 'DELETE', headers })
+//     .then(res => res.json())
+//     .then(data => data.contact)
+
+// export const create = (body) =>
+//   fetch(`${api}/contacts`, {
+//     method: 'POST',
+//     headers: {
+//       ...headers,
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(body)
+//   }).then(res => res.json())
+
+// export const getAll = () =>
+//   fetch(`${api}/contacts`, { headers })
+//     .then(res => res.json())
+//     .then(data => data.contacts)
+
+
+
+
 
 
 

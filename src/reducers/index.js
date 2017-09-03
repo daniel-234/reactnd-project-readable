@@ -64,8 +64,11 @@ function category(state = 'react', action) {
 	}
 }
 
+
+// initialState.entities.posts
+
 // Post reducer. Pass the posts object from entities as its state slice.
-function post(state = initialState.entities.posts, action) {
+function post(state = {}, action) {
 	console.log(action);
 	/*
 	 * See 'Handling More Actions' paragraph in the 'Reducer' section
@@ -82,15 +85,25 @@ function post(state = initialState.entities.posts, action) {
 			 */
 			return {
 				// Pass the previous state from posts.
-				...state,
+
+				// ...state,
 				// Add the new post passed by the action.
+
+
+				...state,
 				[id]: {
-					...post,
-					/* Add a `comments` porperty to the post object to handle all
-					 * the comments related to that post.
-					 */
-					comments: []
-				}
+				...post,
+				id: id
+			}
+
+				// [id]: {
+				// 	...post,
+				// 	 Add a `comments` porperty to the post object to handle all
+				// 	 * the comments related to that post.
+
+				// 	comments: []
+				// }
+
 			};
 		case ADD_COMMENT:
 			// Take properties from the action through object destructuring.
@@ -206,6 +219,6 @@ export default combineReducers({
 	entities,
 	allPosts,
 	// receiveAllPosts,
-	postsByCategory,
+	// postsByCategory,
 	form: formReducer
 });
