@@ -14,6 +14,7 @@ To install this application, instead, you can (fork and) download it and then ru
 * [React](https://facebook.github.io/react/) - A JavaScript library for building user interfaces
 * [Redux](http://redux.js.org/) - A predictable state container for JavaScript apps
 * [Readable API server](https://github.com/udacity/reactnd-project-readable-starter) - The local backend development server used
+* [Redux form](http://redux-form.com/7.0.3/)
 
 ## Author
 
@@ -40,3 +41,6 @@ Here a list of the resources that helped me most:
 * [Redux-form docs: Getting started with redux-form](http://redux-form.com/6.0.0-alpha.4/docs/GettingStarted.md/)
 * [Erik Rasmussen - Abstracting Form State with Redux Form](https://www.youtube.com/watch?v=eDTi7lYR1VU&feature=youtu.be)
 * [Stackoverflow - Clear 'redux-form' after submitting](https://stackoverflow.com/questions/42551955/clear-redux-form-fields-after-submitting)
+* Apart from the good explanation on the Redux official documentation and the lessons in the Udacity course, I relied on a post from Dan Abramov in Stackoverflow and the README documentation in the GitHub repository of the Redux thunk middleware. Dan Abramov points to an official Async example to understand the thunk middleware mechanism, and I relied heavily on some of its code to build some of my actions.
+* [GitHub - Redux thunk repository](https://github.com/gaearon/redux-thunk)
+* [Stackoverflow - How to dispatch a Redux thunk with a timeout](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/)
