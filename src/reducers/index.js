@@ -4,8 +4,6 @@ import { reducer as formReducer } from 'redux-form';
 // Import the actions that need to be handled.
 import {
 	allCategories,
-	ADD_POST,
-	ADD_COMMENT,
 	SET_CATEGORY,
 	RECEIVE_ALL_POSTS,
 	RECEIVE_ALL_COMMENTS
@@ -55,7 +53,7 @@ const initialState = {
 // Extract the React category.
 const { REACT } = allCategories;
 
-// Define a reducer managing selectCategory.
+// Set the selected category.
 function category(state = 'react', action) {
 	switch (action.type) {
 		case SET_CATEGORY:
@@ -65,73 +63,43 @@ function category(state = 'react', action) {
 	}
 }
 
-
-// initialState.entities.posts
-
-// Post reducer. Pass the posts object from entities as its state slice.
+// Post reducer. Pass it the entities posts object state slice.
 function post(state = initialState.entities.posts, action) {
-	console.log(action.dataObj);
-	/*
-	 * See 'Handling More Actions' paragraph in the 'Reducer' section
-	 * in the Redux documentation.
-	 */
 	switch (action.type) {
+		/*
+		 * When all the posts from the server are received, return the
+		 * new state with the entities posts object populated.
+		 */
 		case RECEIVE_ALL_POSTS:
 			const posts = action.dataObj;
 			return {
 				...posts
 			};
-		case ADD_POST:
-			// Take properties from the action through object destructuring.
-			const { post } = action;
-			console.log(action);
-			/*
-			 * `We don't mutate state. We create a copy of it. Using the
-			 * object spread operator, we can write { ...state, ...newState}`.
-			 * [Reducers section in the Redux documentation]
-			 */
-			return {
-				// Pass the previous state from posts.
 
 
-				// Add the new post passed by the action.
+		// TODO delete later
+		// Keep the following commented code to reproduce the steps taken
+		// previously when dealing with adding a comment.
+		// case ADD_COMMENT:
+		// 	// Take properties from the action through object destructuring.
+		// 	const { comment, postId, commentId } = action;
+		// 		return {
+		// 		...state,
+		// 		// Get the post correspondent to the given post id.
+		// 		[postId]: {
+		// 			// Pass it the previous state.
+		// 			...state[postId],
+		// 			// Take the comments property.
+		// 			comments: [
+		// 				// Pass it the comments that were previously in the array.
+		// 				...state[postId].comments,
+		// 				// Add the new comment id.
+		// 				commentId
+		// 			]
+		// 		}
+		// 	};
 
 
-				...state,
-				// [id]: {
-				// ...post,
-				// id: id
-
-
-			// }
-
-				// [post.id]: {
-				// 	...post,
-				// 	 // Add a `comments` porperty to the post object to handle all
-				// 	 // the comments related to that post.
-
-				// 	comments: []
-				// }
-
-			};
-		case ADD_COMMENT:
-			// Take properties from the action through object destructuring.
-			const { comment, postId, commentId } = action;
-				return {
-				...state,
-				// Get the post correspondent to the given post id.
-				[postId]: {
-					// Pass it the previous state.
-					...state[postId],
-					// Take the comments property.
-					comments: [
-						// Pass it the comments that were previously in the array.
-						...state[postId].comments,
-						// Add the new comment id.
-						commentId
-					]
-				}
-			};
 		default:
 			return state;
 	}
@@ -139,23 +107,16 @@ function post(state = initialState.entities.posts, action) {
 
 // Comment reducer.
 function comment(state = initialState.entities.comments, action) {
-	const { comment, postId, commentId } = action;
-	// console.log(action);
-
 	switch (action.type) {
+		/*
+		 * When all the posts from the server are received, return the
+		 * new state with the entities posts object populated.
+		 */
 		case RECEIVE_ALL_COMMENTS:
 			const comments = action.dataObj;
-			// console.log(action);
 			return {
 				...comments
 			}
-		case ADD_COMMENT:
-			return {
-				// Pass the previous state from comments.
-				...state,
-				// Add the new comment passed by the action.
-				[commentId]: comment
-			};
 		default:
 			return state;
 	}
@@ -167,32 +128,7 @@ const entities = combineReducers({
 	comments: comment
 });
 
-
-
-// TODO delete.
-
-// Old reducer that populated the `allPosts` array synchronously
-// without querying the API.
-// AllPosts reducer.
-function receiveAllPosts(state = initialState.allPosts, action) {
-	const { post, id } = action;
-	switch (action.type) {
-		case ADD_POST:
-			// Return a new `allPosts` array.
-			return [
-				// Pass the previous state.
-				...state,
-				// Add the id of the new post.
-				id
-			];
-		default:
-			return state;
-	}
-}
-
-
-
-// Reducer that queries the API.
+// Populate the `allPosts` array.
 function allPosts(state = [], action) {
 	switch(action.type) {
 		case RECEIVE_ALL_POSTS:
@@ -208,22 +144,22 @@ function allPosts(state = [], action) {
 function postsByCategory(state = initialState.postsByCategory, action) {
 	const { post, id } = action;
 	switch (action.type) {
-		case ADD_POST:
-			// Return a new `postsByCategory` object.
-			return {
-				// Pass the previous state.
-				...state,
-				// Select the post category.
-				[post.category]: {
-					// Assign it an `items` property key.
-					items: [
-						// Pass it the old `items` array elements.
-						...state[post.category].items,
-						// Add the new post id.
-						id
-					]
-				}
-			};
+		// case ADD_POST:
+		// 	// Return a new `postsByCategory` object.
+		// 	return {
+		// 		// Pass the previous state.
+		// 		...state,
+		// 		// Select the post category.
+		// 		[post.category]: {
+		// 			// Assign it an `items` property key.
+		// 			items: [
+		// 				// Pass it the old `items` array elements.
+		// 				...state[post.category].items,
+		// 				// Add the new post id.
+		// 				id
+		// 			]
+		// 		}
+		// 	};
 		default:
 			return state;
 	}
@@ -234,7 +170,6 @@ export default combineReducers({
 	selectedCategory: category,
 	entities,
 	allPosts,
-	// receiveAllPosts,
 	// postsByCategory,
 	form: formReducer
 });

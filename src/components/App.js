@@ -9,15 +9,13 @@ import { reset } from 'redux-form';
 import '.././App.css';
 
 class App extends Component {
+  /*
+   * As the component mounts, call the two functions to populate
+   * the `entities` state.
+   */
   componentDidMount() {
-    console.log(this.props);
-
-    // this.props.requestAllPosts();
-    //   // dispatch(fetchAllPosts());
-    // }
     this.props.getAllPosts();
     this.props.getAllComments();
-    console.log(this.props);
   }
 
   // Triggered by onSubmit in the post form.
@@ -31,23 +29,22 @@ class App extends Component {
      * object as argument.
      */
     this.props.displayPost({
-      // {
         title: values.title,
         author: values.author,
         category: values.category,
         body: values.body,
-        // id: 'aaccccc'
-      // }
     });
 
+    /*
+     * After the new post is submitted, get the state synchronized
+     * with the server.
+     */
     this.props.getAllPosts();
     this.props.getAllComments();
   }
 
   // Triggered by onSubmit in the comment form.
   submitComment = (values) => {
-    console.log(values);
-    console.log(this.props);
     /*
      * Call the `displayComment` property function passed
      * to props by `mapDispatchToProps`.
@@ -56,32 +53,23 @@ class App extends Component {
      * object and the related post id as arguments.
      */
     this.props.displayComment({
-      // comment: {
         body: values.comment,
-        // parentId: values.allPosts
-
-        // Hardcode the comment to a given post
+        // For now just add comments to the same post.
+        // TODO change it.
         parentId: '8xf0y6ziyjabvozdd253nd'
-      // },
-      // postId: values.allPosts
     });
-
+    // Get the comments from the server.
     this.props.getAllComments();
   }
 
   // Get all the submitted posts from any category.
   getThePosts = () => {
-    console.log(this.props);
-    console.log(this.props.posts.allPosts);
-
     const allPosts = this.props.posts.allPosts;
     return allPosts;
-    // return ['1', '2', '3'];
   }
 
-
   render() {
-    console.log(this.props);
+    // console.log(this.props);
 
     return (
       <div className="App">

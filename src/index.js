@@ -29,7 +29,3 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById('root'));
 registerServiceWorker();
-
-// store
-// 	.dispatch(fetchAllPosts())
-// 	.then(() => console.log(store.getState()));
