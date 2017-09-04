@@ -1,3 +1,8 @@
+/*
+ * UUID generator function.
+ * Code taken from an answer on Stackoverflow on how to generate a simple
+ * UUID identifier.
+ */
 const generateUUID = function uuidv4() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);

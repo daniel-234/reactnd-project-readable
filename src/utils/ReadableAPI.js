@@ -10,7 +10,53 @@ const headers = {
   'Authorization': token
 }
 
-export const getComponents = () =>
-  fetch(`${api}/categories`, { headers })
-    .then(res => res.json())
-    .then(data => data.categories)
+/*
+ * Get all the posts stored in the server.
+ */
+export const getPosts = () =>
+  fetch(`${api}/posts`, { headers })
+    .then(
+      res => res.json(),
+      error => console.log('An error occurred', error)
+    )
+
+
+// TODO
+// Pass the parentId as argument to the function.
+
+/*
+ * Get all the comments stored in the server.
+ */
+export const getComments = () =>
+  // Hardcode the function to get the comments from this single post for now.
+  fetch(`${api}/posts/8xf0y6ziyjabvozdd253nd/comments`, { headers })
+    .then(
+      res => res.json(),
+      error => console.log('An error occurred', error)
+    )
+
+/*
+ * Add a post to the server.
+ */
+export const addToPosts = (obj) =>
+  fetch(`${api}/posts`, {
+    method: `POST`,
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(obj)
+  }).then(res => res.json())
+
+/*
+ * Add a comment to the server.
+ */
+export const addToComments = (obj) =>
+  fetch(`${api}/comments`, {
+    method: `POST`,
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(obj)
+  }).then(res => res.json())

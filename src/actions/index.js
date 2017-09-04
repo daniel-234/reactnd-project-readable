@@ -1,21 +1,5 @@
-// ID generator function.
 import generateUUID from '../utils/generateID.js';
-
-
-const api = process.env.REACT_APP_PROJECT_READABLE_API_URL || 'http://localhost:5001'
-
-let token = localStorage.token
-
-if (!token)
-  token = localStorage.token = Math.random().toString(36).substr(-8)
-
-const headers = {
-  'Accept': 'application/json',
-  'Authorization': token
-}
-
-
-
+import { getPosts, getComments, addToPosts, addToComments } from '../utils/ReadableAPI';
 
 /*
  * Action types.
@@ -42,38 +26,26 @@ export const allCategories = {
 /*
  * Add a new post to the server, giving as its body the properties
  * returned from the spread operator plus the generated id.
+ * Make use of the `getPosts` function from the ReadableAPI.
  */
 export function addPost(post) {
 	return function(dispatch) {
 		// Generate a UUID for this post.
 		const id = generateUUID();
-		return fetch(`${api}/posts`, {
-			method: `POST`,
-			headers: {
-				...headers,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ ...post, id: id })
-		}).then(res => res.json())
+		return addToPosts({ ...post, id: id });
 	};
 };
 
 /*
  * Add a new comment to the server, giving as its body the properties
  * returned from the spread operator plus the generated id.
+ * Make use of the `getComments` function from the ReadableAPI.
  */
 export function addComment(comment) {
 	return function(dispatch) {
 		// Generate a UUID for this comment.
 		const id = generateUUID();
-		return fetch(`${api}/comments`, {
-			method: `POST`,
-			headers: {
-				...headers,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ ...comment, id: id })
-		}).then(res => res.json())
+		return addToComments({ ...comment, id: id });
 	};
 };
 
@@ -112,27 +84,27 @@ export function receiveAllComments(data) {
 
 /*
  * Fetch all the posts from the server.
+ * Make use of the `getPosts` function from the
+ * ReadableAPI.
  */
 export function fetchAllPosts() {
 	return function(dispatch) {
-		return fetch(`${api}/posts`, { headers })
-	    .then(
-	    	res => res.json(),
-	    	error => console.log('An error occurred', error))
-	    .then(data => dispatch(receiveAllPosts(data)))
+		return getPosts().then((data) => (
+			dispatch(receiveAllPosts(data))
+		));
 	};
 };
 
 /*
  * Fetch all the comments from the server.
+ * Make use of the `getComments` function from the
+ * ReadableAPI.
  */
 export function fetchAllComments() {
 	return function(dispatch) {
-		return fetch(`${api}/posts/8xf0y6ziyjabvozdd253nd/comments`, { headers })
-	    .then(
-	    	res => res.json(),
-	    	error => console.log('An error occurred', error))
-	    .then(data => dispatch(receiveAllComments(data)))
+		return getComments().then((data) => (
+			dispatch(receiveAllComments(data))
+		));
 	};
 };
 

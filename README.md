@@ -33,6 +33,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * [Stackoverflow - How to add an element to an array in Redux](https://stackoverflow.com/questions/40911194/how-do-i-add-an-element-to-array-in-reducer-of-react-native-redux)
 * [Stackoverflow - Adding multiple objects to the store in Redux](https://stackoverflow.com/questions/42463609/adding-multiple-objects-to-the-store-in-redux)
+* Generate a UUID identifier.
+* [Stackoverflow - Create GUID - UUID in JavaScript](https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript)
 * After following the Udacity course lessons, which introduced me to the main topics (and troubles) of adopting Redux for the first time, I switched to the official Redux documentation when I had to develop this project in a manner that was going to progressively diverge from the one encountered in the lessons.
 One of the things that I had to change was the form, for which I chose to use the 'redux-form' package. I read something online about the difficulties of updating the store state with a user input and found that as this application makes heavy use of form data, it was better to use something robust and reliable to handle all of the data.
 Here a list of the resources that helped me most:
