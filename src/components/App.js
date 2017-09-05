@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // TODO delete old actions
-import { addPost, addComment, fetchAllPosts, fetchAllComments } from '../actions';
+import { addPost, addComment, fetchAllPosts } from '../actions';
 import PostForm from './PostForm';
 import CommentForm from './CommentForm';
 import { reset } from 'redux-form';
@@ -10,12 +10,10 @@ import '.././App.css';
 
 class App extends Component {
   /*
-   * As the component mounts, call the two functions to populate
-   * the `entities` state.
+   * As the component mounts, populate the posts state.
    */
   componentDidMount() {
     this.props.getAllPosts();
-    this.props.getAllComments();
   }
 
   // Triggered by onSubmit in the post form.
@@ -40,7 +38,7 @@ class App extends Component {
      * with the server.
      */
     this.props.getAllPosts();
-    this.props.getAllComments();
+    // this.props.getAllComments();
   }
 
   // Triggered by onSubmit in the comment form.
@@ -52,14 +50,15 @@ class App extends Component {
      * action `addComment` from the reducer passing the comment
      * object and the related post id as arguments.
      */
+     console.log(values);
     this.props.setCommentValues({
         body: values.comment,
         // For now just add comments to the same post.
         // TODO change it.
-        parentId: '8xf0y6ziyjabvozdd253nd'
+        parentId: values.allPosts
     });
     // Get the comments from the server.
-    this.props.getAllComments();
+    // this.props.getAllComments();
   }
 
   // Get all the submitted posts from any category.
@@ -69,7 +68,12 @@ class App extends Component {
   }
 
   render() {
-    // console.log(this.props);
+    console.log(this.props);
+
+    const { posts } = this.props;
+    const allStoredPostsIds = posts.allPosts;
+    // const allStoredPostsContents = posts.entities.posts;
+    // console.log(allStoredPostsContents);
 
     return (
       <div className="App">
@@ -89,25 +93,57 @@ class App extends Component {
         <PostForm onSubmit={this.submitPost} />
         <h2>Add a comment</h2>
         <CommentForm onSubmit={this.submitComment} getPosts={this.getThePosts} />
+        <div className='container'>
+
+        { /*
+          <ul className='all-posts'>
+            {allStoredPostsIds.map((postId) => (
+              <li key={postId} className='single-post'>
+                <div className='post-details'>
+                  <p className='post-title'>
+                    {allStoredPostsContents[postId].title}
+                  </p>
+                  <p className='post-author'>
+                    author: {allStoredPostsContents[postId].author}
+                  </p>
+                  <p className='post-separator'>
+                    |
+                  </p>
+                  <p className='post-score'>
+                    score: {allStoredPostsContents[postId].voteScore}
+                  </p>
+                  <p className='post-separator'>
+                    |
+                  </p>
+                  <p className='post-comments'>
+
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+        */ }
+
+        </div>
       </div>
     );
   }
 }
 
-// Takes the current store state and returns it as props.
+// Take the current store state and return it as props.
 function mapStateToProps(posts) {
   return {
     posts
   }
 }
 
-// Dispatch actions to the store.
+// Pass actions to be dispatch as props.
 function mapDispatchToProps(dispatch) {
   return {
     setPostValues: (data) => dispatch(addPost(data)),
     setCommentValues: (data) => dispatch(addComment(data)),
-    getAllPosts: () => dispatch(fetchAllPosts()),
-    getAllComments: () => dispatch(fetchAllComments())
+    getAllPosts: () => dispatch(fetchAllPosts())
   }
 }
 

@@ -64,17 +64,42 @@ function category(state = 'react', action) {
 }
 
 // Post reducer. Pass it the entities posts object state slice.
-function post(state = initialState.entities.posts, action) {
+function post(state = initialState, action) {
 	switch (action.type) {
 		/*
 		 * When all the posts from the server are received, return the
 		 * new state with the entities posts object populated.
 		 */
 		case RECEIVE_ALL_POSTS:
+			console.log(action);
 			const posts = action.dataObj;
 			return {
 				...posts
 			};
+
+		// TODO insert into receive posts
+		// case RECEIVE_ALL_COMMENTS:
+		// 	const comments = action.data;
+		// 	return {
+		// 		...comments
+		// 	}
+
+
+
+		case RECEIVE_ALL_COMMENTS:
+			console.log(action.parentId)
+			console.log(state);
+			// const comments = action.dataObj;
+			return {
+				...state,
+				[action.parentId]: {
+					...state[action.parentId],
+					comments: [
+						...action.dataArray
+					]
+				}
+			}
+
 
 
 		// TODO delete later
@@ -106,27 +131,50 @@ function post(state = initialState.entities.posts, action) {
 }
 
 // Comment reducer.
-function comment(state = initialState.entities.comments, action) {
+function comment(state = initialState.entities.post, action) {
 	switch (action.type) {
 		/*
 		 * When all the posts from the server are received, return the
 		 * new state with the entities posts object populated.
 		 */
 		case RECEIVE_ALL_COMMENTS:
-			const comments = action.dataObj;
+			console.log(action.parentId)
+			console.log(state);
+			// const comments = action.dataObj;
 			return {
-				...comments
+				...state,
+				// state[action.parentId]: {
+				// 	...state[action.parentId],
+					comments: [
+						...action.dataArray
+					]
+				// }
 			}
+
+
+
+
+			// 	state.post: {
+			// 		...state,
+			// 		state.post[comments.parentId]: {
+			// 			...state.post[comments.parentId],
+			// 			...commentsByParentId: [
+			// 				...
+			// 			]
+			// 		}
+			// 	},
+			// 	comments
+			// }
 		default:
 			return state;
 	}
 }
 
 // Combine reducers to compose the entities slice of state.
-const entities = combineReducers({
-	posts: post,
-	comments: comment
-});
+// const entities = combineReducers({
+// 	post,
+// 	comments: comment
+// });
 
 // Populate the `allPosts` array.
 function allPosts(state = [], action) {
@@ -168,7 +216,8 @@ function postsByCategory(state = initialState.postsByCategory, action) {
 // Combine all the reducers responsible for separate portions of the state.
 export default combineReducers({
 	selectedCategory: category,
-	entities,
+	post,
+	// entities,
 	allPosts,
 	// postsByCategory,
 	form: formReducer

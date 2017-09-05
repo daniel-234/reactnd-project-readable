@@ -3,7 +3,8 @@ const api = process.env.REACT_APP_PROJECT_READABLE_API_URL || 'http://localhost:
 let token = localStorage.token
 
 if (!token)
-  token = localStorage.token = Math.random().toString(36).substr(-8)
+  // token = localStorage.token = Math.random().toString(36).substr(-8)
+token = 'aa'
 
 const headers = {
   'Accept': 'application/json',
@@ -27,9 +28,9 @@ export const getPosts = () =>
 /*
  * Get all the comments stored in the server.
  */
-export const getComments = () =>
+export const getComments = (id) =>
   // Hardcode the function to get the comments from this single post for now.
-  fetch(`${api}/posts/8xf0y6ziyjabvozdd253nd/comments`, { headers })
+  fetch(`${api}/posts/` + id + `/comments`, { headers })
     .then(
       res => res.json(),
       error => console.log('An error occurred', error)
