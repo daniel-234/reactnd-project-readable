@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// TODO delete old actions
 import { addPost, addComment, fetchAllPosts } from '../actions';
 import PostForm from './PostForm';
 import CommentForm from './CommentForm';
@@ -15,6 +14,9 @@ class App extends Component {
   componentDidMount() {
     this.props.getAllPosts();
   }
+
+
+  // TODO refactor
 
   // Triggered by onSubmit in the post form.
   submitPost = (values) => {
@@ -40,6 +42,9 @@ class App extends Component {
     this.props.getAllPosts();
     // this.props.getAllComments();
   }
+
+
+  // TODO refactor
 
   // Triggered by onSubmit in the comment form.
   submitComment = (values) => {
@@ -96,6 +101,10 @@ class App extends Component {
         <div className='container'>
 
         { /*
+
+
+          TODO refactor list.
+
           <ul className='all-posts'>
             {allStoredPostsIds.map((postId) => (
               <li key={postId} className='single-post'>

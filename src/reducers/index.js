@@ -26,10 +26,13 @@ import {
  */
 const initialState = {
 	selectedCategory: allCategories.REACT,
-	entities: {
-		posts: {},
-		comments: {}
-	},
+
+	// TODO replace if an entities object is added with a comments object property.
+	// entities: {
+	// 	posts: {},
+	// 	comments: {}
+	// },
+	posts: {},
 	allPosts: [],
 	postsByCategory: {
 		react: {
@@ -63,73 +66,45 @@ function category(state = 'react', action) {
 	}
 }
 
-// Post reducer. Pass it the entities posts object state slice.
+
+// Post reducer. Pass it the posts object state slice.
+
+// TODO change the initial state if the comments object is added.
 function post(state = initialState, action) {
 	switch (action.type) {
 		/*
 		 * When all the posts from the server are received, return the
-		 * new state with the entities posts object populated.
+		 * new state with the posts object populated.
 		 */
 		case RECEIVE_ALL_POSTS:
-			console.log(action);
 			const posts = action.dataObj;
 			return {
 				...posts
 			};
-
-		// TODO insert into receive posts
-		// case RECEIVE_ALL_COMMENTS:
-		// 	const comments = action.data;
-		// 	return {
-		// 		...comments
-		// 	}
-
-
-
+		/*
+		 * When all the comments from the server are received, return the
+		 * new state with a comments ids array as property inside each post
+		 * object they refer to.
+		 */
 		case RECEIVE_ALL_COMMENTS:
-			console.log(action.parentId)
-			console.log(state);
-			// const comments = action.dataObj;
+			const parentId = action.parentId;
+			const comments = action.dataArray;
 			return {
 				...state,
-				[action.parentId]: {
-					...state[action.parentId],
+				[parentId]: {
+					...state[parentId],
 					comments: [
-						...action.dataArray
+						...comments
 					]
 				}
-			}
-
-
-
-		// TODO delete later
-		// Keep the following commented code to reproduce the steps taken
-		// previously when dealing with adding a comment.
-		// case ADD_COMMENT:
-		// 	// Take properties from the action through object destructuring.
-		// 	const { comment, postId, commentId } = action;
-		// 		return {
-		// 		...state,
-		// 		// Get the post correspondent to the given post id.
-		// 		[postId]: {
-		// 			// Pass it the previous state.
-		// 			...state[postId],
-		// 			// Take the comments property.
-		// 			comments: [
-		// 				// Pass it the comments that were previously in the array.
-		// 				...state[postId].comments,
-		// 				// Add the new comment id.
-		// 				commentId
-		// 			]
-		// 		}
-		// 	};
-
-
+			};
 		default:
 			return state;
 	}
 }
 
+
+// TODO refactor it if a comments object is added as entity; delete otherwise.
 // Comment reducer.
 function comment(state = initialState.entities.post, action) {
 	switch (action.type) {
@@ -150,10 +125,6 @@ function comment(state = initialState.entities.post, action) {
 					]
 				// }
 			}
-
-
-
-
 			// 	state.post: {
 			// 		...state,
 			// 		state.post[comments.parentId]: {
@@ -170,11 +141,15 @@ function comment(state = initialState.entities.post, action) {
 	}
 }
 
+
+// TODO uncomment it if a comments object is added.
+
 // Combine reducers to compose the entities slice of state.
 // const entities = combineReducers({
 // 	post,
 // 	comments: comment
 // });
+
 
 // Populate the `allPosts` array.
 function allPosts(state = [], action) {
@@ -188,6 +163,8 @@ function allPosts(state = [], action) {
 	}
 }
 
+
+// TODO refector it.
 // Assign the given post id to its category.
 function postsByCategory(state = initialState.postsByCategory, action) {
 	const { post, id } = action;
@@ -216,7 +193,7 @@ function postsByCategory(state = initialState.postsByCategory, action) {
 // Combine all the reducers responsible for separate portions of the state.
 export default combineReducers({
 	selectedCategory: category,
-	post,
+	posts: post,
 	// entities,
 	allPosts,
 	// postsByCategory,
