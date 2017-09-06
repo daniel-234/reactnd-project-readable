@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { Router, Route } from 'react-router';
+import createHistory from 'history/createBrowserHistory';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
-// import { fetchAllPosts } from './actions';
 import reducer from './reducers';
 import { Provider } from 'react-redux';
 
@@ -29,9 +30,9 @@ const store = createStore(
 			logger
 		)
 	)
-
-	// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+const history = createHistory();
 
 // Use the `react-redux` bindings to make connecting the Redux store
 // with the React components a lot easier.
@@ -41,7 +42,9 @@ const store = createStore(
 // to do that more easily.
 ReactDOM.render(
 	<Provider store={store}>
-		<App />
+		<Router history={history}>
+			<Route path='/' component={App} />
+		</Router>
 	</Provider>,
 	document.getElementById('root'));
 registerServiceWorker();

@@ -50,3 +50,9 @@ Here a list of the resources that helped me most:
 * [Stackoverflow - Need an unordered list without any bullets](https://stackoverflow.com/questions/1027354/need-an-unordered-list-without-any-bullets)
 * [Stackoverflow - Unordered list not aligning all the way to the left in a div](https://stackoverflow.com/questions/10972096/unordered-list-not-aligning-all-the-way-to-the-left-in-a-div)
 * [Matthew James Taylor's Blog - Beautiful CSS centered menu with no hacks](http://matthewjamestaylor.com/blog/beautiful-css-centered-menus-no-hacks-full-cross-browser-support)
+* Adding React Router to the project:
+* [Egghead - JavaScript Redux adding React Router to the project](https://egghead.io/lessons/javascript-redux-adding-react-router-to-the-project)
+* [Redux docs - Advanced tutorial: usage with React Router](http://redux.js.org/docs/advanced/UsageWithReactRouter.html)
+* Solve problems with browser history in Redux, as `history` is a module on its own now:
+* [Stackoverflow - React Router v4 browserHistory is undefined](https://stackoverflow.com/questions/43822589/react-router-v4-browserhistory-is-undefined)
+* [GitHub - ReactTraining history library](https://github.com/ReactTraining/history)
