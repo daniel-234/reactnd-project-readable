@@ -168,24 +168,30 @@ function allPosts(state = [], action) {
 // TODO refector it.
 // Assign the given post id to its category.
 function postsByCategory(state = initialState.postsByCategory, action) {
-	const { post, id } = action;
 	switch (action.type) {
-		// case ADD_POST:
-		// 	// Return a new `postsByCategory` object.
-		// 	return {
-		// 		// Pass the previous state.
-		// 		...state,
-		// 		// Select the post category.
-		// 		[post.category]: {
-		// 			// Assign it an `items` property key.
-		// 			items: [
-		// 				// Pass it the old `items` array elements.
-		// 				...state[post.category].items,
-		// 				// Add the new post id.
-		// 				id
-		// 			]
-		// 		}
-		// 	};
+		case RECEIVE_ALL_POSTS:
+			const posts = action.dataObj;
+			const postsIds = action.allPosts;
+
+			// Return a new `postsByCategory` object.
+			return {
+				// Pass the previous state.
+				react: {
+					items: postsIds.filter((postId) => (
+						posts[postId].category === 'react'
+					))
+				},
+				redux: {
+					items: postsIds.filter((postId) => (
+						posts[postId].category === 'redux'
+					))
+				},
+				udacity: {
+					items: postsIds.filter((postId) => (
+						posts[postId].category === 'udacity'
+					))
+				}
+			};
 		default:
 			return state;
 	}
@@ -197,6 +203,6 @@ export default combineReducers({
 	posts: post,
 	// entities,
 	allPosts,
-	// postsByCategory,
+	postsByCategory,
 	form: formReducer
 });
