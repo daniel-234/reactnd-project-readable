@@ -77,8 +77,8 @@ class App extends Component {
 
     const { posts } = this.props;
     const allStoredPostsIds = posts.allPosts;
-    // const allStoredPostsContents = posts.entities.posts;
-    // console.log(allStoredPostsContents);
+    const allStoredPostsContents = posts.posts;
+    console.log(allStoredPostsContents);
 
     return (
       <div className="App">
@@ -100,39 +100,39 @@ class App extends Component {
         <CommentForm onSubmit={this.submitComment} getPosts={this.getThePosts} />
         <div className='container'>
 
-        { /*
 
 
-          TODO refactor list.
+
+
 
           <ul className='all-posts'>
             {allStoredPostsIds.map((postId) => (
               <li key={postId} className='single-post'>
                 <div className='post-details'>
                   <p className='post-title'>
-                    {allStoredPostsContents[postId].title}
+                    { allStoredPostsContents[postId].title }
                   </p>
                   <p className='post-author'>
-                    author: {allStoredPostsContents[postId].author}
+                    author: { allStoredPostsContents[postId].author }
                   </p>
                   <p className='post-separator'>
                     |
                   </p>
                   <p className='post-score'>
-                    score: {allStoredPostsContents[postId].voteScore}
+                    { allStoredPostsContents[postId].voteScore } points
                   </p>
                   <p className='post-separator'>
                     |
                   </p>
                   <p className='post-comments'>
-
+                    { allStoredPostsContents[postId].comments.length } comments
                   </p>
                 </div>
               </li>
             ))}
           </ul>
 
-        */ }
+
 
         </div>
       </div>

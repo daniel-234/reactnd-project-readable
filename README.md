@@ -46,3 +46,7 @@ Here a list of the resources that helped me most:
 * Apart from the good explanation on the Redux official documentation and the lessons in the Udacity course, I relied on a post from Dan Abramov in Stackoverflow and the README documentation in the GitHub repository of the Redux thunk middleware. Dan Abramov points to an official Async example to understand the thunk middleware mechanism, and I relied heavily on some of its code to build some of my actions.
 * [GitHub - Redux thunk repository](https://github.com/gaearon/redux-thunk)
 * [Stackoverflow - How to dispatch a Redux thunk with a timeout](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/)
+* A brush up on how to center and align divs and unordered lists without special hacks:
+* [Stackoverflow - Need an unordered list without any bullets](https://stackoverflow.com/questions/1027354/need-an-unordered-list-without-any-bullets)
+* [Stackoverflow - Unordered list not aligning all the way to the left in a div](https://stackoverflow.com/questions/10972096/unordered-list-not-aligning-all-the-way-to-the-left-in-a-div)
+* [Matthew James Taylor's Blog - Beautiful CSS centered menu with no hacks](http://matthewjamestaylor.com/blog/beautiful-css-centered-menus-no-hacks-full-cross-browser-support)

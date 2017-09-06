@@ -63,10 +63,15 @@ export function receiveAllPosts(data) {
 	// Loop through the posts data array.
 	for (let i = 0; i < data.length; i++) {
 		/*
-		 * Populate the new posts object with post objects referenced
+		 * Populate the new posts object with post objects referenced.
 		 * by their id.
 		 */
 		dataObj[data[i].id] = data[i];
+		/*
+		 * Add a comments property key which holds an empty array
+		 * as value to each post object.
+		 */
+		dataObj[data[i].id].comments = [];
 	}
 
 	return {
@@ -84,6 +89,7 @@ export function receiveAllPosts(data) {
  * same parent id stored as arry and the parent id.
  */
 export function receiveAllComments(data, parentId) {
+	// TODO check if get comments object from another action.
 	// Define an empty object to store the comments.
 	let dataObj = {};
 	for (let i = 0; i < data.length; i++) {

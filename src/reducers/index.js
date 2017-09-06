@@ -93,6 +93,7 @@ function post(state = initialState, action) {
 				...state,
 				[parentId]: {
 					...state[parentId],
+					// Populate the `comments` property of this post.
 					comments: [
 						...comments
 					]

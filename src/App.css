@@ -63,13 +63,33 @@ button {
   margin-left: .5em;
 }
 
+/*
+ * Remove bullets from the posts list.
+ */
+.all-posts {
+  list-style-type: none;
+}
+
+.all-posts,
+.single-posts {
+  margin: 10px 20px;
+  padding: 0;
+  float: left;
+  text-align: left;
+}
+
 .post-author,
 .post-score,
-.post-separator  {
+.post-separator,
+.post-comments {
   font-size: 0.8em;
   color: #888;
   display: inline;
   padding-right: 1em;
+}
+
+.post-title {
+  margin-bottom: 2px;
 }
 
 /*@keyframes App-logo-spin {
