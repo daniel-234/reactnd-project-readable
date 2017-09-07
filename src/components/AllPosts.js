@@ -61,9 +61,16 @@ class AllPosts extends Component {
 
 	render() {
 		console.log(this.props.posts);
+
+		/*
+     * Extract properties from props.
+     */
+
+    // Extract posts passed via props.
     const posts = this.props.posts;
     const allStoredPostsIds = posts.allPosts;
     const allStoredPostsContents = posts.posts;
+
     console.log(allStoredPostsContents);
 
 		return (
@@ -111,7 +118,7 @@ class AllPosts extends Component {
           	{
           		/*
 							 * Loop through the posts ids array and, for every item
-							 * in there, extract the reuested properties from the
+							 * in there, extract the requested properties from the
 							 * relative post.
           		 */
           	}

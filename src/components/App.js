@@ -65,7 +65,9 @@ class App extends Component {
         <Route
           path='/react'
           render={() => (
-            <Category />
+            <Category
+              posts = {posts}
+            />
           )}
         />
       </div>
