@@ -61,7 +61,6 @@ class AllPosts extends Component {
 
 	render() {
 		console.log(this.props.posts);
-
     const posts = this.props.posts;
     const allStoredPostsIds = posts.allPosts;
     const allStoredPostsContents = posts.posts;
@@ -69,66 +68,81 @@ class AllPosts extends Component {
 
 		return (
 			<div className='all-posts'>
-
-
 				<h2>Add a post</h2>
-	        {
-	          /*
-	           * `onSubmit` prop passed from the App Container to the
-	           * PostForm Component.
-	           * The Component will look for it in its prop to know
-	           * what `handleSubmit` will do with the values passed
-	           * by the user in the form.
-	           */
-	        }
-	        <PostForm onSubmit={this.submitPost} />
-	        <h2>Add a comment</h2>
-	        <CommentForm onSubmit={this.submitComment} getPosts={this.getThePosts} />
-	        <div className='container'>
+        {
+          /*
+           * `onSubmit` prop passed from the App Container to the
+           * PostForm Component.
+           * The Component will look for it in its prop to know
+           * what `handleSubmit` will do with the values passed
+           * by the user in the form.
+           */
+        }
+        <PostForm
+        	onSubmit={this.submitPost}
+        />
 
+        <h2>Add a comment</h2>
+        <CommentForm
+        	onSubmit={this.submitComment}
+        	getPosts={this.getThePosts}
+        />
 
-	          <Link
-	            to='/react'
-	            className='select-category'
-	          >Select Category</Link>
-
-
-
-	          <ul className='all-posts'>
-	            {allStoredPostsIds.map((postId) => (
-	              <li key={postId} className='single-post'>
-	                <div className='post-details'>
-	                  <p className='post-title'>
-	                    { allStoredPostsContents[postId].title }
-	                  </p>
-	                  <p className='post-author'>
-	                    author: { allStoredPostsContents[postId].author }
-	                  </p>
-	                  <p className='post-separator'>
-	                    |
-	                  </p>
-	                  <p className='post-score'>
-	                    { allStoredPostsContents[postId].voteScore } points
-	                  </p>
-	                  <p className='post-separator'>
-	                    |
-	                  </p>
-	                  <p className='post-comments'>
-	                    { allStoredPostsContents[postId].comments.length } comments
-	                  </p>
-	                </div>
-	              </li>
-	            ))}
-	          </ul>
-
-
-
-	        </div>
-
-
+        <div className='container'>
+        	{
+        		/*
+						 * The Link Component tells the Router tp update the URL
+						 * when a user clicks it.
+						 * The value of the `to` property of the Link Component
+						 * tells the app which path to route to.
+        		 */
+        	}
+          <Link
+            to='/react'
+            className='select-category'
+          >Select Category</Link>
+          {
+          	/*
+						 * List all the available posts from the server, getting
+						 * some of its properties to the user.
+          	 */
+          }
+          <ul className='all-posts'>
+          	{
+          		/*
+							 * Loop through the posts ids array and, for every item
+							 * in there, extract the reuested properties from the
+							 * relative post.
+          		 */
+          	}
+            {allStoredPostsIds.map((postId) => (
+              <li key={postId} className='single-post'>
+                <div className='post-details'>
+                  <p className='post-title'>
+                    { allStoredPostsContents[postId].title }
+                  </p>
+                  <p className='post-author'>
+                    author: { allStoredPostsContents[postId].author }
+                  </p>
+                  <p className='post-separator'>
+                    |
+                  </p>
+                  <p className='post-score'>
+                    { allStoredPostsContents[postId].voteScore } points
+                  </p>
+                  <p className='post-separator'>
+                    |
+                  </p>
+                  <p className='post-comments'>
+                    { allStoredPostsContents[postId].comments.length } comments
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
 			</div>
 		);
-
 	}
 }
 

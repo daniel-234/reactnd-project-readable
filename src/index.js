@@ -34,12 +34,14 @@ const store = createStore(
 
 const history = createHistory();
 
-// Use the `react-redux` bindings to make connecting the Redux store
-// with the React components a lot easier.
-// Wrap the main root component inside of Provider and pass it the store.
-// This way whenever any of the components that the App renders or App itself
-// needs access to Redux store or needs to dispatch an action, it will be able
-// to do that more easily.
+/*
+ * Use the `react-redux` bindings to make connecting the Redux store
+ * with the React components a lot easier.
+ * Wrap the main root component inside of Provider and pass it the
+ * store. This way whenever any of the components that the App renders
+ * or App itself needs access to Redux store or needs to dispatch an
+ * action, it will be able to do that more easily.
+ */
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={history}>
