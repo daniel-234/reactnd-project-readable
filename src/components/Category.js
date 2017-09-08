@@ -10,10 +10,13 @@ class Category extends Component {
 		const posts = this.props.posts;
     const allStoredPostsIds = posts.allPosts;
     const allStoredPostsContents = posts.posts;
+    const setCommentvalues = this.props.setCommentvalues;
+    const selectedCategory = this.props.selectedCategory;
+    console.log(selectedCategory);
 
 		return (
 			<div className='category-related-posts'>
-				<h2>React Posts</h2>
+				<h2>{selectedCategory} {' Posts'} </h2>
 				<div className='container'>
 					<ul className='all-posts'>
           	{
@@ -26,7 +29,7 @@ class Category extends Component {
           	}
             {allStoredPostsIds.filter((postId) => (
             		// Hardcode the selected category for now.
-            		allStoredPostsContents[postId].category === 'react'
+            		allStoredPostsContents[postId].category === selectedCategory
             	)).map((postId) => (
               <li key={postId} className='single-post'>
                 <div className='post-details'>

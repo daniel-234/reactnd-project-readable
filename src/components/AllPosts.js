@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import SelectCategory from './SelectCategory';
 import PostForm from './PostForm';
 import CommentForm from './CommentForm';
 
@@ -85,6 +86,7 @@ class AllPosts extends Component {
            * by the user in the form.
            */
         }
+        <SelectCategory />
         <PostForm
         	onSubmit={this.submitPost}
         />
@@ -96,18 +98,6 @@ class AllPosts extends Component {
         />
 
         <div className='container'>
-        	{
-        		/*
-						 * The Link Component tells the Router tp update the URL
-						 * when a user clicks it.
-						 * The value of the `to` property of the Link Component
-						 * tells the app which path to route to.
-        		 */
-        	}
-          <Link
-            to='/react'
-            className='select-category'
-          >Select Category</Link>
           {
           	/*
 						 * List all the available posts from the server, getting

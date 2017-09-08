@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { Router, Route } from 'react-router';
 import createHistory from 'history/createBrowserHistory';
-import App from './components/App';
+import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -45,7 +45,7 @@ const history = createHistory();
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={history}>
-			<Route path='/' component={App} />
+			<Route path='/:category?' component={App} />
 		</Router>
 	</Provider>,
 	document.getElementById('root'));

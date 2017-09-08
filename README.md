@@ -56,3 +56,6 @@ Here a list of the resources that helped me most:
 * Solve problems with browser history in Redux, as `history` is a module on its own now:
 * [Stackoverflow - React Router v4 browserHistory is undefined](https://stackoverflow.com/questions/43822589/react-router-v4-browserhistory-is-undefined)
 * [GitHub - ReactTraining history library](https://github.com/ReactTraining/history)
+* To make the app work well with React Router I had to add a Switch component. Here is the answer on Stackoverflow that hinted me to the solution:
+* [Stackoverflow - React Router Switch component matches](https://stackoverflow.com/questions/43584748/react-router-switch-component-matches)
+* [React Training - React Router Web API Swicth](https://reacttraining.com/react-router/web/api/Switch)
