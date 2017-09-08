@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SelectCategory from './SelectCategory';
 
 class Category extends Component {
 	render() {
@@ -17,6 +18,7 @@ class Category extends Component {
 		return (
 			<div className='category-related-posts'>
 				<h2>{selectedCategory} {' Posts'} </h2>
+				<SelectCategory />
 				<div className='container'>
 					<ul className='all-posts'>
           	{
