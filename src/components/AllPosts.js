@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import SelectCategory from './SelectCategory';
 import PostForm from './PostForm';
 import CommentForm from './CommentForm';
+import PostFormLink from './PostFormLink'
+import AddTextIcon from 'react-icons/lib/fa/quote-right';
+// import AddIcon from'react-icons/lib/md/textsms';
 
 class AllPosts extends Component {
 	// componentDidMount() {
@@ -99,6 +102,10 @@ class AllPosts extends Component {
         	onSubmit={this.submitComment}
         	getPosts={this.getThePosts}
         />
+
+        <div className='icons'>
+        	<PostFormLink />
+        </div>
 
         <div className='container'>
           {

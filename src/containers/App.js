@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import AllPosts from '../components/AllPosts';
 import Category from '../components/Category';
 import Post from '../components/Post';
+import CreatePostForm from '../components/CreatePostForm';
 import { addPost, addComment, fetchAllPosts, setCategory, getPostDetails } from '../actions';
 import { reset } from 'redux-form';
 import '.././App.css';
@@ -98,6 +99,19 @@ class App extends Component {
              * match from the previous one. If its path matches the URL, it
              * renders (a UI based on what it's called by its `render` method),
              * otherwise it does not render anything.
+             * Checks if the Link to `create` a post has been called.
+             */
+          }
+          <Route
+            exact path='/create'
+            render={() => (
+              <CreatePostForm />
+            )}
+          />
+
+          {
+            /*
+             * Checks if a category has been selected.
              */
           }
           <Route
@@ -111,7 +125,7 @@ class App extends Component {
           />
           {
             /*
-             * This Route Component checks the URL to see if a post id matches it.
+             * Checks if the URL matches a post id.
              */
           }
           <Route
