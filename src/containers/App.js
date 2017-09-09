@@ -28,22 +28,32 @@ class App extends Component {
     const setPostValues = this.props.setPostValues;
     const setCommentValues = this.props.setCommentValues;
 
-    const getPost = this.props.getPost;
-
+    /*
+     * A `match` object contains information about how a <Route path>
+     * matched the URL. `match` objects contain a `params` object property
+     * with key/value pairs parsed from the URL corresponding to the dynamic
+     * segment of the path.
+     */
     const urlParams = this.props.match.params;
-    console.log(this.props);
-    console.log(urlParams);
-    const selectCategory = this.props.selectCategory;
+    // Get the category value from the params properties.
+    const category = urlParams.category;
 
-    const postId = this.props.location.pathname.slice(this.props.location.pathname.lastIndexOf('/') + 1);
+    /*
+     * A `location` object is a <Switch> prop used for matching children
+     * elements instead of the current history location.
+     * All children of a <Switch> should be <Route> elements.
+     * <Route> elements are matched using their pathname prop.
+     */
+    const path = this.props.location.pathname;
+    /*
+     * As the current path for a Post View is made up of the category
+     * and the post id, take the string and get the id after the last `/`
+     * symbol.
+     */
+    const postId = path.slice(path.lastIndexOf('/') + 1);
 
-    // const postDetails = posts.postDetails;
-
+    // Create a new post object.
     const post = {...posts.posts[postId]};
-
-
-    console.log(this.props);
-
 
     return (
       <div className="App">
@@ -68,8 +78,8 @@ class App extends Component {
              */
           }
           <Route
-            exact path='/'
-            render={() => (
+            exact path = '/'
+            render = {() => (
               /*
                * Pass as props to `allPosts` some values. The passed values here
                * are the ones extracted from the App class props above.
@@ -91,22 +101,25 @@ class App extends Component {
              */
           }
           <Route
-            exact path='/:category?'
-            render={() => (
+            exact path = '/:category?'
+            render = {() => (
               <Category
                 posts = {posts}
-                selectedCategory = {urlParams.category}
+                selectedCategory = {category}
               />
             )}
           />
+          {
+            /*
+             * This Route Component checks the URL to see if a post id matches it.
+             */
+          }
           <Route
             path='/:postId?'
             render={() => (
-              // <p>{this.props.location.pathname.slice(this.props.location.pathname.lastIndexOf('/') + 1)}</p>
               <Post
-                postId = {postId}
+                // postId = {postId}
                 post = {post}
-                // getPost = {getPost}
               />
             )}
           />
@@ -130,7 +143,7 @@ function mapDispatchToProps(dispatch) {
     setCommentValues: (data) => dispatch(addComment(data)),
     selectCategory: (category) => dispatch(setCategory(category)),
     getAllPosts: () => dispatch(fetchAllPosts()),
-    getPost: (postId) => dispatch(getPostDetails(postId))
+    // getPost: (postId) => dispatch(getPostDetails(postId))
   }
 }
 

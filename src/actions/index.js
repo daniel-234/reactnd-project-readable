@@ -8,7 +8,7 @@ import { getPosts, getComments, addToPosts, addToComments, getSinglePost } from 
 export const SET_CATEGORY = 'SET_CATEGORY';
 export const RECEIVE_ALL_POSTS = 'RECEIVE_ALL_POSTS';
 export const RECEIVE_ALL_COMMENTS = 'RECEIVE_ALL_COMMENTS';
-export const RECEIVE_POST_DETAILS = 'RECEIVE_POST_DETAILS';
+// export const RECEIVE_POST_DETAILS = 'RECEIVE_POST_DETAILS';
 
 /*
  * Other constants.
@@ -109,13 +109,19 @@ export function receiveAllComments(data, parentId) {
 	};
 };
 
-export function receivePostDetails(data) {
-	console.log(data);
-	return {
-		type: RECEIVE_POST_DETAILS,
-		postDetails: data
-	}
-}
+
+// TODO check
+
+// See if it is useful
+// export function receivePostDetails(data) {
+// 	console.log(data);
+// 	return {
+// 		type: RECEIVE_POST_DETAILS,
+// 		postDetails: data
+// 	};
+// };
+
+
 
 /*
  * Fetch all the posts from the server.
@@ -146,15 +152,20 @@ export function fetchAllPosts() {
 	};
 };
 
-export function getPostDetails(postId) {
-	return function(dispatch) {
-		return getSinglePost(postId)
-			.then((data) => (
-				// console.log(data)
-				dispatch(receivePostDetails(data))
-			))
-	};
-};
+
+// TODO check
+
+// See if it is useful
+// export function getPostDetails(postId) {
+// 	return function(dispatch) {
+// 		return getSinglePost(postId)
+// 			.then((data) => (
+// 				// console.log(data)
+// 				dispatch(receivePostDetails(data))
+// 			))
+// 	};
+// };
+
 
 /*
  * Set the selected category.

@@ -7,7 +7,7 @@ import {
 	SET_CATEGORY,
 	RECEIVE_ALL_POSTS,
 	RECEIVE_ALL_COMMENTS,
-	RECEIVE_POST_DETAILS
+	// RECEIVE_POST_DETAILS
 } from '../actions';
 
 /*
@@ -46,7 +46,7 @@ const initialState = {
 			items: []
 		}
 	},
-	postDetails: {}
+	// postDetails: {}
 };
 
 /*
@@ -199,18 +199,18 @@ function postsByCategory(state = initialState.postsByCategory, action) {
 	}
 }
 
-function postDetails(state = {}, action) {
-	switch (action.type) {
-		case RECEIVE_POST_DETAILS:
-			console.log(action);
-			const postDetails = action.postDetails;
-			return {
-				postDetails: postDetails
-			}
-		default:
-			return state;
-	}
-}
+// function postDetails(state = {}, action) {
+// 	switch (action.type) {
+// 		case RECEIVE_POST_DETAILS:
+// 			console.log(action);
+// 			const postDetails = action.postDetails;
+// 			return {
+// 				postDetails: postDetails
+// 			}
+// 		default:
+// 			return state;
+// 	}
+// }
 
 
 // Combine all the reducers responsible for separate portions of the state.
@@ -220,6 +220,6 @@ export default combineReducers({
 	// entities,
 	allPosts,
 	postsByCategory,
-	postDetails,
+	// postDetails,
 	form: formReducer
 });

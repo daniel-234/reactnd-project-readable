@@ -5,9 +5,9 @@ import PostForm from './PostForm';
 import CommentForm from './CommentForm';
 
 class AllPosts extends Component {
-	componentDidMount() {
-    this.props.getAllPosts();
-  }
+	// componentDidMount() {
+ //    this.props.getAllPosts();
+ //  }
 
 	// Triggered by onSubmit in the post form.
   submitPost = (values) => {
@@ -116,24 +116,23 @@ class AllPosts extends Component {
           		 */
           	}
             {allStoredPostsIds.map((postId) => (
-
-            	// <Link
-            	// 	to='/react/8xf0y6ziyjabvozdd253nd'
-            	// >
-
-
               <li key={postId} className='single-post'>
                 <div className='post-details'>
-
+                	{
+	                	/*
+	                	 * Provides navigation to this Post View (referenced by postId in
+	                	 * the URL).
+	                	 *
+	                	 * Wraps the post title as an anchor tag.
+	                	 */
+	                }
                 	<Link
 		            		to={'/' + allStoredPostsContents[postId].category + '/' + postId}
 		            	>
-
-                  {postId}
-
-
+	                  <p className='post-title'>
+	                    { allStoredPostsContents[postId].title }
+	                  </p>
                   </Link>
-
                   <p className='post-author'>
                     author: { allStoredPostsContents[postId].author }
                   </p>
@@ -151,10 +150,6 @@ class AllPosts extends Component {
                   </p>
                 </div>
               </li>
-
-
-              // </Link>
-
             ))}
           </ul>
         </div>

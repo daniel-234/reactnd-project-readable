@@ -67,37 +67,3 @@ export const getSinglePost = (postId) =>
       error => console.log('An error occurred', error)
     )
 
-
-
-/*
-
-app.get('/posts', (req, res) => {
-    posts.getAll(req.token)
-      .then(
-          (data) => res.send(data),
-          (error) => {
-              console.error(error)
-              res.status(500).send({
-                 error: 'There was an error.'
-          })
-        }
-      )
-})
-
-  app.get('/posts/:id', (req, res) => {
-    posts.get(req.token, req.params.id)
-      .then(
-          (data) => res.send(data),
-          (error) => {
-              console.error(error)
-              res.status(500).send({
-                  error: 'There was an error.'
-              })
-          }
-      )
-})
-
-  `GET /posts/:id`
-  **USAGE:**
-    Get the details of a single post
-    */
