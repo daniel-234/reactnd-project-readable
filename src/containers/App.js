@@ -3,7 +3,8 @@ import { Switch, Route } from 'react-router';
 import { connect } from 'react-redux';
 import AllPosts from '../components/AllPosts';
 import Category from '../components/Category';
-import { addPost, addComment, fetchAllPosts, setCategory } from '../actions';
+import Post from '../components/Post';
+import { addPost, addComment, fetchAllPosts, setCategory, getPostDetails } from '../actions';
 import { reset } from 'redux-form';
 import '.././App.css';
 
@@ -27,10 +28,21 @@ class App extends Component {
     const setPostValues = this.props.setPostValues;
     const setCommentValues = this.props.setCommentValues;
 
+    const getPost = this.props.getPost;
+
     const urlParams = this.props.match.params;
     console.log(this.props);
     console.log(urlParams);
     const selectCategory = this.props.selectCategory;
+
+    const postId = this.props.location.pathname.slice(this.props.location.pathname.lastIndexOf('/') + 1);
+
+    // const postDetails = posts.postDetails;
+
+    const post = {...posts.posts[postId]};
+
+
+    console.log(this.props);
 
 
     return (
@@ -79,11 +91,22 @@ class App extends Component {
              */
           }
           <Route
-            path='/:category?'
+            exact path='/:category?'
             render={() => (
               <Category
                 posts = {posts}
                 selectedCategory = {urlParams.category}
+              />
+            )}
+          />
+          <Route
+            path='/:postId?'
+            render={() => (
+              // <p>{this.props.location.pathname.slice(this.props.location.pathname.lastIndexOf('/') + 1)}</p>
+              <Post
+                postId = {postId}
+                post = {post}
+                // getPost = {getPost}
               />
             )}
           />
@@ -106,7 +129,8 @@ function mapDispatchToProps(dispatch) {
     setPostValues: (data) => dispatch(addPost(data)),
     setCommentValues: (data) => dispatch(addComment(data)),
     selectCategory: (category) => dispatch(setCategory(category)),
-    getAllPosts: () => dispatch(fetchAllPosts())
+    getAllPosts: () => dispatch(fetchAllPosts()),
+    getPost: (postId) => dispatch(getPostDetails(postId))
   }
 }
 

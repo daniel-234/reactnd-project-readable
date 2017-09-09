@@ -6,7 +6,8 @@ import {
 	allCategories,
 	SET_CATEGORY,
 	RECEIVE_ALL_POSTS,
-	RECEIVE_ALL_COMMENTS
+	RECEIVE_ALL_COMMENTS,
+	RECEIVE_POST_DETAILS
 } from '../actions';
 
 /*
@@ -44,7 +45,8 @@ const initialState = {
 		udacity: {
 			items: []
 		}
-	}
+	},
+	postDetails: {}
 };
 
 /*
@@ -197,6 +199,20 @@ function postsByCategory(state = initialState.postsByCategory, action) {
 	}
 }
 
+function postDetails(state = {}, action) {
+	switch (action.type) {
+		case RECEIVE_POST_DETAILS:
+			console.log(action);
+			const postDetails = action.postDetails;
+			return {
+				postDetails: postDetails
+			}
+		default:
+			return state;
+	}
+}
+
+
 // Combine all the reducers responsible for separate portions of the state.
 export default combineReducers({
 	selectedCategory: category,
@@ -204,5 +220,6 @@ export default combineReducers({
 	// entities,
 	allPosts,
 	postsByCategory,
+	postDetails,
 	form: formReducer
 });

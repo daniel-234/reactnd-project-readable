@@ -22,7 +22,7 @@ export const getPosts = () =>
 
 /*
  * Get all the comments stored in the server that reference the
- * given parent id..
+ * given parent id.
  */
 export const getComments = (parentId) =>
   fetch(`${api}/posts/` + parentId + `/comments`, { headers })
@@ -56,3 +56,48 @@ export const addToComments = (obj) =>
     },
     body: JSON.stringify(obj)
   }).then(res => res.json())
+
+/*
+ * Get the details of a single post.
+ */
+export const getSinglePost = (postId) =>
+  fetch(`${api}/posts/` + postId, { headers })
+    .then(
+      res => res.json(),
+      error => console.log('An error occurred', error)
+    )
+
+
+
+/*
+
+app.get('/posts', (req, res) => {
+    posts.getAll(req.token)
+      .then(
+          (data) => res.send(data),
+          (error) => {
+              console.error(error)
+              res.status(500).send({
+                 error: 'There was an error.'
+          })
+        }
+      )
+})
+
+  app.get('/posts/:id', (req, res) => {
+    posts.get(req.token, req.params.id)
+      .then(
+          (data) => res.send(data),
+          (error) => {
+              console.error(error)
+              res.status(500).send({
+                  error: 'There was an error.'
+              })
+          }
+      )
+})
+
+  `GET /posts/:id`
+  **USAGE:**
+    Get the details of a single post
+    */
