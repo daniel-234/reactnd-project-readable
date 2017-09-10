@@ -87,9 +87,9 @@ class App extends Component {
                */
               <AllPosts
                 posts = {posts}
-                getAllPosts = {getAllPosts}
-                setPostValues = {setPostValues}
-                setCommentValues = {setCommentValues}
+                // getAllPosts = {getAllPosts}
+                // setPostValues = {setPostValues}
+                // setCommentValues = {setCommentValues}
               />
             )}
           />
@@ -105,7 +105,12 @@ class App extends Component {
           <Route
             exact path='/create'
             render={() => (
-              <CreatePostForm />
+              <CreatePostForm
+                posts = {posts}
+                getAllPosts = {getAllPosts}
+                setPostValues = {setPostValues}
+                setCommentValues = {setCommentValues}
+              />
             )}
           />
 
