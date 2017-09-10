@@ -59,20 +59,38 @@ class CreatePostForm extends Component {
 
   render() {
   	return (
-
-  		// TODO complete
-			// Used just to chack that the Link and Route work correctly.
-			<div>
-				<PostForm
-		    	onSubmit={this.submitPost}
-		    />
-
-		    <h2>Add a comment</h2>
-		    <CommentForm
-		    	onSubmit={this.submitComment}
-		    	getPosts={this.getThePosts}
-		    />
-			</div>
+  		<div className='create-post-form'>
+  			{
+  				/*
+  				 * Post form.
+  				 */
+  			}
+	  		<h2>Add a post</h2>
+				<div className='post-form-container'>
+					<PostForm
+						/*
+	           * `onSubmit` prop passed from the App Container to the
+	           * PostForm Component.
+	           * The Component will look for it in its prop to know
+	           * what `handleSubmit` will do with the values passed
+	           * by the user in the form.
+	           */
+			    	onSubmit={this.submitPost}
+			    />
+			   </div>
+			   {
+			   	/*
+			   	 * Comment form.
+			   	 */
+			   }
+			   <div className='comment-form-container'>
+			    <h2>Add a comment</h2>
+			    <CommentForm
+			    	onSubmit={this.submitComment}
+			    	getPosts={this.getThePosts}
+			    />
+				</div>
+  		</div>
   	)
   }
 }

@@ -87,9 +87,6 @@ class App extends Component {
                */
               <AllPosts
                 posts = {posts}
-                // getAllPosts = {getAllPosts}
-                // setPostValues = {setPostValues}
-                // setCommentValues = {setCommentValues}
               />
             )}
           />
