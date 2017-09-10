@@ -3,66 +3,10 @@ import { Link } from 'react-router-dom';
 import SelectCategory from './SelectCategory';
 import PostFormLink from './PostFormLink';
 import AddTextIcon from 'react-icons/lib/fa/quote-right';
+import ArrowUp from 'react-icons/lib/fa/sort-asc';
+import ArrowDown from 'react-icons/lib/fa/sort-desc';
 
 class AllPosts extends Component {
-	// componentDidMount() {
- //    this.props.getAllPosts();
- //  }
-
-	// // Triggered by onSubmit in the post form.
- //  submitPost = (values) => {
- //    console.log(values);
- //    /*
- //     * Call the `displayPost` property function passed
- //     * to props by `mapDispatchToProps`.
- //     * Get the values from the post form and dispatch the
- //     * action `addPost` from the reducer passing the post
- //     * object as argument.
- //     */
- //    this.props.setPostValues({
- //        title: values.title,
- //        author: values.author,
- //        category: values.category,
- //        body: values.body,
- //    });
-
- //    /*
- //     * After the new post is submitted, get the state synchronized
- //     * with the server.
- //     */
- //    this.props.getAllPosts();
- //    // this.props.getAllComments();
- //  }
-
-
- //  // TODO refactor
-
- //  // Triggered by onSubmit in the comment form.
- //  submitComment = (values) => {
- //    /*
- //     * Call the `displayComment` property function passed
- //     * to props by `mapDispatchToProps`.
- //     * Get the values from the comment form and dispatch the
- //     * action `addComment` from the reducer passing the comment
- //     * object and the related post id as arguments.
- //     */
- //    console.log(values);
- //    this.props.setCommentValues({
- //        body: values.comment,
- //        // For now just add comments to the same post.
- //        // TODO change it.
- //        parentId: values.allPosts
- //    });
- //    // Get the comments from the server.
- //    // this.props.getAllComments();
- //  }
-
-  // // Get all the submitted posts from any category.
-  // getThePosts = () => {
-  //   const allPosts = this.props.posts.allPosts;
-  //   return allPosts;
-  // }
-
 	render() {
 		console.log(this.props.posts);
 
@@ -93,7 +37,11 @@ class AllPosts extends Component {
         <div className='post-icons'>
         	<PostFormLink />
         </div>
-
+        {
+        	/*
+        	 * Posts list.
+        	 */
+        }
         <div className='container'>
           {
           	/*
@@ -111,6 +59,22 @@ class AllPosts extends Component {
           	}
             {allStoredPostsIds.map((postId) => (
               <li key={postId} className='single-post'>
+              	<div className='post-voting-icons'>
+            			<ArrowUp
+            				className='up=arrow'
+            				size={20}
+            				onClick={() => (
+            					console.log('Up')
+            				)}
+            			/>
+            			<ArrowDown
+            				className='down-arrow'
+            				size={20}
+            				onClick={() => (
+            					console.log('Down')
+            				)}
+            			/>
+              	</div>
                 <div className='post-details'>
                 	{
 	                	/*

@@ -70,8 +70,9 @@ button {
   list-style-type: none;
 }
 
-.all-posts,
-.single-posts {
+.all-posts
+ {
+  width: 100%;
   margin: 10px 20px;
   padding: 0;
   float: left;
@@ -96,6 +97,42 @@ button {
   display: inline-block;
   padding-right: 20px;
 }
+
+.post-voting-icons {
+  /*float: left;
+  width: 5%;*/
+
+  /*position: relative;*/
+  width: 2.5%;
+  float: left;
+  clear: left;
+}
+
+.post-details {
+  /*float: left;*/
+  width: 97.5%;
+  /*margin-left: 5%;*/
+}
+
+.up-arrow,
+.down-arrow {
+  /*position: absolute;
+  left: 2px;*/
+  /*padding-top: 1.5%;*/
+
+  display: block;
+  float: none;
+  clear: both;
+}
+
+/*.up-arrow {
+  padding-top: 1%;
+}
+
+.down-arrow {
+  padding-top: 3%;
+}
+*/
 
 /*@keyframes App-logo-spin {
   from { transform: rotate(0deg); }
