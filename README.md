@@ -62,3 +62,6 @@ Here a list of the resources that helped me most:
 * [Stackoverflow - React Router Switch component matches](https://stackoverflow.com/questions/43584748/react-router-switch-component-matches)
 * [React Training - React Router Web API Swicth](https://reacttraining.com/react-router/web/api/Switch)
 * [Stackoverflow - Wrapping a React Router Link in an HTML button](https://stackoverflow.com/questions/42463263/wrapping-a-react-router-link-in-an-html-button)
+* Some CSS hints to display the two React icons arrows on the page:
+* [Stackoverflow - Two divs side by side fluid display](https://stackoverflow.com/questions/17217766/two-divs-side-by-side-fluid-display)
+* [Stackoverflow - How can I stack two arrow images (upvote and downvote) on top of each other using CSS](https://stackoverflow.com/questions/764042/how-can-i-stack-two-arrow-images-upvote-downvote-on-top-of-eachother-using-css)
