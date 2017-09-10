@@ -67,3 +67,16 @@ export const getSinglePost = (postId) =>
       error => console.log('An error occurred', error)
     )
 
+/*
+ * Pass the downVote or upVote to the post with given `postId`.
+ */
+export const votePost = (postId, vote) =>
+  fetch(`${api}/posts/` + postId, {
+    method: `POST`,
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(vote)
+  })
+  .then(res => res.json())

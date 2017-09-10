@@ -1,5 +1,5 @@
 import generateUUID from '../utils/generateID.js';
-import { getPosts, getComments, addToPosts, addToComments, getSinglePost } from '../utils/ReadableAPI';
+import { getPosts, getComments, addToPosts, addToComments, getSinglePost, votePost } from '../utils/ReadableAPI';
 
 /*
  * Action types.
@@ -150,6 +150,16 @@ export function fetchAllPosts() {
 				)
 			);
 	};
+};
+
+export function addVoteToPost(postId, vote) {
+	return function(dispatch) {
+		return votePost(postId, { option: vote})
+			.then((data) => (
+				console.log(data)
+		))
+	};
+	// console.log(voteStr);
 };
 
 

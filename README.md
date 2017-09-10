@@ -65,3 +65,5 @@ Here a list of the resources that helped me most:
 * Some CSS hints to display the two React icons arrows on the page:
 * [Stackoverflow - Two divs side by side fluid display](https://stackoverflow.com/questions/17217766/two-divs-side-by-side-fluid-display)
 * [Stackoverflow - How can I stack two arrow images (upvote and downvote) on top of each other using CSS](https://stackoverflow.com/questions/764042/how-can-i-stack-two-arrow-images-upvote-downvote-on-top-of-eachother-using-css)
+* On implementing the mechanism to vote a post I faced some issues, one of which was a way to pass a reference to the click mechanism. This answer in Stackoverflow helped me solve it:
+* [Stackoverflow - ReactJS onClick can't pass value to method](https://stackoverflow.com/questions/29810914/react-js-onclick-cant-pass-value-to-method)

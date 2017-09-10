@@ -5,7 +5,7 @@ import AllPosts from '../components/AllPosts';
 import Category from '../components/Category';
 import Post from '../components/Post';
 import CreatePostForm from '../components/CreatePostForm';
-import { addPost, addComment, fetchAllPosts, setCategory, getPostDetails } from '../actions';
+import { addPost, addComment, fetchAllPosts, setCategory, getPostDetails, addVoteToPost } from '../actions';
 import { reset } from 'redux-form';
 import '.././App.css';
 
@@ -28,6 +28,7 @@ class App extends Component {
     const getAllPosts = this.props.getAllPosts;
     const setPostValues = this.props.setPostValues;
     const setCommentValues = this.props.setCommentValues;
+    const voteAPost = this.props.voteAPost;
 
     /*
      * A `match` object contains information about how a <Route path>
@@ -87,6 +88,7 @@ class App extends Component {
                */
               <AllPosts
                 posts = {posts}
+                voteAPost = {voteAPost}
               />
             )}
           />
@@ -159,6 +161,7 @@ function mapDispatchToProps(dispatch) {
     setCommentValues: (data) => dispatch(addComment(data)),
     selectCategory: (category) => dispatch(setCategory(category)),
     getAllPosts: () => dispatch(fetchAllPosts()),
+    voteAPost: (postId, vote) => dispatch(addVoteToPost(postId, vote))
     // getPost: (postId) => dispatch(getPostDetails(postId))
   }
 }
