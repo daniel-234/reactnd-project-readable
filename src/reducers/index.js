@@ -7,7 +7,8 @@ import {
 	SET_CATEGORY,
 	RECEIVE_ALL_POSTS,
 	RECEIVE_ALL_COMMENTS,
-	UPDATE_POST_SCORE
+	UPDATE_POST_SCORE,
+	ORDER_POSTS
 } from '../actions';
 
 /*
@@ -175,6 +176,8 @@ function allPosts(state = [], action) {
 			return [
 				...action.allPosts
 			];
+		// case ORDER_POSTS:
+		// 	return
 		default:
 			return state;
 	}

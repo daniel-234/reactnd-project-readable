@@ -18,16 +18,16 @@ let PostForm = props => {
      */
 		<form onSubmit={ handleSubmit }>
       <div>
-        <label>Title</label>
-        <Field name='title' component='input' type='text' />
+        <label className='post-title-label'>Title</label>
+        <Field className='form-input-title' name='title' component='input' type='text' />
       </div>
       <div>
-        <label>Author</label>
-        <Field name='author' component='input' type='text' />
+        <label className='post-author-label'>Author</label>
+        <Field className='form-input-author' name='author' component='input' type='text' />
       </div>
       <div>
-        <label>Category</label>
-        <Field name='category' component='select'>
+        <label className='post-category-label'>Category</label>
+        <Field className='category-select' name='category' component='select'>
           <option></option>
           <option value='react'>React</option>
           <option value='redux'>Redux</option>
@@ -35,10 +35,10 @@ let PostForm = props => {
         </Field>
       </div>
       <div>
-        <label>Body</label>
-        <Field name='body' component='textarea' />
+        <label className='post-body-label'>Body</label>
+        <Field className='post-body-textarea' name='body' component='textarea' />
       </div>
-      <button className='button' type='submit'>Submit</button>
+      <button className='post-submit-button' type='submit'>Submit</button>
 		</form>
 	)
 }

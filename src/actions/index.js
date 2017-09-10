@@ -9,6 +9,7 @@ export const SET_CATEGORY = 'SET_CATEGORY';
 export const RECEIVE_ALL_POSTS = 'RECEIVE_ALL_POSTS';
 export const RECEIVE_ALL_COMMENTS = 'RECEIVE_ALL_COMMENTS';
 export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE';
+export const ORDER_POSTS = 'ORDER_POSTS';
 
 /*
  * Other constants.
@@ -80,7 +81,7 @@ export function receiveAllPosts(data) {
 		// Posts object.
 		dataObj,
 		// Posts ids array property.
-		allPosts: data.map(post => post.id)
+		allPosts: data.map(post => post.id),
 	};
 };
 
@@ -173,6 +174,26 @@ export function addVoteToPost(postId, vote) {
 			))
 	};
 };
+
+
+export function reorderPosts(newOrder) {
+	return {
+		type: ORDER_POSTS,
+		newOrder
+	}
+}
+
+
+// sortPosts = (value, arr, obj) => {
+// 		switch(value) {
+// 			case 'most-voted':
+// 				return arr.sort(function(a, b) { return obj[b].voteScore - obj[a].voteScore})
+// 			case 'most-recent':
+// 				return arr.sort(function(a, b) { return obj[a].timestamp - obj[b].timestamp})
+// 			default:
+// 				return arr;
+// 		}
+// 	}
 
 
 // TODO check

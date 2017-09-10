@@ -7,6 +7,10 @@ import ArrowUp from 'react-icons/lib/fa/sort-asc';
 import ArrowDown from 'react-icons/lib/fa/sort-desc';
 
 class AllPosts extends Component {
+	state = {
+		value: 'most-voted'
+	};
+
 	upvote = (postId) => {
 		// e.preventDefault();
 		console.log(postId);
@@ -19,8 +23,31 @@ class AllPosts extends Component {
 		this.props.voteAPost(postId, 'downVote');
 	}
 
+	handleSubmit = (event) => {
+		event.preventDefault();
+	}
+
+	handleChange = (event) => {
+		// this.setState({value: event.target.value});
+		// const newOrder = event.target.value;
+		this.props.sortPosts();
+	}
+
+	// sortPosts = (event.target.value, arr, obj) => {
+	// 	switch(value) {
+	// 		case 'most-voted':
+	// 			arr.sort(function(a, b) { return obj[b].voteScore - obj[a].voteScore})
+	// 		case 'most-recent':
+	// 			return arr.sort(function(a, b) { return obj[a].timestamp - obj[b].timestamp})
+	// 		default:
+	// 			return arr;
+	// 	}
+	// }
+
 	render() {
 		console.log(this.props.posts);
+
+		console.log(this.state);
 
 		/*
      * Extract properties from props.
@@ -30,6 +57,14 @@ class AllPosts extends Component {
     const posts = this.props.posts;
     const allStoredPostsIds = posts.allPosts;
     const allStoredPostsContents = posts.posts;
+
+
+
+    // const allPostsByVoteScoreIds = allStoredPostsIds.sort(function(a, b) { return allStoredPostsContents[b].voteScore - allStoredPostsContents[a].voteScore})
+    // 	.map(post => post.id);
+
+    // const allPostsByVoteScoreIds = this.sortPosts(this.state.value, allStoredPostsIds, allStoredPostsContents)
+    // 	.map(post => post.id);
 
     console.log(allStoredPostsContents);
 
@@ -48,6 +83,17 @@ class AllPosts extends Component {
         }
         <div className='post-icons'>
         	<PostFormLink />
+        </div>
+        <div className='sort-select-form'>
+        	<form onSubmit={this.handleSubmit}>
+        		<label>
+        			Sort posts by: {' '}
+        		</label>
+        		<select onChange={this.handleChange}>
+        			<option value='most-points'>higher points</option>
+        			<option value='most-recent'>most recent</option>
+        		</select>
+        	</form>
         </div>
         {
         	/*
@@ -71,6 +117,7 @@ class AllPosts extends Component {
           	}
             {allStoredPostsIds.map((postId) => (
               <li key={postId} className='single-post'>
+              	<div className='single-post-wrapper'>
               	{
               		/*
               		 * Controls to increment and decrement the vote score
@@ -129,6 +176,7 @@ class AllPosts extends Component {
                   <p className='post-comments'>
                     { allStoredPostsContents[postId].comments.length } comments
                   </p>
+                </div>
                 </div>
               </li>
             ))}

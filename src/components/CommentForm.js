@@ -19,8 +19,8 @@ let CommentForm = props => {
      */
 		<form onSubmit={ handleSubmit }>
       <div>
-        <label>Post</label>
-        <Field name='allPosts' component='select'>
+        <label className='comment-label-post-reference'>Post</label>
+        <Field className='post-select' name='allPosts' component='select'>
           <option></option>
           {getPosts().map((postId, index) => (
             <option
@@ -35,10 +35,10 @@ let CommentForm = props => {
 
       </div>
       <div>
-        <label>Comment</label>
-        <Field name='comment' component='textarea' />
+        <label className='comment-body-label'>Comment</label>
+        <Field className='comment-body-textarea' name='comment' component='textarea' />
       </div>
-      <button className='button' type='submit'>Submit</button>
+      <button className='comment-submit-button' type='submit'>Submit</button>
 		</form>
 	)
 }

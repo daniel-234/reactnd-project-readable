@@ -5,7 +5,7 @@ import AllPosts from '../components/AllPosts';
 import Category from '../components/Category';
 import Post from '../components/Post';
 import CreatePostForm from '../components/CreatePostForm';
-import { addPost, addComment, fetchAllPosts, setCategory, getPostDetails, addVoteToPost } from '../actions';
+import { addPost, addComment, fetchAllPosts, setCategory, getPostDetails, addVoteToPost, reorderPosts } from '../actions';
 import { reset } from 'redux-form';
 import '.././App.css';
 
@@ -89,6 +89,7 @@ class App extends Component {
               <AllPosts
                 posts = {posts}
                 voteAPost = {voteAPost}
+                // sortPosts = {sortPosts}
               />
             )}
           />
@@ -161,7 +162,8 @@ function mapDispatchToProps(dispatch) {
     setCommentValues: (data) => dispatch(addComment(data)),
     selectCategory: (category) => dispatch(setCategory(category)),
     getAllPosts: () => dispatch(fetchAllPosts()),
-    voteAPost: (postId, vote) => dispatch(addVoteToPost(postId, vote))
+    voteAPost: (postId, vote) => dispatch(addVoteToPost(postId, vote)),
+    // sortPosts: (newOrder) => dispatch(reorderPosts(newOrder))
     // getPost: (postId) => dispatch(getPostDetails(postId))
   }
 }
