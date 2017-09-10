@@ -7,7 +7,7 @@ import {
 	SET_CATEGORY,
 	RECEIVE_ALL_POSTS,
 	RECEIVE_ALL_COMMENTS,
-	// RECEIVE_POST_DETAILS
+	UPDATE_POST_SCORE
 } from '../actions';
 
 /*
@@ -101,6 +101,20 @@ function post(state = initialState, action) {
 					]
 				}
 			};
+		/*
+		 * Update the `voteScore` for a single post.
+		 */
+		case UPDATE_POST_SCORE:
+			const postId = action.postId;
+			const postScore = action.postScore;
+			return {
+				...state,
+				[postId]: {
+					...state[postId],
+					// Change the post score
+					voteScore: postScore
+				}
+			}
 		default:
 			return state;
 	}

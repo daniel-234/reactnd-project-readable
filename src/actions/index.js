@@ -8,7 +8,7 @@ import { getPosts, getComments, addToPosts, addToComments, getSinglePost, votePo
 export const SET_CATEGORY = 'SET_CATEGORY';
 export const RECEIVE_ALL_POSTS = 'RECEIVE_ALL_POSTS';
 export const RECEIVE_ALL_COMMENTS = 'RECEIVE_ALL_COMMENTS';
-// export const RECEIVE_POST_DETAILS = 'RECEIVE_POST_DETAILS';
+export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE';
 
 /*
  * Other constants.
@@ -109,19 +109,19 @@ export function receiveAllComments(data, parentId) {
 	};
 };
 
-
-// TODO check
-
-// See if it is useful
-// export function receivePostDetails(data) {
-// 	console.log(data);
-// 	return {
-// 		type: RECEIVE_POST_DETAILS,
-// 		postDetails: data
-// 	};
-// };
-
-
+/*
+ * Get a single post object as data and update the voteScore for a
+ * single post.
+ */
+export function updatePostScore(data) {
+	const postId = data.id;
+	const postScore = data.voteScore;
+	return {
+		type: UPDATE_POST_SCORE,
+		postId: postId,
+		postScore: postScore
+	};
+};
 
 /*
  * Fetch all the posts from the server.
@@ -142,7 +142,7 @@ export function fetchAllPosts() {
 					// Get all the comments for the given `post` id from the server.
 					getComments(postItem)
 						// As comments objects are returned, dispatch an action to dispose of them.
-						.then(data => (
+						.then((data) => (
 							// Pass the comments object and the post id to the function.
 							dispatch(receiveAllComments(data, postItem))
 						))
@@ -152,14 +152,26 @@ export function fetchAllPosts() {
 	};
 };
 
+/*
+ * Pass vote to the post with given postId. Vote can be either
+ * positive or negative.
+ */
 export function addVoteToPost(postId, vote) {
 	return function(dispatch) {
 		return votePost(postId, { option: vote})
-			.then((data) => (
-				console.log(data)
-		))
+			.then(() => (
+				getSinglePost(postId)
+					.then((data) => (
+						dispatch(updatePostScore(data))
+					))
+					.then(() => (
+						getComments(postId)
+						.then((data) => (
+							dispatch(receiveAllComments(data, postId))
+						))
+					))
+			))
 	};
-	// console.log(voteStr);
 };
 
 
