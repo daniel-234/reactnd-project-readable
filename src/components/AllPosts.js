@@ -7,6 +7,16 @@ import ArrowUp from 'react-icons/lib/fa/sort-asc';
 import ArrowDown from 'react-icons/lib/fa/sort-desc';
 
 class AllPosts extends Component {
+	upvote = (e) => {
+		e.preventDefault();
+		console.log('Up');
+	}
+
+	downvote = (e) => {
+		e.preventDefault();
+		console.log('Down');
+	}
+
 	render() {
 		console.log(this.props.posts);
 
@@ -59,22 +69,29 @@ class AllPosts extends Component {
           	}
             {allStoredPostsIds.map((postId) => (
               <li key={postId} className='single-post'>
+              	{
+              		/*
+              		 * Controls to increment and decrement the vote score
+              		 * for this object post.
+              		 */
+              	}
               	<div className='post-voting-icons'>
             			<ArrowUp
             				className='up=arrow'
             				size={20}
-            				onClick={() => (
-            					console.log('Up')
-            				)}
+            				onClick={this.upvote}
             			/>
             			<ArrowDown
             				className='down-arrow'
             				size={20}
-            				onClick={() => (
-            					console.log('Down')
-            				)}
+            				onClick={this.downvote}
             			/>
               	</div>
+              	{
+              		/*
+              		 * Post details.
+              		 */
+              	}
                 <div className='post-details'>
                 	{
 	                	/*
