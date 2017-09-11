@@ -30,7 +30,8 @@ class AllPosts extends Component {
 	handleChange = (event) => {
 		// this.setState({value: event.target.value});
 		// const newOrder = event.target.value;
-		this.props.sortPosts();
+		// this.props.sortPosts();
+		console.log(event.target.value);
 	}
 
 	// sortPosts = (event.target.value, arr, obj) => {
@@ -45,9 +46,13 @@ class AllPosts extends Component {
 	// }
 
 	render() {
+		// const { ids, thePosts, sortOrder } = posts;
+		// console.log(state);
 		console.log(this.props.posts);
 
-		console.log(this.state);
+		// console.log(this.props.posts.allPosts);
+
+		console.log(this.props.postIds);
 
 		/*
      * Extract properties from props.
@@ -55,8 +60,8 @@ class AllPosts extends Component {
 
     // Extract posts passed via props.
     const posts = this.props.posts;
-    const allStoredPostsIds = posts.allPosts;
-    const allStoredPostsContents = posts.posts;
+    const postIds = this.props.postIds;
+    // const allStoredPostsContents = posts.posts;
 
 
 
@@ -66,122 +71,122 @@ class AllPosts extends Component {
     // const allPostsByVoteScoreIds = this.sortPosts(this.state.value, allStoredPostsIds, allStoredPostsContents)
     // 	.map(post => post.id);
 
-    console.log(allStoredPostsContents);
+    // console.log(allStoredPostsContents);
 
 		return (
 			<div className='all-posts'>
 				{
-					/*
-					 * Navigation links to select a category View.
-					 */
+				/*
+				 * Navigation links to select a category View.
+				 */
 				}
-        <SelectCategory />
-        {
-        	/*
-        	 * `Plus` icon that links to the create post form View.
-        	 */
-        }
-        <div className='post-icons'>
-        	<PostFormLink />
-        </div>
-        <div className='sort-select-form'>
-        	<form onSubmit={this.handleSubmit}>
-        		<label>
-        			Sort posts by: {' '}
-        		</label>
-        		<select onChange={this.handleChange}>
-        			<option value='most-points'>higher points</option>
-        			<option value='most-recent'>most recent</option>
-        		</select>
-        	</form>
-        </div>
-        {
-        	/*
-        	 * Posts list.
-        	 */
-        }
-        <div className='container'>
-          {
-          	/*
+	      <SelectCategory />
+	      {
+	      	/*
+	      	 * `Plus` icon that links to the create post form View.
+	      	 */
+	      }
+	      <div className='post-icons'>
+	      	<PostFormLink />
+	      </div>
+	      <div className='sort-select-form'>
+	      	<form onSubmit={this.handleSubmit}>
+	      		<label>
+	      			Sort posts by: {' '}
+	      		</label>
+	      		<select onChange={this.handleChange}>
+	      			<option value='hiher-points'>higher points</option>
+	      			<option value='most-recent'>most recent</option>
+	      		</select>
+	      	</form>
+	      </div>
+	      {
+	      	/*
+	      	 * Posts list.
+	      	 */
+	      }
+	      <div className='container'>
+	        {
+	        	/*
 						 * List all the available posts from the server, getting
 						 * some of its properties to the user.
-          	 */
-          }
-          <ul className='all-posts'>
-          	{
-          		/*
+	        	 */
+	        }
+	        <ul className='all-posts'>
+	        	{
+	        		/*
 							 * Loop through the posts ids array and, for every item
 							 * in there, extract the requested properties from the
 							 * relative post.
-          		 */
-          	}
-            {allStoredPostsIds.map((postId) => (
-              <li key={postId} className='single-post'>
-              	<div className='single-post-wrapper'>
-              	{
-              		/*
-              		 * Controls to increment and decrement the vote score
-              		 * for this object post.
-              		 */
-              	}
-              	<div className='post-voting-icons'>
-            			<ArrowUp
-            				className='up=arrow'
-            				size={20}
-            				value={postId}
-            				onClick={() => this.upvote(postId)}
-            				// postId={postId}
-            			/>
-            			<ArrowDown
-            				className='down-arrow'
-            				size={20}
-            				value={postId}
-            				onClick={() => this.downvote(postId)}
-            				// postId={postId}
-            			/>
-              	</div>
-              	{
-              		/*
-              		 * Post details.
-              		 */
-              	}
-                <div className='post-details'>
-                	{
-	                	/*
-	                	 * Provides navigation to this Post View (referenced by postId in
-	                	 * the URL).
-	                	 *
-	                	 * Wraps the post title as an anchor tag.
-	                	 */
-	                }
-                	<Link
-		            		to={'/' + allStoredPostsContents[postId].category + '/' + postId}
-		            	>
-	                  <p className='post-title'>
-	                    { allStoredPostsContents[postId].title }
-	                  </p>
-                  </Link>
-                  <p className='post-author'>
-                    author: { allStoredPostsContents[postId].author }
-                  </p>
-                  <p className='post-separator'>
-                    |
-                  </p>
-                  <p className='post-score'>
-                    { allStoredPostsContents[postId].voteScore } points
-                  </p>
-                  <p className='post-separator'>
-                    |
-                  </p>
-                  <p className='post-comments'>
-                    { allStoredPostsContents[postId].comments.length } comments
-                  </p>
-                </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+	        		 */
+	        	}
+	          {postIds.map((postId) => (
+	            <li key={postId} className='single-post'>
+	            	<div className='single-post-wrapper'>
+		            	{
+		            		/*
+		            		 * Controls to increment and decrement the vote score
+		            		 * for this object post.
+		            		 */
+		            	}
+		            	<div className='post-voting-icons'>
+		          			<ArrowUp
+		          				className='up=arrow'
+		          				size={20}
+		          				value={postId}
+		          				onClick={() => this.upvote(postId)}
+		          				// postId={postId}
+		          			/>
+		          			<ArrowDown
+		          				className='down-arrow'
+		          				size={20}
+		          				value={postId}
+		          				onClick={() => this.downvote(postId)}
+		          				// postId={postId}
+		          			/>
+		            	</div>
+		            	{
+		            		/*
+		            		 * Post details.
+		            		 */
+		            	}
+		              <div className='post-details'>
+		              	{
+		                	/*
+		                	 * Provides navigation to this Post View (referenced by postId in
+		                	 * the URL).
+		                	 *
+		                	 * Wraps the post title as an anchor tag.
+		                	 */
+		                }
+		              	<Link
+			            		to={'/' + posts[postId].category + '/' + postId}
+			            	>
+		                  <p className='post-title'>
+		                    { posts[postId].title }
+		                  </p>
+		                </Link>
+		                <p className='post-author'>
+		                  author: { posts[postId].author }
+		                </p>
+		                <p className='post-separator'>
+		                  |
+		                </p>
+		                <p className='post-score'>
+		                  { posts[postId].voteScore } points
+		                </p>
+		                <p className='post-separator'>
+		                  |
+		                </p>
+		                <p className='post-comments'>
+		                  { posts[postId].comments.length } comments
+		                </p>
+		              </div>
+	              </div>
+	            </li>
+	          ))}
+	        </ul>
+	      </div>
 			</div>
 		);
 	}

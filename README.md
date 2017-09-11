@@ -67,3 +67,5 @@ Here a list of the resources that helped me most:
 * [Stackoverflow - How can I stack two arrow images (upvote and downvote) on top of each other using CSS](https://stackoverflow.com/questions/764042/how-can-i-stack-two-arrow-images-upvote-downvote-on-top-of-eachother-using-css)
 * On implementing the mechanism to vote a post I faced some issues, one of which was a way to pass a reference to the click mechanism. This answer in Stackoverflow helped me solve it:
 * [Stackoverflow - ReactJS onClick can't pass value to method](https://stackoverflow.com/questions/29810914/react-js-onclick-cant-pass-value-to-method)
+* When I was looking for a way to sort the posts in my app, through the `select` form in the main page, I came across this post on Stackoverflow. Thanks to the answers I was able to get in the right path. I followed the second one, which pointed me to the Redux Documentation and the section `Usage with React`.
+* [Stackoverflow - Where should I handle sorting in Redux App?](https://stackoverflow.com/questions/34475367/where-should-i-handle-sorting-in-redux-app)

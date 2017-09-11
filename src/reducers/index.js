@@ -4,6 +4,7 @@ import { reducer as formReducer } from 'redux-form';
 // Import the actions that need to be handled.
 import {
 	allCategories,
+	sortingTypes,
 	SET_CATEGORY,
 	RECEIVE_ALL_POSTS,
 	RECEIVE_ALL_COMMENTS,
@@ -28,6 +29,10 @@ import {
  */
 const initialState = {
 	selectedCategory: allCategories.REACT,
+	sortOrder: 'sortingTypes.LEAST_RECENT',
+
+
+
 
 	// TODO replace if an entities object is added with a comments object property.
 	// entities: {
@@ -59,11 +64,20 @@ const initialState = {
 // Extract the React category.
 const { REACT } = allCategories;
 
+const { HIGHEST_POINTS } = sortingTypes;
+
 // Set the selected category.
 function category(state = 'react', action) {
 	switch (action.type) {
 		case SET_CATEGORY:
 			return action.category;
+		default:
+			return state;
+	}
+}
+
+function sortOrder(state = HIGHEST_POINTS, action) {
+	switch (action.type) {
 		default:
 			return state;
 	}
@@ -233,6 +247,7 @@ function postsByCategory(state = initialState.postsByCategory, action) {
 // Combine all the reducers responsible for separate portions of the state.
 export default combineReducers({
 	selectedCategory: category,
+	sortOrder,
 	posts: post,
 	// entities,
 	allPosts,

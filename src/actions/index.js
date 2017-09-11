@@ -21,6 +21,13 @@ export const allCategories = {
 	UDACITY: 'UDACITY'
 };
 
+export const sortingTypes = {
+	MOST_RECENT: 'MOST_RECENT',
+	LEAST_RECENT: 'LEAST_RECENT',
+	HIGHEST_POINTS: 'HIGHEST_POINTS',
+	LOWEST_POINTS: 'LOWEST_POINTS'
+};
+
 /*
  * Action creators.
  */

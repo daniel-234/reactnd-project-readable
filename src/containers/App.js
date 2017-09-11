@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router';
 import { connect } from 'react-redux';
 import AllPosts from '../components/AllPosts';
+import VisiblePosts from './VisiblePosts';
 import Category from '../components/Category';
 import Post from '../components/Post';
 import CreatePostForm from '../components/CreatePostForm';
@@ -86,9 +87,9 @@ class App extends Component {
                * Pass as props to `allPosts` some values. The passed values here
                * are the ones extracted from the App class props above.
                */
-              <AllPosts
-                posts = {posts}
-                voteAPost = {voteAPost}
+              <VisiblePosts
+                // posts = {posts}
+                // voteAPost = {voteAPost}
                 // sortPosts = {sortPosts}
               />
             )}
