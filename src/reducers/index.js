@@ -9,7 +9,8 @@ import {
 	RECEIVE_ALL_POSTS,
 	RECEIVE_ALL_COMMENTS,
 	UPDATE_POST_SCORE,
-	ORDER_POSTS
+	ORDER_POSTS,
+	CHANGE_SORTING_ORDER
 } from '../actions';
 
 /*
@@ -29,7 +30,7 @@ import {
  */
 const initialState = {
 	selectedCategory: allCategories.REACT,
-	sortOrder: 'sortingTypes.LEAST_RECENT',
+	sortOrder: sortingTypes.MOST_RECENT,
 
 
 
@@ -76,8 +77,11 @@ function category(state = 'react', action) {
 	}
 }
 
-function sortOrder(state = HIGHEST_POINTS, action) {
+function sortOrder(state = initialState.sortOrder, action) {
 	switch (action.type) {
+		case CHANGE_SORTING_ORDER:
+			console.log(action.sortOrder);
+			return action.sortOrder;
 		default:
 			return state;
 	}

@@ -7,9 +7,9 @@ import ArrowUp from 'react-icons/lib/fa/sort-asc';
 import ArrowDown from 'react-icons/lib/fa/sort-desc';
 
 class AllPosts extends Component {
-	state = {
-		value: 'most-voted'
-	};
+	// state = {
+	// 	value: 'most-voted'
+	// };
 
 	upvote = (postId) => {
 		// e.preventDefault();
@@ -29,9 +29,10 @@ class AllPosts extends Component {
 
 	handleChange = (event) => {
 		// this.setState({value: event.target.value});
-		// const newOrder = event.target.value;
-		// this.props.sortPosts();
 		console.log(event.target.value);
+		const newOrder = event.target.value;
+		this.props.sortPosts(newOrder);
+
 	}
 
 	// sortPosts = (event.target.value, arr, obj) => {
@@ -47,12 +48,13 @@ class AllPosts extends Component {
 
 	render() {
 		// const { ids, thePosts, sortOrder } = posts;
-		// console.log(state);
+		console.log(this.props);
 		console.log(this.props.posts);
+
 
 		// console.log(this.props.posts.allPosts);
 
-		console.log(this.props.postIds);
+		console.log(this.props.sortedIds);
 
 		/*
      * Extract properties from props.
@@ -60,8 +62,26 @@ class AllPosts extends Component {
 
     // Extract posts passed via props.
     const posts = this.props.posts;
-    const postIds = this.props.postIds;
+    const sortedIds = this.props.sortedIds;
     // const allStoredPostsContents = posts.posts;
+
+
+    // return (
+    // 	<div>
+    // 		<div className='sort-select-form'>
+	   //    	<form onSubmit={this.handleSubmit}>
+	   //    		<label>
+	   //    			Sort posts by: {' '}
+	   //    		</label>
+	   //    		<select onChange={this.handleChange}>
+	   //    			<option value='HIGHEST_POINTS'>highest points</option>
+	   //    			<option value='LEAST_RECENT'>least recent</option>
+	   //    			<option value='MOST_RECENT'>most recent</option>
+	   //    		</select>
+	   //    	</form>
+	   //    </div>
+    // 	</div>
+    // )
 
 
 
@@ -75,6 +95,8 @@ class AllPosts extends Component {
 
 		return (
 			<div className='all-posts'>
+
+
 				{
 				/*
 				 * Navigation links to select a category View.
@@ -95,8 +117,10 @@ class AllPosts extends Component {
 	      			Sort posts by: {' '}
 	      		</label>
 	      		<select onChange={this.handleChange}>
-	      			<option value='hiher-points'>higher points</option>
-	      			<option value='most-recent'>most recent</option>
+		      		<option value='MOST_RECENT'>most recent</option>
+		      		<option value='LEAST_RECENT'>least recent</option>
+	      			<option value='HIGHEST_POINTS'>highest points</option>
+	      			<option value='LOWEST_POINTS'>lowest points</option>
 	      		</select>
 	      	</form>
 	      </div>
@@ -120,7 +144,7 @@ class AllPosts extends Component {
 							 * relative post.
 	        		 */
 	        	}
-	          {postIds.map((postId) => (
+	          {sortedIds.map((postId) => (
 	            <li key={postId} className='single-post'>
 	            	<div className='single-post-wrapper'>
 		            	{

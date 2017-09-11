@@ -10,6 +10,7 @@ export const RECEIVE_ALL_POSTS = 'RECEIVE_ALL_POSTS';
 export const RECEIVE_ALL_COMMENTS = 'RECEIVE_ALL_COMMENTS';
 export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE';
 export const ORDER_POSTS = 'ORDER_POSTS';
+export const CHANGE_SORTING_ORDER = 'CHANGE_SORTING_ORDER';
 
 /*
  * Other constants.
@@ -31,6 +32,14 @@ export const sortingTypes = {
 /*
  * Action creators.
  */
+
+export function changeSortingOrder(sortOrder) {
+	console.log('Change');
+	return {
+		type: CHANGE_SORTING_ORDER,
+		sortOrder
+	}
+}
 
 /*
  * Add a new post to the server, giving as its body the properties
