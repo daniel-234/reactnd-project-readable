@@ -69,3 +69,8 @@ Here a list of the resources that helped me most:
 * [Stackoverflow - ReactJS onClick can't pass value to method](https://stackoverflow.com/questions/29810914/react-js-onclick-cant-pass-value-to-method)
 * When I was looking for a way to sort the posts in my app, through the `select` form in the main page, I came across this post on Stackoverflow. Thanks to the answers I was able to get in the right path. I followed the second one, which pointed me to the Redux Documentation and the section `Usage with React`.
 * [Stackoverflow - Where should I handle sorting in Redux App?](https://stackoverflow.com/questions/34475367/where-should-i-handle-sorting-in-redux-app)
+* Using Redux with React and separating Presentational and Container Components:
+* [Redux Docs - Usage with React](http://redux.js.org/docs/basics/UsageWithReact.html)
+* [GitHub Redux issues - State changes but does not call render function of Parent Component](https://github.com/reactjs/redux/issues/2190)
+* [GitHub React issues - Components not re-rendering with connect()](https://github.com/reactjs/redux/issues/585)
+* [Stackoverflow - My Redux state has changed. Why doesn't React trigger a re-render?](https://stackoverflow.com/questions/39513753/my-redux-state-has-changed-why-doesnt-react-trigger-a-re-render)
