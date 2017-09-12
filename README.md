@@ -74,3 +74,5 @@ Here a list of the resources that helped me most:
 * [GitHub Redux issues - State changes but does not call render function of Parent Component](https://github.com/reactjs/redux/issues/2190)
 * [GitHub React issues - Components not re-rendering with connect()](https://github.com/reactjs/redux/issues/585)
 * [Stackoverflow - My Redux state has changed. Why doesn't React trigger a re-render?](https://stackoverflow.com/questions/39513753/my-redux-state-has-changed-why-doesnt-react-trigger-a-re-render)
+* Convert a Unit timestamp into a readable date:
+* [Stackoverflow - Convert a Unix timestamp to time in JavaScript](https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript)

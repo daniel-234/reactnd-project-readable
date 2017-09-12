@@ -5,6 +5,7 @@ import PostFormLink from './PostFormLink';
 import AddTextIcon from 'react-icons/lib/fa/quote-right';
 import ArrowUp from 'react-icons/lib/fa/sort-asc';
 import ArrowDown from 'react-icons/lib/fa/sort-desc';
+import { convertToReadableDate } from '../utils/convertDate';
 
 class AllPosts extends Component {
 	// state = {
@@ -44,6 +45,30 @@ class AllPosts extends Component {
 	// 		default:
 	// 			return arr;
 	// 	}
+	// }
+
+	// convertToReadableDate = (unixTimeStamp) => {
+
+
+	// 	const date = new Date(unixTimeStamp);
+	// 	const year = date.getFullYear();
+	// 	const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+	// 	const month = (months[date.getMonth()]);
+	// 	const day =  date.getDate();
+	// 	const hours = ('0' + (date.getHours() + 1).toString()).substr(-2);
+	// 	const minutes = ('0' + (date.getMinutes() + 1).toString()).substr(-2);
+	// 	const seconds = ('0' + (date.getSeconds() + 1).toString()).substr(-2);
+
+	// 	const formattedTime = day + ' ' + month + ' ' + year + ', ' + hours + ':' + minutes + ':' + seconds;
+
+	// 	// const formattedTime = moment('31:01:2017').format('MMMM Do YYYY');
+	// 	// var moment = require('moment');
+
+	// 	// const formattedTime = moment(unixTimeStamp);
+
+	// 	// const formattedTime = date.getFullYear();
+
+	// 	return formattedTime;
 	// }
 
 	render() {
@@ -192,6 +217,12 @@ class AllPosts extends Component {
 		                </Link>
 		                <p className='post-author'>
 		                  author: { posts[postId].author }
+		                </p>
+		                <p className='post-separator'>
+		                  |
+		                </p>
+		                <p className='post-author'>
+		                  { convertToReadableDate(posts[postId].timestamp) }
 		                </p>
 		                <p className='post-separator'>
 		                  |
