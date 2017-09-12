@@ -14,13 +14,13 @@ class AllPosts extends Component {
 	upvote = (postId) => {
 		// e.preventDefault();
 		console.log(postId);
-		this.props.voteAPost(postId, 'upVote');
+		this.props.votePosts(postId, 'upVote');
 	}
 
 	downvote = (postId) => {
 		// e.preventDefault();
 		console.log(postId);
-		this.props.voteAPost(postId, 'downVote');
+		this.props.votePosts(postId, 'downVote');
 	}
 
 	handleSubmit = (event) => {

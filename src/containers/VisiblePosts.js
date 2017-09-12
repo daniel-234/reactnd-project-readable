@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { changeSortingOrder } from '../actions'
+import { changeSortingOrder, addVoteToPost } from '../actions'
 import AllPosts from '../components/AllPosts';
 
 const getVisiblePosts = (postIds, posts, sortOrder) => {
@@ -45,7 +45,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-	sortPosts: changeSortingOrder
+	sortPosts: changeSortingOrder,
+	votePosts: addVoteToPost
 }
 
 const VisiblePosts = connect(
