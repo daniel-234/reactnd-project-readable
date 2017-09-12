@@ -8,19 +8,11 @@ import ArrowDown from 'react-icons/lib/fa/sort-desc';
 import { convertToReadableDate } from '../utils/convertDate';
 
 class AllPosts extends Component {
-	// state = {
-	// 	value: 'most-voted'
-	// };
-
 	upvote = (postId) => {
-		// e.preventDefault();
-		console.log(postId);
 		this.props.votePosts(postId, 'upVote');
 	}
 
 	downvote = (postId) => {
-		// e.preventDefault();
-		console.log(postId);
 		this.props.votePosts(postId, 'downVote');
 	}
 
@@ -29,99 +21,17 @@ class AllPosts extends Component {
 	}
 
 	handleChange = (event) => {
-		// this.setState({value: event.target.value});
-		console.log(event.target.value);
 		const newOrder = event.target.value;
 		this.props.sortPosts(newOrder);
-
 	}
 
-	// sortPosts = (event.target.value, arr, obj) => {
-	// 	switch(value) {
-	// 		case 'most-voted':
-	// 			arr.sort(function(a, b) { return obj[b].voteScore - obj[a].voteScore})
-	// 		case 'most-recent':
-	// 			return arr.sort(function(a, b) { return obj[a].timestamp - obj[b].timestamp})
-	// 		default:
-	// 			return arr;
-	// 	}
-	// }
-
-	// convertToReadableDate = (unixTimeStamp) => {
-
-
-	// 	const date = new Date(unixTimeStamp);
-	// 	const year = date.getFullYear();
-	// 	const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-	// 	const month = (months[date.getMonth()]);
-	// 	const day =  date.getDate();
-	// 	const hours = ('0' + (date.getHours() + 1).toString()).substr(-2);
-	// 	const minutes = ('0' + (date.getMinutes() + 1).toString()).substr(-2);
-	// 	const seconds = ('0' + (date.getSeconds() + 1).toString()).substr(-2);
-
-	// 	const formattedTime = day + ' ' + month + ' ' + year + ', ' + hours + ':' + minutes + ':' + seconds;
-
-	// 	// const formattedTime = moment('31:01:2017').format('MMMM Do YYYY');
-	// 	// var moment = require('moment');
-
-	// 	// const formattedTime = moment(unixTimeStamp);
-
-	// 	// const formattedTime = date.getFullYear();
-
-	// 	return formattedTime;
-	// }
-
 	render() {
-		// const { ids, thePosts, sortOrder } = posts;
-		console.log(this.props);
-		console.log(this.props.posts);
-
-
-		// console.log(this.props.posts.allPosts);
-
-		console.log(this.props.sortedIds);
-
-		/*
-     * Extract properties from props.
-     */
-
-    // Extract posts passed via props.
+    // Extract posts passed via props from the container component.
     const posts = this.props.posts;
     const sortedIds = this.props.sortedIds;
-    // const allStoredPostsContents = posts.posts;
-
-
-    // return (
-    // 	<div>
-    // 		<div className='sort-select-form'>
-	   //    	<form onSubmit={this.handleSubmit}>
-	   //    		<label>
-	   //    			Sort posts by: {' '}
-	   //    		</label>
-	   //    		<select onChange={this.handleChange}>
-	   //    			<option value='HIGHEST_POINTS'>highest points</option>
-	   //    			<option value='LEAST_RECENT'>least recent</option>
-	   //    			<option value='MOST_RECENT'>most recent</option>
-	   //    		</select>
-	   //    	</form>
-	   //    </div>
-    // 	</div>
-    // )
-
-
-
-    // const allPostsByVoteScoreIds = allStoredPostsIds.sort(function(a, b) { return allStoredPostsContents[b].voteScore - allStoredPostsContents[a].voteScore})
-    // 	.map(post => post.id);
-
-    // const allPostsByVoteScoreIds = this.sortPosts(this.state.value, allStoredPostsIds, allStoredPostsContents)
-    // 	.map(post => post.id);
-
-    // console.log(allStoredPostsContents);
 
 		return (
 			<div className='all-posts'>
-
-
 				{
 				/*
 				 * Navigation links to select a category View.
