@@ -52,7 +52,8 @@ export function addPost(post) {
 	return function(dispatch) {
 		// Generate a UUID for this post.
 		const id = generateUUID();
-		return addToPosts({ ...post, id: id });
+		const timestamp = Date.now();
+		return addToPosts({ ...post, id: id, timestamp: timestamp });
 	};
 };
 
