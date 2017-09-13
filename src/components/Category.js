@@ -41,9 +41,13 @@ class Category extends Component {
 		return (
 			<div className='container'>
 				<h2>{visibleCategoryName} {' Posts'} </h2>
-				<HomeButton
-      		size='40'
-      	/>
+				<Link
+					to={'/'}
+				>
+					<HomeButton
+	      		size='40'
+	      	/>
+	      </Link>
 				<SelectCategory />
 				{
 	      	/*

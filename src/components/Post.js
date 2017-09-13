@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import SelectCategory from './SelectCategory';
 import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
@@ -41,9 +42,13 @@ class Post extends Component {
 
 		return (
 			<div className='container'>
-				<HomeButton
-      		size='40'
-      	/>
+				<Link
+					to={'/'}
+				>
+					<HomeButton
+	      		size='40'
+	      	/>
+	      </Link>
 				<SelectCategory />
 				<div className='post-details'>
 	      	{
