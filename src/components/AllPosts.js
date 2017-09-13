@@ -5,6 +5,7 @@ import PostFormLink from './PostFormLink';
 // import AddTextIcon from 'react-icons/lib/fa/quote-right';
 import ArrowUp from 'react-icons/lib/fa/sort-asc';
 import ArrowDown from 'react-icons/lib/fa/sort-desc';
+import HomeButton from 'react-icons/lib/fa/home';
 import { convertToReadableDate } from '../utils/convertDate';
 
 class AllPosts extends Component {
@@ -33,7 +34,10 @@ class AllPosts extends Component {
     const sortedIds = this.props.sortedIds;
 
 		return (
-			<div className='all-posts'>
+			<div className='container'>
+				<HomeButton
+      		size='40'
+      	/>
 				{
 				/*
 				 * Navigation links to select a category View.
@@ -66,7 +70,7 @@ class AllPosts extends Component {
 	      	 * Posts list.
 	      	 */
 	      }
-	      <div className='container'>
+	      <div className='all-posts-list'>
 		      {
 		      	/*
 						 * List all the available posts from the server, getting

@@ -4,6 +4,7 @@ import SelectCategory from './SelectCategory';
 import PostFormLink from './PostFormLink';
 import ArrowUp from 'react-icons/lib/fa/sort-asc';
 import ArrowDown from 'react-icons/lib/fa/sort-desc';
+import HomeButton from 'react-icons/lib/fa/home';
 import { convertToReadableDate } from '../utils/convertDate';
 
 class Category extends Component {
@@ -38,8 +39,11 @@ class Category extends Component {
     const visibleCategoryName = selectedCategory.charAt(0).toUpperCase() + selectedCategory.substring(1);
 
 		return (
-			<div className='category-related-posts'>
+			<div className='container'>
 				<h2>{visibleCategoryName} {' Posts'} </h2>
+				<HomeButton
+      		size='40'
+      	/>
 				<SelectCategory />
 				{
 	      	/*
@@ -67,7 +71,7 @@ class Category extends Component {
 	      	 * Posts list.
 	      	 */
 	      }
-				<div className='container'>
+				<div className='category-related-posts'>
 					<ul className='all-posts'>
           	{
           		/*

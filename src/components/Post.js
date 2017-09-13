@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import SelectCategory from './SelectCategory';
 import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
+import HomeButton from 'react-icons/lib/fa/home';
+import CommentsButton from 'react-icons/lib/fa/comments-o';
+import EditButton from 'react-icons/lib/fa/edit';
+import DeleteButton from 'react-icons/lib/fa/trash-o';
 
 class Post extends Component {
 	// Upvote a post.
@@ -37,6 +41,9 @@ class Post extends Component {
 
 		return (
 			<div className='container'>
+				<HomeButton
+      		size='40'
+      	/>
 				<SelectCategory />
 				<div className='post-details'>
 	      	{
@@ -82,6 +89,18 @@ class Post extends Component {
 			      value={postId}
     				onClick={() => this.downvote(postId)}
     			/>
+    			<CommentsButton
+    				className='comments-button'
+    				size='40'
+    			/>
+    			<EditButton
+	      		className='post-details-edit-button'
+	      		size='40'
+	      	/>
+	      	<DeleteButton
+	      		className='delete-button'
+	      		size='40'
+	      	/>
 	      </div>
 			</div>
 		);
