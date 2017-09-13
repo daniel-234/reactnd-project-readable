@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const CategoryLink = ({ category, children }) => (
 	<Link
-		to={category}
+		to={'/' + category}
 	>{children}
 	</Link>
 )
