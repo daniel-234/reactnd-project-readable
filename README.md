@@ -76,3 +76,6 @@ Here a list of the resources that helped me most:
 * [Stackoverflow - My Redux state has changed. Why doesn't React trigger a re-render?](https://stackoverflow.com/questions/39513753/my-redux-state-has-changed-why-doesnt-react-trigger-a-re-render)
 * Convert a Unit timestamp into a readable date:
 * [Stackoverflow - Convert a Unix timestamp to time in JavaScript](https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript)
+* Adding features to a container component:
+* [GithHub - Allow connect to more than one component](https://github.com/reactjs/react-redux/issues/647)
+* [Stackoverflow - Passing `props` to React-Redux Container Component](https://stackoverflow.com/questions/37778153/passing-props-to-react-redux-container-component)
