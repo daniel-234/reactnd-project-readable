@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SelectCategory from './SelectCategory';
 import PostFormLink from './PostFormLink';
-import AddTextIcon from 'react-icons/lib/fa/quote-right';
+// import AddTextIcon from 'react-icons/lib/fa/quote-right';
 import ArrowUp from 'react-icons/lib/fa/sort-asc';
 import ArrowDown from 'react-icons/lib/fa/sort-desc';
 import { convertToReadableDate } from '../utils/convertDate';
@@ -65,23 +65,23 @@ class AllPosts extends Component {
 	      	 */
 	      }
 	      <div className='container'>
-	        {
-	        	/*
+		      {
+		      	/*
 						 * List all the available posts from the server, getting
 						 * some of its properties to the user.
-	        	 */
-	        }
-	        <ul className='all-posts'>
-	        	{
-	        		/*
+		      	 */
+		      }
+		      <ul className='all-posts'>
+		      	{
+		      		/*
 							 * Loop through the posts ids array and, for every item
 							 * in there, extract the requested properties from the
 							 * relative post.
-	        		 */
-	        	}
-	          {sortedIds.map((postId) => (
-	            <li key={postId} className='single-post'>
-	            	<div className='single-post-wrapper'>
+		      		 */
+		      	}
+		        {sortedIds.map((postId) => (
+		          <li key={postId} className='single-post'>
+		          	<div className='single-post-wrapper'>
 		            	{
 		            		/*
 		            		 * Controls to increment and decrement the vote score
@@ -147,11 +147,11 @@ class AllPosts extends Component {
 		                  { posts[postId].comments.length } comments
 		                </p>
 		              </div>
-	              </div>
-	            </li>
-	          ))}
-	        </ul>
-	      </div>
+		            </div>
+		          </li>
+		        ))}
+		      </ul>
+		    </div>
 			</div>
 		);
 	}

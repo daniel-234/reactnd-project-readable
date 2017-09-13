@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router';
 import { connect } from 'react-redux';
 import AllPosts from '../components/AllPosts';
-import VisiblePosts from './VisiblePosts';
+import { VisiblePosts, VisibleCategoryPosts } from './VisiblePosts';
 import Category from '../components/Category';
 import Post from '../components/Post';
 import CreatePostForm from '../components/CreatePostForm';
@@ -32,6 +32,7 @@ class App extends Component {
     const voteAPost = this.props.voteAPost;
 
     /*
+     * Get the `match` object from Route props.
      * A `match` object contains information about how a <Route path>
      * matched the URL. `match` objects contain a `params` object property
      * with key/value pairs parsed from the URL corresponding to the dynamic
@@ -119,8 +120,14 @@ class App extends Component {
           <Route
             exact path = '/:category?'
             render = {() => (
-              <Category
-                posts = {posts}
+              <VisibleCategoryPosts
+                /*
+                 * Pass the category taken form the `match` Route
+                 * props to the VisibleCategoryComponent.
+                 * This will match the category part of the URL and
+                 * it will pass it to the component to render the
+                 * relative posts.
+                 */
                 selectedCategory = {category}
               />
             )}

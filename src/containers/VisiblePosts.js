@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { changeSortingOrder, addVoteToPost, sortingTypes } from '../actions'
 import AllPosts from '../components/AllPosts';
+import Category from '../components/Category';
 
 // Extract the properties from the `sortingTypes` object.
 const {
@@ -67,12 +68,15 @@ const mapDispatchToProps = {
 }
 
 /*
- * Hook up the `AllPosts` presentational component to Redux by
- * connecting it to this container component.
+ * Hook up the `AllPosts` and the `Category` presentational components
+ * to Redux by connecting it to this container component.
  */
-const VisiblePosts = connect(
+export const VisiblePosts = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(AllPosts)
+)(AllPosts);
 
-export default VisiblePosts;
+export const VisibleCategoryPosts = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Category);
