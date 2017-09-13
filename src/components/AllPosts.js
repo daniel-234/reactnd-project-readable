@@ -8,10 +8,12 @@ import ArrowDown from 'react-icons/lib/fa/sort-desc';
 import { convertToReadableDate } from '../utils/convertDate';
 
 class AllPosts extends Component {
+	// Upvote a post.
 	upvote = (postId) => {
 		this.props.votePosts(postId, 'upVote');
 	}
 
+	// Downvote a post.
 	downvote = (postId) => {
 		this.props.votePosts(postId, 'downVote');
 	}

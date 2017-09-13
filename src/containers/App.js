@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router';
 import { connect } from 'react-redux';
-import AllPosts from '../components/AllPosts';
+// import AllPosts from '../components/AllPosts';
 import { VisiblePosts, VisibleCategoryPosts } from './VisiblePosts';
 import Category from '../components/Category';
-import Post from '../components/Post';
+// import Post from '../components/Post';
+import { PostDetails } from './PostDetails';
 import CreatePostForm from '../components/CreatePostForm';
 import { addPost, addComment, fetchAllPosts, setCategory, getPostDetails } from '../actions';
 import { reset } from 'redux-form';
@@ -49,15 +50,6 @@ class App extends Component {
      * <Route> elements are matched using their pathname prop.
      */
     const path = this.props.location.pathname;
-    /*
-     * As the current path for a Post View is made up of the category
-     * and the post id, take the string and get the id after the last `/`
-     * symbol.
-     */
-    const postId = path.slice(path.lastIndexOf('/') + 1);
-
-    // Create a new post object.
-    const post = {...posts.posts[postId]};
 
     return (
       <div className="App">
@@ -140,9 +132,8 @@ class App extends Component {
           <Route
             path='/:postId?'
             render={() => (
-              <Post
-                // postId = {postId}
-                post = {post}
+              <PostDetails
+                path = {path}
               />
             )}
           />

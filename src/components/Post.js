@@ -4,10 +4,33 @@ import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
 
 class Post extends Component {
+	// Upvote a post.
+	upvote = (postId) => {
+		this.props.votePosts(postId, 'upVote');
+	}
+
+	// Downvote a post.
+	downvote = (postId) => {
+		this.props.votePosts(postId, 'downVote');
+	}
+
+	handleSubmit = (event) => {
+		event.preventDefault();
+	}
+
+	handleChange = (event) => {
+		const newOrder = event.target.value;
+		this.props.sortPosts(newOrder);
+	}
+
 	render() {
 		// Get the current post.
 		const post = this.props.post;
-		console.log(post);
+		const postId = post.id;
+
+		// console.log(post);
+		// console.log(this.props);
+
 		// Get the number of comments to the post.
 		const commentsLength = post.comments ? post.comments.length : 0;
 		console.log(commentsLength);
@@ -46,8 +69,20 @@ class Post extends Component {
 	          { commentsLength } comments
 	        </p>
 	      </div>
-	      <ThumbsUp className='thumbs-up-button' size='40'/>
-	      <ThumbsDown className='thumbs-down-button' size='40' />
+	      <div className='post-icons'>
+	      	<ThumbsUp
+	      		className='thumbs-up-button'
+	      		size='40'
+	      		value={postId}
+    				onClick={() => this.upvote(postId)}
+    			/>
+		      <ThumbsDown
+			      className='thumbs-down-button'
+			      size='40'
+			      value={postId}
+    				onClick={() => this.downvote(postId)}
+    			/>
+	      </div>
 			</div>
 		);
 	}
