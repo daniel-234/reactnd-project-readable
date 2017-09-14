@@ -19,8 +19,8 @@ class AllPosts extends Component {
 		this.props.votePosts(postId, 'downVote');
 	}
 
-	handleSubmit = (event) => {
-		event.preventDefault();
+	deleteThisPost = (postId) => {
+		this.props.deletePost(postId);
 	}
 
 	handleChange = (event) => {
@@ -151,6 +151,15 @@ class AllPosts extends Component {
 		                </p>
 		                <p className='post-comments'>
 		                  { posts[postId].comments.length } comments
+		                </p>
+		                <p className='post-separator'>
+		                  |
+		                </p>
+		                <p
+			                className='post-delete-link'
+			                onClick={() => this.deleteThisPost(postId)}
+			              >
+		                  delete
 		                </p>
 		              </div>
 		            </div>

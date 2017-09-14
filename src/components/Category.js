@@ -18,6 +18,10 @@ class Category extends Component {
 		this.props.votePosts(postId, 'downVote');
 	}
 
+	deleteThisPost = (postId) => {
+		this.props.deletePost(postId);
+	}
+
 	handleSubmit = (event) => {
 		event.preventDefault();
 	}
@@ -154,6 +158,15 @@ class Category extends Component {
 		                </p>
 		                <p className='post-comments'>
 		                  { posts[postId].comments.length } comments
+		                </p>
+		                <p className='post-separator'>
+		                  |
+		                </p>
+		                <p
+			                className='post-delete-link'
+			                onClick={() => this.deleteThisPost(postId)}
+			              >
+		                  delete
 		                </p>
 		              </div>
 		            </div>

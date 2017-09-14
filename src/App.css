@@ -105,7 +105,9 @@ form div + div {
 .post-author,
 .post-score,
 .post-separator,
-.post-comments {
+.post-comments,
+.post-delete-link
+{
   font-size: 0.8em;
   color: #888;
   display: inline;
