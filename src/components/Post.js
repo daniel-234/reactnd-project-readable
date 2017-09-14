@@ -31,6 +31,11 @@ class Post extends Component {
 		this.props.deletePost(postId);
 	}
 
+	deleteThisComment = (commentId) => {
+		const parentId = this.props.commentsToPost[commentId].parentId;
+		this.props.deleteComment(commentId, parentId);
+	}
+
 	handleSubmit = (event) => {
 		event.preventDefault();
 	}
@@ -193,7 +198,7 @@ class Post extends Component {
 					        <p className='comment-separator'>
 					          |
 					        </p>
-					        <p className='comment-score'>
+					        <p className='comment-score' onClick={() => this.deleteThisComment(commentId)}>
 					          delete
 					        </p>
 					      </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addVoteToPost, addVoteToComment, deleteSinglePost } from '../actions';
+import { addVoteToPost, addVoteToComment, deleteSinglePost, deleteSingleComment } from '../actions';
 import Post from '../components/Post';
 
 const getPostFromPath = (ids, posts, path) => {
@@ -32,8 +32,9 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
 	votePosts: addVoteToPost,
+	voteComment: addVoteToComment,
 	deletePost: deleteSinglePost,
-	voteComment: addVoteToComment
+	deleteComment: deleteSingleComment
 };
 
 export const PostDetails = connect(

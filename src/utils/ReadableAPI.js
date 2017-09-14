@@ -116,3 +116,14 @@ export const deletePost = (postId) =>
       'Content-Type': 'application/json',
     }})
 
+/*
+ * Delete the comment with `id` value commentId.
+ */
+export const deleteComment = (commentId) =>
+  fetch(`${api}/comments/` + commentId, {
+    method: `DELETE`,
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    }})
+

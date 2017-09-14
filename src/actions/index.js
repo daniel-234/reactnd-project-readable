@@ -8,7 +8,8 @@ import {
 	getSingleComment,
 	votePost,
 	voteComment,
-	deletePost
+	deletePost,
+	deleteComment
 } from '../utils/ReadableAPI';
 
 /*
@@ -22,6 +23,7 @@ export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE';
 export const ORDER_POSTS = 'ORDER_POSTS';
 export const CHANGE_SORTING_ORDER = 'CHANGE_SORTING_ORDER';
 export const UPDATE_POSTS_VISIBILITY = 'UPDATE_POSTS_VISIBILITY';
+export const UPDATE_COMMENTS_VISIBILITY = 'UPDATE_COMMENTS_VISIBILITY';
 export const UPDATE_COMMENT_SCORE = 'UPDATE_COMMENT_SCORE';
 
 /*
@@ -167,8 +169,9 @@ export function updateCommentScore(data) {
 };
 
 /*
- * Get a data array of posts and return an object with a payload of an
- * array of all the posts id filtered to not include the deleted posts.
+ * Get a data array of posts and return, as payload, an object with
+ *  an array of all the posts ids filtered to not include the deleted
+ * posts.
  */
 export function updatePostsVisibility(data) {
 	return {
@@ -176,7 +179,26 @@ export function updatePostsVisibility(data) {
 		allPosts: data.filter((post) => (
 			!post.deleted
 		)).map((post) => (
-			post.id))
+			post.id
+		))
+	};
+};
+
+/*
+ * Get a data array of comments and return, as payload, an object with
+ * an array of all the comments ids filtered to not include the deleted
+ * comments.
+ */
+export function updateCommentsVisibility(data, parentId) {
+	console.log(parentId);
+	return {
+		type: UPDATE_COMMENTS_VISIBILITY,
+		commentsIds: data.filter((comment) => (
+			!comment.deleted
+		)).map((comment) => (
+			comment.id
+		)),
+		parentPostId: parentId
 	};
 };
 
@@ -258,6 +280,22 @@ export function deleteSinglePost(postId) {
 					// As data are returned, dispatch an action to dispose of them.
 					.then((data) => (
 						dispatch(updatePostsVisibility(data))
+					))
+			));
+	};
+};
+
+/*
+ * Change the `deleted` flag to true of the comment referenced by `commentId`.
+ */
+export function deleteSingleComment(commentId, postId) {
+	return function (dispatch) {
+		return deleteComment(commentId)
+			.then(() => (
+				getComments(postId)
+					// As data are returned, dispatch an action to dispose of them.
+					.then((data) => (
+						dispatch(updateCommentsVisibility(data, postId))
 					))
 			));
 	};

@@ -11,6 +11,7 @@ import {
 	UPDATE_POST_SCORE,
 	UPDATE_COMMENT_SCORE,
 	UPDATE_POSTS_VISIBILITY,
+	UPDATE_COMMENTS_VISIBILITY,
 	ORDER_POSTS,
 	CHANGE_SORTING_ORDER
 } from '../actions';
@@ -121,6 +122,28 @@ function post(state = initialState, action) {
 					...state[postId],
 					// Change the post score.
 					voteScore: postScore
+				}
+			};
+
+
+			case UPDATE_POSTS_VISIBILITY:
+			return [
+				...action.allPosts
+			]
+
+
+		case UPDATE_COMMENTS_VISIBILITY:
+			const commentsIds = action.commentsIds;
+			const parentPostId = action.parentPostId;
+			console.log(parentPostId);
+			console.log(commentsIds);
+			return {
+				...state,
+				[parentPostId]: {
+					...state[parentPostId],
+					comments: [
+						...commentsIds
+					]
 				}
 			}
 		default:
