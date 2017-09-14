@@ -19,6 +19,14 @@ class Post extends Component {
 		this.props.votePosts(postId, 'downVote');
 	}
 
+	upvoteAComment = (commentId) => {
+		this.props.voteComment(commentId, 'upVote');
+	}
+
+	downvotACommente = (commentId) => {
+		this.props.voteComment(commentId, 'downVote')
+	}
+
 	deleteThisPost = (postId) => {
 		this.props.deletePost(postId);
 	}
@@ -142,8 +150,6 @@ class Post extends Component {
 	      <div className='all-comments-list'>
 	      	<ul className='all-comments'>
 	      		{idsOfCommentsToPost.map((commentId) => (
-
-	      			// console.log(comments[commentId])
 	      			<li key={commentId} className='single-comment'>
 		      			<div className='comment-details'>
 					      	{
@@ -169,13 +175,13 @@ class Post extends Component {
 					        <p className='comment-separator'>
 					          |
 					        </p>
-					        <p className='comment-score'>
+					        <p className='comment-score' onClick={() => this.upvoteAComment(commentId)}>
 					          + 1
 					        </p>
 					        <p className='comment-separator'>
 					          |
 					        </p>
-					        <p className='comment-score'>
+					        <p className='comment-score' onClick={() => this.downvotACommente(commentId)}>
 					          - 1
 					        </p>
 					        <p className='comment-separator'>

@@ -1,5 +1,15 @@
 import generateUUID from '../utils/generateID.js';
-import { getPosts, getComments, addToPosts, addToComments, getSinglePost, votePost, deletePost } from '../utils/ReadableAPI';
+import {
+	getPosts,
+	getComments,
+	addToPosts,
+	addToComments,
+	getSinglePost,
+	getSingleComment,
+	votePost,
+	voteComment,
+	deletePost
+} from '../utils/ReadableAPI';
 
 /*
  * Action types.
@@ -12,6 +22,7 @@ export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE';
 export const ORDER_POSTS = 'ORDER_POSTS';
 export const CHANGE_SORTING_ORDER = 'CHANGE_SORTING_ORDER';
 export const UPDATE_POSTS_VISIBILITY = 'UPDATE_POSTS_VISIBILITY';
+export const UPDATE_COMMENT_SCORE = 'UPDATE_COMMENT_SCORE';
 
 /*
  * Other constants.
@@ -121,7 +132,6 @@ export function receiveAllComments(data, parentId) {
 	let dataArray = data.map((item) => (
 		item.id
 	));
-
 	return {
 		type: RECEIVE_ALL_COMMENTS,
 		dataObj,
@@ -131,8 +141,7 @@ export function receiveAllComments(data, parentId) {
 };
 
 /*
- * Get a single post object as data and update the voteScore for a
- * single post.
+ * Get a single post object as data and update its voteScore.
  */
 export function updatePostScore(data) {
 	const postId = data.id;
@@ -144,6 +153,18 @@ export function updatePostScore(data) {
 	};
 };
 
+/*
+ * Get a single comment object as data and update its voteScore.
+ */
+export function updateCommentScore(data) {
+	const commentId = data.id;
+	const commentScore = data.voteScore;
+	return {
+		type: UPDATE_COMMENT_SCORE,
+		commentId: commentId,
+		commentScore: commentScore
+	};
+};
 
 /*
  * Get a data array of posts and return an object with a payload of an
@@ -205,6 +226,22 @@ export function addVoteToPost(postId, vote) {
 						.then((data) => (
 							dispatch(receiveAllComments(data, postId))
 						))
+					))
+			))
+	};
+};
+
+/*
+ * Pass vote to the post with given postId. Vote can be either
+ * positive or negative.
+ */
+export function addVoteToComment(commentId, vote) {
+	return function(dispatch) {
+		return voteComment(commentId, { option: vote})
+			.then(() => (
+				getSingleComment(commentId)
+					.then((data) => (
+						dispatch(updateCommentScore(data))
 					))
 			))
 	};

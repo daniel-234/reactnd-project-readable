@@ -68,10 +68,34 @@ export const getSinglePost = (postId) =>
     )
 
 /*
+ * Get the details of a single comment.
+ */
+export const getSingleComment = (postId) =>
+  fetch(`${api}/comments/` + postId, { headers })
+    .then(
+      res => res.json(),
+      error => console.log('An error occurred', error)
+    )
+
+/*
  * Pass the downVote or upVote to the post with given `postId`.
  */
 export const votePost = (postId, vote) =>
   fetch(`${api}/posts/` + postId, {
+    method: `POST`,
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(vote)
+  })
+  .then(res => res.json())
+
+/*
+ * Pass the downVote or upVote to the comment with given `commentId`.
+ */
+export const voteComment = (commentId, vote) =>
+  fetch(`${api}/comments/` + commentId, {
     method: `POST`,
     headers: {
       ...headers,

@@ -9,6 +9,7 @@ import {
 	RECEIVE_ALL_POSTS,
 	RECEIVE_ALL_COMMENTS,
 	UPDATE_POST_SCORE,
+	UPDATE_COMMENT_SCORE,
 	UPDATE_POSTS_VISIBILITY,
 	ORDER_POSTS,
 	CHANGE_SORTING_ORDER
@@ -118,7 +119,7 @@ function post(state = initialState, action) {
 				...state,
 				[postId]: {
 					...state[postId],
-					// Change the post score
+					// Change the post score.
 					voteScore: postScore
 				}
 			}
@@ -131,15 +132,30 @@ function post(state = initialState, action) {
 function comments(state = initialState.comments, action) {
 	switch (action.type) {
 		/*
-		 * When all the posts from the server are received, return the
+		 * When all the comments from the server are received, return the
 		 * new state with the comments object populated.
 		 */
 		case RECEIVE_ALL_COMMENTS:
 			const comments = action.dataObj;
+			// Return the state as it was before, adding the new comments.
 			return {
 				...state,
 				...comments
 			};
+		// Update the `voteScore` for a single comment.
+		case UPDATE_COMMENT_SCORE:
+			const commentId = action.commentId;
+			const commentScore = action.commentScore;
+			return {
+				// Return the state as it was before.
+				...state,
+				// Get the single comment that was voted.
+				[commentId]: {
+					...state[commentId],
+					// Change the comment score.
+					voteScore: commentScore
+				}
+			}
 		default:
 			return state;
 	}
