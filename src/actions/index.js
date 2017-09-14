@@ -124,7 +124,7 @@ export function receiveAllComments(data, parentId) {
 
 	return {
 		type: RECEIVE_ALL_COMMENTS,
-		// dataObj
+		dataObj,
 		dataArray,
 		parentId
 	};

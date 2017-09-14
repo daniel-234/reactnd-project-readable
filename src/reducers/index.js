@@ -32,16 +32,8 @@ import {
 const initialState = {
 	selectedCategory: allCategories.REACT,
 	sortOrder: sortingTypes.MOST_RECENT,
-
-
-
-
-	// TODO replace if an entities object is added with a comments object property.
-	// entities: {
-	// 	posts: {},
-	// 	comments: {}
-	// },
 	posts: {},
+	comments: {},
 	allPosts: [],
 	postsByCategory: {
 		react: {
@@ -54,7 +46,6 @@ const initialState = {
 			items: []
 		}
 	},
-	// postDetails: {}
 };
 
 /*
@@ -78,6 +69,7 @@ function category(state = 'react', action) {
 	}
 }
 
+// Change the sorting order of the posts.
 function sortOrder(state = initialState.sortOrder, action) {
 	switch (action.type) {
 		case CHANGE_SORTING_ORDER:
@@ -88,10 +80,7 @@ function sortOrder(state = initialState.sortOrder, action) {
 	}
 }
 
-
 // Post reducer. Pass it the posts object state slice.
-
-// TODO change the initial state if the comments object is added.
 function post(state = initialState, action) {
 	switch (action.type) {
 		/*
@@ -138,38 +127,19 @@ function post(state = initialState, action) {
 	}
 }
 
-// TODO refactor it if a comments object is added as entity; delete otherwise.
-// Comment reducer.
-function comment(state = initialState.entities.post, action) {
+// Comments reducer.
+function comments(state = initialState.comments, action) {
 	switch (action.type) {
 		/*
 		 * When all the posts from the server are received, return the
-		 * new state with the entities posts object populated.
+		 * new state with the comments object populated.
 		 */
 		case RECEIVE_ALL_COMMENTS:
-			console.log(action.parentId)
-			console.log(state);
-			// const comments = action.dataObj;
+			const comments = action.dataObj;
 			return {
 				...state,
-				// state[action.parentId]: {
-				// 	...state[action.parentId],
-					comments: [
-						...action.dataArray
-					]
-				// }
-			}
-			// 	state.post: {
-			// 		...state,
-			// 		state.post[comments.parentId]: {
-			// 			...state.post[comments.parentId],
-			// 			...commentsByParentId: [
-			// 				...
-			// 			]
-			// 		}
-			// 	},
-			// 	comments
-			// }
+				...comments
+			};
 		default:
 			return state;
 	}
@@ -195,7 +165,6 @@ function allPosts(state = [], action) {
 			return state;
 	}
 }
-
 
 // TODO refector it.
 // Assign the given post id to its category.
@@ -229,28 +198,13 @@ function postsByCategory(state = initialState.postsByCategory, action) {
 	}
 }
 
-// function postDetails(state = {}, action) {
-// 	switch (action.type) {
-// 		case RECEIVE_POST_DETAILS:
-// 			console.log(action);
-// 			const postDetails = action.postDetails;
-// 			return {
-// 				postDetails: postDetails
-// 			}
-// 		default:
-// 			return state;
-// 	}
-// }
-
-
 // Combine all the reducers responsible for separate portions of the state.
 export default combineReducers({
 	selectedCategory: category,
 	sortOrder,
 	posts: post,
-	// entities,
+	comments: comments,
 	allPosts,
 	postsByCategory,
-	// postDetails,
 	form: formReducer
 });

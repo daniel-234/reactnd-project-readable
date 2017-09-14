@@ -35,9 +35,9 @@ class Post extends Component {
 	render() {
 		// Get the current post.
 		const post = this.props.post;
-
+		// Check if the post has been deleted
 		if (Object.keys(post).length === 0) {
-			console.log(post);
+			// Display a message to the user.
 			return (
 				<div className='container'>
 					<Link
@@ -54,10 +54,16 @@ class Post extends Component {
 			);
 		}
 
+		// Get the post id.
 		const postId = post.id;
 
-		// console.log(post);
-		// console.log(this.props);
+		// Get the comments ids related to this post.
+		const idsOfCommentsToPost = post.comments;
+		/*
+		 * Get the comments object (to take the properties)
+		 * from comments related to this post.
+		 */
+		const comments = this.props.commentsToPost;
 
 		// Get the number of comments to the post.
 		const commentsLength = post.comments ? post.comments.length : 0;
@@ -73,7 +79,7 @@ class Post extends Component {
 	      	/>
 	      </Link>
 				<SelectCategory />
-				<div className='post-details'>
+				<div className='single-post-details'>
 	      	{
 	        	/*
 	        	 * Provides navigation to this Post View (referenced by postId in
@@ -131,6 +137,63 @@ class Post extends Component {
 	      		value={postId}
 	      		onClick={() => this.deleteThisPost(postId)}
 	      	/>
+	      </div>
+
+	      <div className='all-comments-list'>
+	      	<ul className='all-comments'>
+	      		{idsOfCommentsToPost.map((commentId) => (
+
+	      			// console.log(comments[commentId])
+	      			<li key={commentId} className='single-comment'>
+		      			<div className='comment-details'>
+					      	{
+					        	/*
+					        	 * Provides navigation to this Post View (referenced by postId in
+					        	 * the URL).
+					        	 *
+					        	 * Wraps the post title as an anchor tag.
+					        	 */
+					        }
+					        <p className='comment-body'>
+					        	{ comments[commentId].body }
+					        </p>
+					        <p className='comment-author'>
+					          author: { comments[commentId].author }
+					        </p>
+					        <p className='comment-separator'>
+					          |
+					        </p>
+					        <p className='comment-score'>
+					          { comments[commentId].voteScore } points
+					        </p>
+					        <p className='comment-separator'>
+					          |
+					        </p>
+					        <p className='comment-score'>
+					          + 1
+					        </p>
+					        <p className='comment-separator'>
+					          |
+					        </p>
+					        <p className='comment-score'>
+					          - 1
+					        </p>
+					        <p className='comment-separator'>
+					          |
+					        </p>
+					        <p className='comment-score'>
+					          edit
+					        </p>
+					        <p className='comment-separator'>
+					          |
+					        </p>
+					        <p className='comment-score'>
+					          delete
+					        </p>
+					      </div>
+		      		</li>
+	      		))}
+	      	</ul>
 	      </div>
 			</div>
 		);

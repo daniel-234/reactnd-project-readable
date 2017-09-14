@@ -26,7 +26,8 @@ const mapStateToProps = (state, ownProps) => ({
 	 * Pass `ownProps` as second argument to `mapStateToProps` to get
 	 * access to the props passed to the container component.
 	 */
-	post: getPostFromPath(state.allPosts, state.posts, ownProps.path)
+	post: getPostFromPath(state.allPosts, state.posts, ownProps.path),
+	commentsToPost: state.comments
 });
 
 const mapDispatchToProps = {

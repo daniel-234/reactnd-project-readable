@@ -89,12 +89,13 @@ form div + div {
 /*
  * Remove bullets from the posts list.
  */
-.all-posts {
+.all-posts,
+.all-comments
+{
   list-style-type: none;
 }
 
-.all-posts
- {
+.all-posts {
   width: 100%;
   margin: 10px 20px;
   padding: 0;
@@ -102,11 +103,20 @@ form div + div {
   text-align: left;
 }
 
+.all-comments {
+  padding-left: 3em;
+  padding-top: 1em;
+  font-size: 0.9em;
+}
+
 .post-author,
 .post-score,
 .post-separator,
 .post-comments,
-.post-delete-link
+.post-delete-link,
+.comment-author,
+.comment-separator,
+.comment-score
 {
   font-size: 0.8em;
   color: #888;
@@ -137,6 +147,10 @@ form div + div {
   /*float: left;*/
   width: 97.5%;
   /*margin-left: 5%;*/
+}
+
+.single-post-details {
+  font-size: 1.5em;
 }
 
 .up-arrow,
