@@ -19,6 +19,10 @@ class Post extends Component {
 		this.props.votePosts(postId, 'downVote');
 	}
 
+	deleteThisPost = (postId) => {
+		this.props.deletePost(postId);
+	}
+
 	handleSubmit = (event) => {
 		event.preventDefault();
 	}
@@ -31,6 +35,25 @@ class Post extends Component {
 	render() {
 		// Get the current post.
 		const post = this.props.post;
+
+		if (Object.keys(post).length === 0) {
+			console.log(post);
+			return (
+				<div className='container'>
+					<Link
+						to={'/'}
+					>
+						<HomeButton
+		      		size='40'
+		      	/>
+		      </Link>
+	      	<div className='success-delete-message'>
+						<h2>Post deleted successfully!</h2>
+					</div>
+				</div>
+			);
+		}
+
 		const postId = post.id;
 
 		// console.log(post);
@@ -105,6 +128,8 @@ class Post extends Component {
 	      	<DeleteButton
 	      		className='delete-button'
 	      		size='40'
+	      		value={postId}
+	      		onClick={() => this.deleteThisPost(postId)}
 	      	/>
 	      </div>
 			</div>

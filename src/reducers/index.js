@@ -9,6 +9,7 @@ import {
 	RECEIVE_ALL_POSTS,
 	RECEIVE_ALL_COMMENTS,
 	UPDATE_POST_SCORE,
+	UPDATE_POSTS_VISIBILITY,
 	ORDER_POSTS,
 	CHANGE_SORTING_ORDER
 } from '../actions';
@@ -120,9 +121,7 @@ function post(state = initialState, action) {
 					]
 				}
 			};
-		/*
-		 * Update the `voteScore` for a single post.
-		 */
+		// Update the `voteScore` for a single post.
 		case UPDATE_POST_SCORE:
 			const postId = action.postId;
 			const postScore = action.postScore;
@@ -138,7 +137,6 @@ function post(state = initialState, action) {
 			return state;
 	}
 }
-
 
 // TODO refactor it if a comments object is added as entity; delete otherwise.
 // Comment reducer.
@@ -177,16 +175,6 @@ function comment(state = initialState.entities.post, action) {
 	}
 }
 
-
-// TODO uncomment it if a comments object is added.
-
-// Combine reducers to compose the entities slice of state.
-// const entities = combineReducers({
-// 	post,
-// 	comments: comment
-// });
-
-
 // Populate the `allPosts` array.
 function allPosts(state = [], action) {
 	switch(action.type) {
@@ -194,8 +182,15 @@ function allPosts(state = [], action) {
 			return [
 				...action.allPosts
 			];
-		// case ORDER_POSTS:
-		// 	return
+		/*
+		 * When the following action gets triggered by a user who deleted
+		 * a post, we just update the `allPosts` array to filter out the
+		 * deleted posts.
+		 */
+		case UPDATE_POSTS_VISIBILITY:
+			return [
+				...action.allPosts
+			]
 		default:
 			return state;
 	}

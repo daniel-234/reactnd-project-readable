@@ -1,15 +1,20 @@
-import { connect } from 'react-redux';
 import React from 'react';
-import { addVoteToPost } from '../actions';
+import { connect } from 'react-redux';
+import { addVoteToPost, deleteSinglePost } from '../actions';
 import Post from '../components/Post';
 
-const getPostFromPath = (posts, path) => {
+const getPostFromPath = (ids, posts, path) => {
 	/*
 	 * As the current path for a Post View is made up of the category
 	 * and the post id, take the string and get the id after the last `/`
 	 * symbol.
 	 */
 	const postId = path.slice(path.lastIndexOf('/') + 1);
+
+	if (ids.indexOf(postId) === -1) {
+		console.log('NO');
+		return {};
+	}
 	// Create a new post object.
   const post = {...posts[postId]};
 
@@ -21,11 +26,12 @@ const mapStateToProps = (state, ownProps) => ({
 	 * Pass `ownProps` as second argument to `mapStateToProps` to get
 	 * access to the props passed to the container component.
 	 */
-	post: getPostFromPath(state.posts, ownProps.path)
+	post: getPostFromPath(state.allPosts, state.posts, ownProps.path)
 });
 
 const mapDispatchToProps = {
-	votePosts: addVoteToPost
+	votePosts: addVoteToPost,
+	deletePost: deleteSinglePost
 };
 
 export const PostDetails = connect(

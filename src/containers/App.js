@@ -83,6 +83,7 @@ class App extends Component {
               <VisiblePosts />
             )}
           />
+
           {
             /*
              * This Route Component checks the URL, too, if there is not a
@@ -124,6 +125,7 @@ class App extends Component {
               />
             )}
           />
+
           {
             /*
              * Checks if the URL matches a post id.

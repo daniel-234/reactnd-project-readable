@@ -1,5 +1,5 @@
 import generateUUID from '../utils/generateID.js';
-import { getPosts, getComments, addToPosts, addToComments, getSinglePost, votePost } from '../utils/ReadableAPI';
+import { getPosts, getComments, addToPosts, addToComments, getSinglePost, votePost, deletePost } from '../utils/ReadableAPI';
 
 /*
  * Action types.
@@ -11,6 +11,7 @@ export const RECEIVE_ALL_COMMENTS = 'RECEIVE_ALL_COMMENTS';
 export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE';
 export const ORDER_POSTS = 'ORDER_POSTS';
 export const CHANGE_SORTING_ORDER = 'CHANGE_SORTING_ORDER';
+export const UPDATE_POSTS_VISIBILITY = 'UPDATE_POSTS_VISIBILITY';
 
 /*
  * Other constants.
@@ -98,7 +99,9 @@ export function receiveAllPosts(data) {
 		// Posts object.
 		dataObj,
 		// Posts ids array property.
-		allPosts: data.map(post => post.id),
+		allPosts: data.filter((post) => (
+			!post.deleted
+		)).map((post) => post.id)
 	};
 };
 
@@ -138,6 +141,21 @@ export function updatePostScore(data) {
 		type: UPDATE_POST_SCORE,
 		postId: postId,
 		postScore: postScore
+	};
+};
+
+
+/*
+ * Get a data array of posts and return an object with a payload of an
+ * array of all the posts id filtered to not include the deleted posts.
+ */
+export function updatePostsVisibility(data) {
+	return {
+		type: UPDATE_POSTS_VISIBILITY,
+		allPosts: data.filter((post) => (
+			!post.deleted
+		)).map((post) => (
+			post.id))
 	};
 };
 
@@ -192,25 +210,23 @@ export function addVoteToPost(postId, vote) {
 	};
 };
 
+/*
+ * Change the `deleted` flag to true of the post referenced by `postId`.
+ */
+export function deleteSinglePost(postId) {
+	return function (dispatch) {
+		return deletePost(postId)
+			.then(() => (
+				getPosts()
+					// As data are returned, dispatch an action to dispose of them.
+					.then((data) => (
+						dispatch(updatePostsVisibility(data))
+					))
+			));
+	};
+};
 
-export function reorderPosts(newOrder) {
-	return {
-		type: ORDER_POSTS,
-		newOrder
-	}
-}
 
-
-// sortPosts = (value, arr, obj) => {
-// 		switch(value) {
-// 			case 'most-voted':
-// 				return arr.sort(function(a, b) { return obj[b].voteScore - obj[a].voteScore})
-// 			case 'most-recent':
-// 				return arr.sort(function(a, b) { return obj[a].timestamp - obj[b].timestamp})
-// 			default:
-// 				return arr;
-// 		}
-// 	}
 
 
 // TODO check

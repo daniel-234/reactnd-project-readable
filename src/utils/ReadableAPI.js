@@ -80,3 +80,15 @@ export const votePost = (postId, vote) =>
     body: JSON.stringify(vote)
   })
   .then(res => res.json())
+
+/*
+ * Delete the post with `id` value postId.
+ */
+export const deletePost = (postId) =>
+  fetch(`${api}/posts/` + postId, {
+    method: `DELETE`,
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    }})
+

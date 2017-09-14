@@ -48,7 +48,7 @@ const getVisiblePosts = (postIds, posts, sortOrder) => {
 			sortedIds = ids.sort(function(a, b) { return posts[a].voteScore - posts[b].voteScore });
 			return sortedIds;
 		default:
-			return sortedIds;
+			return ids;
 	};
 };
 
