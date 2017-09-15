@@ -42,6 +42,10 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * [Redux form docs: Synchronous Validation example](https://redux-form.com/7.0.4/examples/syncvalidation/)
 * [Erik Rasmussen - Abstracting Form State with Redux Form](https://www.youtube.com/watch?v=eDTi7lYR1VU&feature=youtu.be)
 * [Stackoverflow - Clear 'redux-form' after submitting](https://stackoverflow.com/questions/42551955/clear-redux-form-fields-after-submitting)
+* Initialize Redux form from state:
+* [Redux form - Initialize from state](https://redux-form.com/7.0.4/examples/initializefromstate/)
+* [Stackoverflow - Redux form initial values](https://stackoverflow.com/questions/41267037/redux-form-initial-values-from)
+* [GitHub Redux form issues - initialize from state](https://github.com/erikras/redux-form/issues/1399)
 * Apart from the good explanation on the Redux official documentation and the lessons in the Udacity course, I relied on a post from Dan Abramov in Stackoverflow and the README documentation in the GitHub repository of the Redux thunk middleware. Dan Abramov points to an official Async example to understand the thunk middleware mechanism, and I relied heavily on some of its code to build some of my actions.
 * [GitHub - Redux thunk repository](https://github.com/gaearon/redux-thunk)
 * [Stackoverflow - How to dispatch a Redux thunk with a timeout](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/)
@@ -52,6 +56,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Adding React Router to the project:
 * [Egghead - JavaScript Redux adding React Router to the project](https://egghead.io/lessons/javascript-redux-adding-react-router-to-the-project)
 * [Redux docs - Advanced tutorial: usage with React Router](http://redux.js.org/docs/advanced/UsageWithReactRouter.html)
+* [Stackoverflow - Pass props in link React router](https://stackoverflow.com/questions/30115324/pass-props-in-link-react-router)
 * Solve problems with browser history in Redux, as `history` is a module on its own now:
 * [Stackoverflow - React Router v4 browserHistory is undefined](https://stackoverflow.com/questions/43822589/react-router-v4-browserhistory-is-undefined)
 * [GitHub - ReactTraining history library](https://github.com/ReactTraining/history)

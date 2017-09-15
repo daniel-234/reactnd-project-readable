@@ -77,9 +77,11 @@ const App = (props) => {
         />
 
         <Route
-          exact path='/edit'
+          exact path='/edit/:postId?'
           render={() => (
-            <EditPostFormDetails />
+            <EditPostFormDetails
+              path = {path}
+            />
           )}
         />
 

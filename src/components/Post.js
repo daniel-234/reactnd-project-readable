@@ -33,7 +33,8 @@ class Post extends Component {
 	}
 
 	editThisPost = (postId) => {
-		this.props.editPost(postId, this.props.post);
+		// this.props.editPost(postId, this.props.post);
+		console.log('EDIT')
 	}
 
 	deleteThisComment = (commentId) => {
@@ -147,6 +148,8 @@ class Post extends Component {
     			/>
     			<EditPostButtonLink
     				post={this.props.post}
+    				// onClick={() => this.editThisPost(postId)}
+    				provaInPost='BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
 	      	/>
 	      	<DeleteButton
 	      		className='delete-button'

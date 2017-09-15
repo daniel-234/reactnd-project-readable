@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PostForm from './PostForm';
+import InitializePostForm from './InitializePostForm';
 import HomeButton from 'react-icons/lib/fa/home';
 
 class EditPostForm extends Component {
 	// Triggered by onSubmit in the post form.
   submitPost = (values) => {
     console.log(values);
+    console.log(this.props);
     /*
      * Call the `displayPost` property function passed
      * to props by `mapDispatchToProps`.
@@ -14,12 +15,17 @@ class EditPostForm extends Component {
      * action `addPost` from the reducer passing the post
      * object as argument.
      */
-    this.props.setPostValues({
-        title: values.title,
-        author: values.author,
-        category: values.category,
-        body: values.body,
-    });
+
+    //  editSinglePost(postId, newPost)
+
+    // this.props.editSinglePost(
+    //   postId:
+    // {
+    //     title: values.title,
+    //     author: values.author,
+    //     category: values.category,
+    //     body: values.body,
+    // });
 
     /*
      * After the new post is submitted, get the state synchronized
@@ -39,6 +45,7 @@ class EditPostForm extends Component {
   }
 
   render() {
+    const post = this.props.post;
   	console.log(this.props);
   	return (
   		<div className='container'>
@@ -57,7 +64,7 @@ class EditPostForm extends Component {
 	  			}
 		  		<h2>Edit post</h2>
 					<div className='post-form-container'>
-						<PostForm
+						<InitializePostForm
 							/*
 		           * `onSubmit` prop passed from the App Container to the
 		           * PostForm Component.
@@ -66,6 +73,7 @@ class EditPostForm extends Component {
 		           * by the user in the form.
 		           */
 				    	onSubmit={this.submitPost}
+              post={post}
 				    />
 				  </div>
 	  		</div>
