@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-/*.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}*/
-
 .App-header {
   background-color: #222;
   height: 150px;
@@ -17,17 +12,6 @@
 .App-intro {
   font-size: large;
 }
-
-/*form {
-  margin: 0 auto;
-  width: 400px;
-
-  padding: 1em;
-}
-
-form div + div {
-  margin-top: 1em;
-}*/
 
 .comment-label-post-reference,
 .comment-body-label,
@@ -57,7 +41,6 @@ form div + div {
   width: 300px;
 }
 
-/*.category-select,*/
 .post-select
 {
   width: 307px;
@@ -109,13 +92,6 @@ form>div>div>span {
   font-weight: bold;
   color: #700;
 }
-
-/*.post-submit-button,
-.comment-submit-button
-{
-  text-align: left;
-  /*padding-left: 90px;*/
-
 
 .post-submit-button,
 .comment-submit-button
@@ -176,19 +152,13 @@ form>div>div>span {
 }
 
 .post-voting-icons {
-  /*float: left;
-  width: 5%;*/
-
-  /*position: relative;*/
   width: 2.5%;
   float: left;
   clear: left;
 }
 
 .post-details {
-  /*float: left;*/
   width: 97.5%;
-  /*margin-left: 5%;*/
 }
 
 .single-post-details {
@@ -197,10 +167,6 @@ form>div>div>span {
 
 .up-arrow,
 .down-arrow {
-  /*position: absolute;
-  left: 2px;*/
-  /*padding-top: 1.5%;*/
-
   display: block;
   float: none;
   clear: both;
@@ -214,12 +180,8 @@ form>div>div>span {
 .thumbs-down-button,
 .add-comment-button,
 .post-details-edit-button,
-/*.comments-button,*/
 .delete-button
 {
-  /*float: left;*/
-  /*padding-left: 3em;*/
-
   margin-top: 1em;
   margin-right: 1em;
 }
@@ -231,17 +193,3 @@ form>div>div>span {
 .comment-form-container {
   padding-top: 1em;
 }
-
-/*.up-arrow {
-  padding-top: 1%;
-}
-
-.down-arrow {
-  padding-top: 3%;
-}
-*/
-
-/*@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}*/
