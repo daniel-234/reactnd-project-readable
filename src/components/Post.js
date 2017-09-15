@@ -148,8 +148,6 @@ class Post extends Component {
     			/>
     			<EditPostButtonLink
     				post={this.props.post}
-    				// onClick={() => this.editThisPost(postId)}
-    				provaInPost='BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'
 	      	/>
 	      	<DeleteButton
 	      		className='delete-button'

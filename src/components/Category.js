@@ -162,11 +162,10 @@ class Category extends Component {
 		                <p className='post-separator'>
 		                  |
 		                </p>
-		                <p
-			                className='post-edit-link'
-			                // onClick={() => this.deleteThisPost(postId)}
-			              >
-		                  edit
+		                <p className='post-edit-link'>
+		                	<Link to={'/edit/' + postId}>
+			                  edit
+			                </Link>
 		                </p>
 		                <p className='post-separator'>
 		                  |
