@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PostForm from './PostForm';
 import CommentForm from './CommentForm';
+import HomeButton from 'react-icons/lib/fa/home';
 
 class CreatePostForm extends Component {
 	// Triggered by onSubmit in the post form.
@@ -53,43 +55,56 @@ class CreatePostForm extends Component {
 
   // Get all the submitted posts from any category.
   getThePosts = () => {
-    const allPosts = this.props.posts.allPosts;
+    // const allPosts = this.props.posts.allPosts;
+    const allPosts = this.props.allPosts;
+    console.log(this.props.allPostsIds);
+    console.log(allPosts);
     return allPosts;
   }
 
   render() {
+  	console.log(this.props);
   	return (
-  		<div className='create-post-form'>
-  			{
-  				/*
-  				 * Post form.
-  				 */
-  			}
-	  		<h2>Add a post</h2>
-				<div className='post-form-container'>
-					<PostForm
-						/*
-	           * `onSubmit` prop passed from the App Container to the
-	           * PostForm Component.
-	           * The Component will look for it in its prop to know
-	           * what `handleSubmit` will do with the values passed
-	           * by the user in the form.
-	           */
-			    	onSubmit={this.submitPost}
-			    />
-			   </div>
-			   {
-			   	/*
-			   	 * Comment form.
-			   	 */
-			   }
-			   <div className='comment-form-container'>
-			    <h2>Add a comment</h2>
-			    <CommentForm
-			    	onSubmit={this.submitComment}
-			    	getPosts={this.getThePosts}
-			    />
-				</div>
+  		<div className='container'>
+  			<Link
+						to={'/'}
+					>
+						<HomeButton
+		      		size='40'
+		      	/>
+		      </Link>
+	  		<div className='create-post-form'>
+	  			{
+	  				/*
+	  				 * Post form.
+	  				 */
+	  			}
+		  		<h2>Add a post</h2>
+					<div className='post-form-container'>
+						<PostForm
+							/*
+		           * `onSubmit` prop passed from the App Container to the
+		           * PostForm Component.
+		           * The Component will look for it in its prop to know
+		           * what `handleSubmit` will do with the values passed
+		           * by the user in the form.
+		           */
+				    	onSubmit={this.submitPost}
+				    />
+				   </div>
+				   {
+				   	/*
+				   	 * Comment form.
+				   	 */
+				   }
+				   <div className='comment-form-container'>
+				    <h2>Add a comment</h2>
+				    <CommentForm
+				    	onSubmit={this.submitComment}
+				    	getPosts={this.getThePosts}
+				    />
+					</div>
+	  		</div>
   		</div>
   	)
   }

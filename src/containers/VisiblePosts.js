@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { changeSortingOrder, addVoteToPost, sortingTypes, deleteSinglePost } from '../actions'
+import { fetchAllPosts, changeSortingOrder, addVoteToPost, sortingTypes, deleteSinglePost } from '../actions'
 import AllPosts from '../components/AllPosts';
 import Category from '../components/Category';
 
@@ -65,7 +65,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
 	sortPosts: changeSortingOrder,
 	votePosts: addVoteToPost,
-	deletePost: deleteSinglePost
+	deletePost: deleteSinglePost,
+	getAllPosts: fetchAllPosts
 }
 
 /*

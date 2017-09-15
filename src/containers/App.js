@@ -6,18 +6,19 @@ import { VisiblePosts, VisibleCategoryPosts } from './VisiblePosts';
 import Category from '../components/Category';
 // import Post from '../components/Post';
 import { PostDetails } from './PostDetails';
-import CreatePostForm from '../components/CreatePostForm';
+import { FormDetails } from './FormDetails';
+// import CreatePostForm from '../components/CreatePostForm';
 import { addPost, addComment, fetchAllPosts, setCategory, getPostDetails } from '../actions';
 import { reset } from 'redux-form';
 import '.././App.css';
 
 class App extends Component {
-  /*
-   * As the component mounts, populate the posts state.
-   */
-  componentDidMount() {
-    this.props.getAllPosts();
-  }
+
+  //  * As the component mounts, populate the posts state.
+
+  // componentDidMount() {
+  //   this.props.getAllPosts();
+  // }
 
   render() {
     /*
@@ -25,20 +26,22 @@ class App extends Component {
      */
 
     // Extract posts passed to props via `mapStateToProps`.
-    const posts = this.props.posts;
+    // const posts = this.props.posts;
     // Extract methods passed to props via `MapDispatchToProps`.
-    const getAllPosts = this.props.getAllPosts;
-    const setPostValues = this.props.setPostValues;
-    const setCommentValues = this.props.setCommentValues;
-    const voteAPost = this.props.voteAPost;
+    // const getAllPosts = this.props.getAllPosts;
+    // const setPostValues = this.props.setPostValues;
+    // const setCommentValues = this.props.setCommentValues;
+    // const voteAPost = this.props.voteAPost;
 
     /*
-     * Get the `match` object from Route props.
+     * Get the `match` object from Route props (see '../index.js').
      * A `match` object contains information about how a <Route path>
      * matched the URL. `match` objects contain a `params` object property
      * with key/value pairs parsed from the URL corresponding to the dynamic
      * segment of the path.
      */
+
+    console.log(this.props);
     const urlParams = this.props.match.params;
     // Get the category value from the params properties.
     const category = urlParams.category;
@@ -96,11 +99,11 @@ class App extends Component {
           <Route
             exact path='/create'
             render={() => (
-              <CreatePostForm
-                posts = {posts}
-                getAllPosts = {getAllPosts}
-                setPostValues = {setPostValues}
-                setCommentValues = {setCommentValues}
+              <FormDetails
+                // posts = {posts}
+                // getAllPosts = {getAllPosts}
+                // setPostValues = {setPostValues}
+                // setCommentValues = {setCommentValues}
               />
             )}
           />
@@ -146,23 +149,24 @@ class App extends Component {
 }
 
 // Take the current store state and return it as posts via props.
-function mapStateToProps(posts) {
-  return {
-    posts
-  }
-}
+// function mapStateToProps(posts) {
+//   return {
+//     posts
+//   }
+// }
 
 // Pass actions to be dispatch as props.
-function mapDispatchToProps(dispatch) {
-  return {
-    setPostValues: (data) => dispatch(addPost(data)),
-    setCommentValues: (data) => dispatch(addComment(data)),
-    selectCategory: (category) => dispatch(setCategory(category)),
-    getAllPosts: () => dispatch(fetchAllPosts()),
-    // voteAPost: (postId, vote) => dispatch(addVoteToPost(postId, vote)),
-    // sortPosts: (newOrder) => dispatch(reorderPosts(newOrder))
-    // getPost: (postId) => dispatch(getPostDetails(postId))
-  }
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     // setPostValues: (data) => dispatch(addPost(data)),
+//     // setCommentValues: (data) => dispatch(addComment(data)),
+//     selectCategory: (category) => dispatch(setCategory(category))
+//     // getAllPosts: () => dispatch(fetchAllPosts()),
+//     // voteAPost: (postId, vote) => dispatch(addVoteToPost(postId, vote)),
+//     // sortPosts: (newOrder) => dispatch(reorderPosts(newOrder))
+//     // getPost: (postId) => dispatch(getPostDetails(postId))
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App
