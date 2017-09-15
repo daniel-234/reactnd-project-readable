@@ -3,7 +3,8 @@ import { Switch, Route } from 'react-router';
 import { VisiblePosts, VisibleCategoryPosts } from './VisiblePosts';
 import Category from '../components/Category';
 import { PostDetails } from './PostDetails';
-import { FormDetails } from './FormDetails';
+import { CreatePostFormDetails } from './CreatePostFormDetails';
+import { EditPostFormDetails } from './EditPostFormDetails';
 import '.././App.css';
 
 const App = (props) => {
@@ -71,7 +72,14 @@ const App = (props) => {
         <Route
           exact path='/create'
           render={() => (
-            <FormDetails />
+            <CreatePostFormDetails />
+          )}
+        />
+
+        <Route
+          exact path='/edit'
+          render={() => (
+            <EditPostFormDetails />
           )}
         />
 

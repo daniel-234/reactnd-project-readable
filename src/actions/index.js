@@ -8,6 +8,7 @@ import {
 	getSingleComment,
 	votePost,
 	voteComment,
+	editPost,
 	deletePost,
 	deleteComment
 } from '../utils/ReadableAPI';
@@ -268,6 +269,21 @@ export function addVoteToComment(commentId, vote) {
 			))
 	};
 };
+
+/*
+ * Edit the selected post.
+ */
+export function editSinglePost(postId, newPost) {
+	return function(dispatch) {
+		return editPost(postId, newPost)
+			.then((data) => (
+				console.log(data)
+			))
+	};
+};
+
+// editPost = (postId, newPost)
+
 
 /*
  * Change the `deleted` flag to true of the post referenced by `postId`.

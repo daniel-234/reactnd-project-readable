@@ -106,7 +106,60 @@ export const voteComment = (commentId, vote) =>
   .then(res => res.json())
 
 /*
- * Delete the post with `id` value postId.
+ * Edit the post with id value `postId`.
+ */
+export const editPost = (postId, newPost) =>
+  fetch(`${api}/posts/` + postId, {
+    method: `PUT`,
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newPost)
+  })
+  .then(res => res.json())
+
+
+// app.put('/posts/:id', bodyParser.json(), (req, res) => {
+//     posts.edit(req.token, req.params.id, req.body)
+//       .then(
+//         (data) => res.send(data),
+//           (error) => {
+//               console.error(error)
+//               res.status(500).send({
+//                   error: 'There was an error.'
+//               })
+//           }
+//       )
+// })
+
+// app.post('/posts/:id', bodyParser.json(), (req, res) => {
+//     const { option } = req.body
+//     const id = req.params.id
+//     posts.vote(req.token, id, option)
+//       .then(
+//           (data) => res.send(data),
+//           (error) => {
+//               console.error(error)
+//               res.status(500).send({
+//                   error: 'There was an error.'
+//               })
+//           }
+//       )
+// })
+
+// function edit (token, id, post) {
+//     return new Promise((res) => {
+//         let posts = getData(token)
+//         for (prop in post) {
+//             posts[id][prop] = post[prop]
+//         }
+//         res(posts[id])
+//     })
+// }
+
+/*
+ * Delete the post with id value `postId`.
  */
 export const deletePost = (postId) =>
   fetch(`${api}/posts/` + postId, {
@@ -117,7 +170,7 @@ export const deletePost = (postId) =>
     }})
 
 /*
- * Delete the comment with `id` value commentId.
+ * Delete the comment with id value `commentId`.
  */
 export const deleteComment = (commentId) =>
   fetch(`${api}/comments/` + commentId, {

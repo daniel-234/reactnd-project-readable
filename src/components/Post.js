@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SelectCategory from './SelectCategory';
+import EditPostButtonLink from './EditPostButtonLink';
 import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
 import HomeButton from 'react-icons/lib/fa/home';
@@ -29,6 +30,10 @@ class Post extends Component {
 
 	deleteThisPost = (postId) => {
 		this.props.deletePost(postId);
+	}
+
+	editThisPost = (postId) => {
+		this.props.editPost(postId, this.props.post);
 	}
 
 	deleteThisComment = (commentId) => {
@@ -140,9 +145,8 @@ class Post extends Component {
     				className='comments-button'
     				size='40'
     			/>
-    			<EditButton
-	      		className='post-details-edit-button'
-	      		size='40'
+    			<EditPostButtonLink
+    				post={this.props.post}
 	      	/>
 	      	<DeleteButton
 	      		className='delete-button'
@@ -192,13 +196,13 @@ class Post extends Component {
 					        <p className='comment-separator'>
 					          |
 					        </p>
-					        <p className='comment-score'>
+					        <p className='comment-edit'  onClick={() => this.editThisComment(postId)}>
 					          edit
 					        </p>
 					        <p className='comment-separator'>
 					          |
 					        </p>
-					        <p className='comment-score' onClick={() => this.deleteThisComment(commentId)}>
+					        <p className='comment-delete' onClick={() => this.deleteThisComment(commentId)}>
 					          delete
 					        </p>
 					      </div>

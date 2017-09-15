@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addPost, addComment, fetchAllPosts } from '../actions';
-import CreatePostForm from '../components/CreatePostForm';
-
-
+import EditPostForm from '../components/EditPostForm';
 
 const mapStateToProps = (state) => ({
 	posts: state.posts,
@@ -16,7 +14,7 @@ const mapDispatchToProps = {
   getAllPosts: fetchAllPosts
 };
 
-export const FormDetails = connect(
+export const EditPostFormDetails = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(CreatePostForm)
+)(EditPostForm)

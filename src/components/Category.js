@@ -163,6 +163,15 @@ class Category extends Component {
 		                  |
 		                </p>
 		                <p
+			                className='post-edit-link'
+			                // onClick={() => this.deleteThisPost(postId)}
+			              >
+		                  edit
+		                </p>
+		                <p className='post-separator'>
+		                  |
+		                </p>
+		                <p
 			                className='post-delete-link'
 			                onClick={() => this.deleteThisPost(postId)}
 			              >
