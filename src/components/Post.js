@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SelectCategory from './SelectCategory';
 import EditPostButtonLink from './EditPostButtonLink';
+import CommentForm from './CommentForm';
 import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
 import HomeButton from 'react-icons/lib/fa/home';
 import CommentsButton from 'react-icons/lib/fa/comments-o';
 import EditButton from 'react-icons/lib/fa/edit';
 import DeleteButton from 'react-icons/lib/fa/trash-o';
+import AddTextIcon from 'react-icons/lib/fa/plus-circle';
+
 
 class Post extends Component {
 	// Upvote a post.
@@ -50,6 +53,20 @@ class Post extends Component {
 		const newOrder = event.target.value;
 		this.props.sortPosts(newOrder);
 	}
+
+	submitComment = (values) => {
+    /*
+     * Get the values from the comment form and dispatch the
+     * action `addComment` from the reducer passing the comment
+     * object and the related post id as arguments.
+     */
+    const postId = this.props.post.id;
+    this.props.addAComment({
+    	author: values.author,
+      body: values.comment,
+      parentId: postId
+    });
+  }
 
 	render() {
 		// Get the current post.
@@ -142,10 +159,6 @@ class Post extends Component {
 			      value={postId}
     				onClick={() => this.downvote(postId)}
     			/>
-    			<CommentsButton
-    				className='comments-button'
-    				size='40'
-    			/>
     			<EditPostButtonLink
     				post={this.props.post}
 	      	/>
@@ -197,7 +210,7 @@ class Post extends Component {
 					        <p className='comment-separator'>
 					          |
 					        </p>
-					        <p className='comment-edit'  onClick={() => this.editThisComment(postId)}>
+					        <p className='comment-edit' onClick={() => this.editThisComment(postId)}>
 					          edit
 					        </p>
 					        <p className='comment-separator'>
@@ -211,6 +224,13 @@ class Post extends Component {
 	      		))}
 	      	</ul>
 	      </div>
+
+	      <div className='comment-form-container'>
+				    <h2>Add a comment</h2>
+				    <CommentForm
+				    	onSubmit={this.submitComment}
+				    />
+					</div>
 			</div>
 		);
 	}

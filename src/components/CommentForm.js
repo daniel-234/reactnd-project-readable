@@ -4,7 +4,7 @@ import { Field, reduxForm, reset } from 'redux-form';
 let CommentForm = props => {
 	const { handleSubmit, getPosts } = props;
   // console.log(handleSubmit);
-  console.log(getPosts());
+  // console.log(getPosts());
 	return (
     /*
      * "Redux form provides a special `handleSubmit` function that we
@@ -19,24 +19,16 @@ let CommentForm = props => {
      */
 		<form onSubmit={ handleSubmit }>
       <div>
-        <label className='comment-label-post-reference'>Post</label>
-        <Field className='post-select' name='allPosts' component='select'>
-          <option></option>
-          {getPosts().map((postId, index) => (
-            <option
-              key={index}
-              name={postId}
-              value={postId}
-            >
-              {String(postId)}
-            </option>
-          ))}
-        </Field>
-
+        <label className='comment-author-label'>Author</label>
+        <div>
+          <Field className='comment-author-input' name='author' component='input' />
+        </div>
       </div>
       <div>
-        <label className='comment-body-label'>Comment</label>
-        <Field className='comment-body-textarea' name='comment' component='textarea' />
+        <label className='comment-body-label'>Body</label>
+        <div>
+          <Field className='comment-body-textarea' name='comment' component='textarea' />
+        </div>
       </div>
       <button className='comment-submit-button' type='submit'>Submit</button>
 		</form>

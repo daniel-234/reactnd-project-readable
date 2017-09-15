@@ -83,7 +83,14 @@ export function addComment(comment) {
 	return function(dispatch) {
 		// Generate a UUID for this comment.
 		const id = generateUUID();
-		return addToComments({ ...comment, id: id });
+		const postId = comment.parentId;
+		return addToComments({ ...comment, id: id })
+		.then(() => (
+			getComments(postId)
+			.then((data) => (
+				dispatch(receiveAllComments(data, postId))
+			))
+		));
 	};
 };
 
@@ -171,7 +178,7 @@ export function updateCommentScore(data) {
 
 /*
  * Get a data array of posts and return, as payload, an object with
- *  an array of all the posts ids filtered to not include the deleted
+ * an array of all the posts ids filtered to not include the deleted
  * posts.
  */
 export function updatePostsVisibility(data) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PostForm from './PostForm';
-import CommentForm from './CommentForm';
+// import CommentForm from './CommentForm';
 import HomeButton from 'react-icons/lib/fa/home';
 
 class CreatePostForm extends Component {
@@ -28,38 +28,6 @@ class CreatePostForm extends Component {
      */
     this.props.getAllPosts();
     // this.props.getAllComments();
-  }
-
-
-  // TODO refactor
-
-  // Triggered by onSubmit in the comment form.
-  submitComment = (values) => {
-    /*
-     * Call the `displayComment` property function passed
-     * to props by `mapDispatchToProps`.
-     * Get the values from the comment form and dispatch the
-     * action `addComment` from the reducer passing the comment
-     * object and the related post id as arguments.
-     */
-    console.log(values);
-    this.props.setCommentValues({
-        body: values.comment,
-        // For now just add comments to the same post.
-        // TODO change it.
-        parentId: values.allPosts
-    });
-    // Get the comments from the server.
-    // this.props.getAllComments();
-  }
-
-  // Get all the submitted posts from any category.
-  getThePosts = () => {
-    // const allPosts = this.props.posts.allPosts;
-    const allPosts = this.props.allPosts;
-    console.log(this.props.allPostsIds);
-    console.log(allPosts);
-    return allPosts;
   }
 
   render() {
@@ -92,18 +60,6 @@ class CreatePostForm extends Component {
 				    	onSubmit={this.submitPost}
 				    />
 				   </div>
-				   {
-				   	/*
-				   	 * Comment form.
-				   	 */
-				   }
-				   <div className='comment-form-container'>
-				    <h2>Add a comment</h2>
-				    <CommentForm
-				    	onSubmit={this.submitComment}
-				    	getPosts={this.getThePosts}
-				    />
-					</div>
 	  		</div>
   		</div>
   	)

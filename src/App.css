@@ -52,8 +52,7 @@ form div + div {
 
 .form-input-title,
 .form-input-author,
-.post-body-textarea,
-.comment-body-textarea
+.post-body-textarea
 {
   width: 300px;
 }
@@ -64,8 +63,7 @@ form div + div {
   width: 307px;
 }
 
-.post-body-textarea,
-.comment-body-textarea
+.post-body-textarea
 {
   vertical-align: top;
   height: 6em;
@@ -158,7 +156,9 @@ form>div>div>span {
 .post-delete-link,
 .comment-author,
 .comment-separator,
-.comment-score
+.comment-score,
+.comment-edit,
+.comment-delete
 {
   font-size: 0.8em;
   color: #888;
@@ -212,8 +212,9 @@ form>div>div>span {
 
 .thumbs-up-button,
 .thumbs-down-button,
+.add-comment-button,
 .post-details-edit-button,
-.comments-button,
+/*.comments-button,*/
 .delete-button
 {
   /*float: left;*/
@@ -225,6 +226,10 @@ form>div>div>span {
 
 .success-delete-message {
   margin-top: 5em;
+}
+
+.comment-form-container {
+  padding-top: 1em;
 }
 
 /*.up-arrow {
