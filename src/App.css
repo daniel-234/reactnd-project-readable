@@ -18,7 +18,7 @@
   font-size: large;
 }
 
-form {
+/*form {
   margin: 0 auto;
   width: 400px;
 
@@ -27,7 +27,7 @@ form {
 
 form div + div {
   margin-top: 1em;
-}
+}*/
 
 .comment-label-post-reference,
 .comment-body-label,
@@ -58,7 +58,7 @@ form div + div {
   width: 300px;
 }
 
-.category-select,
+/*.category-select,*/
 .post-select
 {
   width: 307px;
@@ -69,6 +69,47 @@ form div + div {
 {
   vertical-align: top;
   height: 6em;
+}
+
+form {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+form>div {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin: 10px 5px;
+}
+
+form>div>label {
+  font-weight: bold;
+  margin-right: 10px;
+  min-width: 150px;
+  text-align: right;
+  padding: 6px 9px;
+}
+
+form>div>div {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+}
+
+form>div>div>* {
+  flex: 1;
+  font-size: 16px;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+}
+
+form>div>div>span {
+  border: none;
+  font-weight: bold;
+  color: #700;
 }
 
 /*.post-submit-button,

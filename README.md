@@ -35,12 +35,11 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * [Stackoverflow - Adding multiple objects to the store in Redux](https://stackoverflow.com/questions/42463609/adding-multiple-objects-to-the-store-in-redux)
 * Generate a UUID identifier.
 * [Stackoverflow - Create GUID - UUID in JavaScript](https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript)
-* After following the Udacity course lessons, which introduced me to the main topics (and troubles) of adopting Redux for the first time, I switched to the official Redux documentation when I had to develop this project in a manner that was going to progressively diverge from the one encountered in the lessons.
-One of the things that I had to change was the form, for which I chose to use the 'redux-form' package. I read something online about the difficulties of updating the store state with a user input and found that as this application makes heavy use of form data, it was better to use something robust and reliable to handle all of the data.
-Here a list of the resources that helped me most:
+* Redux forms:
 * [Hackernoon - Using forms in React-Redux: tips and tricks](https://hackernoon.com/using-forms-in-react-redux-tips-and-tricks-48ad9c7522f6)
 * [Medium - Using Redux to handle user input](https://medium.com/@jtbennett/using-redux-form-to-handle-user-input-1392826f2c6d)
 * [Redux-form docs: Getting started with redux-form](http://redux-form.com/6.0.0-alpha.4/docs/GettingStarted.md/)
+* [Redux form docs: Synchronous Validation example](https://redux-form.com/7.0.4/examples/syncvalidation/)
 * [Erik Rasmussen - Abstracting Form State with Redux Form](https://www.youtube.com/watch?v=eDTi7lYR1VU&feature=youtu.be)
 * [Stackoverflow - Clear 'redux-form' after submitting](https://stackoverflow.com/questions/42551955/clear-redux-form-fields-after-submitting)
 * Apart from the good explanation on the Redux official documentation and the lessons in the Udacity course, I relied on a post from Dan Abramov in Stackoverflow and the README documentation in the GitHub repository of the Redux thunk middleware. Dan Abramov points to an official Async example to understand the thunk middleware mechanism, and I relied heavily on some of its code to build some of my actions.
