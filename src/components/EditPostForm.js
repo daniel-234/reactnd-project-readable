@@ -8,6 +8,8 @@ class EditPostForm extends Component {
   submitPost = (values) => {
     console.log(values);
     console.log(this.props);
+
+    const postId = values.id;
     /*
      * Call the `displayPost` property function passed
      * to props by `mapDispatchToProps`.
@@ -18,14 +20,14 @@ class EditPostForm extends Component {
 
     //  editSinglePost(postId, newPost)
 
-    // this.props.editSinglePost(
-    //   postId:
-    // {
-    //     title: values.title,
-    //     author: values.author,
-    //     category: values.category,
-    //     body: values.body,
-    // });
+    this.props.editPost(
+      postId,
+    {
+        title: values.title,
+        author: values.author,
+        category: values.category,
+        body: values.body,
+    });
 
     /*
      * After the new post is submitted, get the state synchronized
