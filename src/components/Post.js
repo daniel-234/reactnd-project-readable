@@ -7,6 +7,7 @@ import EditCommentForm from './EditCommentForm';
 // import InitializeCommentForm from './InitializeCommentForm';
 import CommentForm from './CommentForm';
 
+import { convertToReadableDate } from '../utils/convertDate';
 import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
 import HomeButton from 'react-icons/lib/fa/home';
@@ -245,19 +246,25 @@ class Post extends Component {
 					        <p className='comment-separator'>
 					          |
 					        </p>
+					        <p className='comment-date'>
+					          { convertToReadableDate(comments[commentId].timestamp) }
+					        </p>
+					        <p className='comment-separator'>
+					          |
+					        </p>
 					        <p className='comment-score'>
 					          { comments[commentId].voteScore } points
 					        </p>
 					        <p className='comment-separator'>
 					          |
 					        </p>
-					        <p className='comment-score' onClick={() => this.upvoteAComment(commentId)}>
+					        <p className='comment-upvote' onClick={() => this.upvoteAComment(commentId)}>
 					          + 1
 					        </p>
 					        <p className='comment-separator'>
 					          |
 					        </p>
-					        <p className='comment-score' onClick={() => this.downvotACommente(commentId)}>
+					        <p className='comment-downvote' onClick={() => this.downvotACommente(commentId)}>
 					          - 1
 					        </p>
 					        <p className='comment-separator'>

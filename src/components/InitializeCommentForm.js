@@ -15,13 +15,6 @@ let commentId;
  */
 const validate = (values) => {
   const errors = {};
-  if (!values.author) {
-    errors.author = 'Required';
-  } else if (values.author.length > 30) {
-    errors.author = 'Must be 25 characters or less';
-  } else if (!isNaN(Number(values.author))) {
-    errors.author = 'Invalid title. You inserted a number';
-  }
   if (!values.body) {
     errors.body = 'You must insert a comment body';
   } else if (values.body.length > 1000) {
@@ -31,30 +24,6 @@ const validate = (values) => {
   }
   return errors;
 };
-
-// Custom component to render an `input` component type.
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error }
-}) => (
-  <div>
-    <label>
-      {label}
-    </label>
-    <div>
-      <input {...input} placeholder={label} type={type} />
-      {touched &&
-        ((error &&
-          <span>
-            {error}
-          </span>
-        ))
-      }
-    </div>
-  </div>
-)
 
 // Custom component to render a `textarea` component type.
 const textAreaField = ({
@@ -98,14 +67,6 @@ let InitializeCommentForm = ((props) => {
      * that instead".
      */
 		<form onSubmit={ handleSubmit }>
-      <Field
-        className='comment-input-author'
-        name='author'
-        type='text'
-        component={renderField}
-        label='Author'
-      />
-
       <Field
         className='comment-body-textarea'
         name='body'

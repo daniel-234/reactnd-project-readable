@@ -144,7 +144,7 @@ class AllPosts extends Component {
 		                <p className='post-separator'>
 		                  |
 		                </p>
-		                <p className='post-author'>
+		                <p className='post-date'>
 		                  { convertToReadableDate(posts[postId].timestamp) }
 		                </p>
 		                <p className='post-separator'>

@@ -125,14 +125,18 @@ form>div>div>span {
 }
 
 .post-author,
+.post-date,
 .post-score,
 .post-separator,
 .post-comments,
 .post-edit-link,
 .post-delete-link,
 .comment-author,
+.comment-date,
 .comment-separator,
 .comment-score,
+.comment-upvote,
+.comment-downvote,
 .comment-edit,
 .comment-delete
 {

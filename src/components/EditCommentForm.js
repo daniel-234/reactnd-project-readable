@@ -21,9 +21,9 @@ class EditCommentForm extends Component {
     this.props.editComment(
       commentId,
       {
-          author: values.author,
-          body: values.body
-      });
+        body: values.body
+      }
+    );
 
     /*
      * After the new post is submitted, get the state synchronized

@@ -22,18 +22,18 @@ class EditPostForm extends Component {
 
     this.props.editPost(
       postId,
-    {
+      {
         title: values.title,
-        author: values.author,
         category: values.category,
         body: values.body,
-    });
+      }
+    );
 
     /*
      * After the new post is submitted, get the store state synchronized
      * with the server.
      */
-    this.props.getAllPosts();
+    // this.props.getAllPosts();
     // this.props.getAllComments();
   }
 

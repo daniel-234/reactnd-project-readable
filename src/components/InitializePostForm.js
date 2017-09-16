@@ -22,13 +22,6 @@ const validate = (values) => {
   } else if (!isNaN(Number(values.title))) {
     errors.title = 'Invalid title. You inserted a number';
   }
-  if (!values.author) {
-    errors.author = 'Required';
-  } else if (values.author.length > 30) {
-    errors.author = 'Must be 25 characters or less';
-  } else if (!isNaN(Number(values.author))) {
-    errors.author = 'Invalid title. You inserted a number';
-  }
   if (!values.body) {
     errors.body = 'You must insert a post body';
   } else if (values.body.length > 2000) {
@@ -112,13 +105,6 @@ let InitializePostForm = ((props) => {
         type='text'
         component={renderField}
         label='Title'
-      />
-      <Field
-        className='form-input-author'
-        name='author'
-        type='text'
-        component={renderField}
-        label='Author'
       />
       <div>
         <label>

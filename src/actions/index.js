@@ -86,6 +86,7 @@ export function addComment(comment) {
 	return function(dispatch) {
 		// Generate a UUID for this comment.
 		const id = generateUUID();
+		const timestamp = Date.now();
 		const postId = comment.parentId;
 		return addToComments({ ...comment, id: id })
 		.then(() => (
@@ -157,10 +158,16 @@ export function receiveAllComments(data, parentId) {
  * Get a single post object as data and update its contents.
  */
 export function updatePost(data) {
-	const post = data;
+	const postId = data.id;
+	const title = data.title;
+	const category = data.category;
+	const body = data.body;
 	return {
 		type: UPDATE_POST,
-		post
+		postId,
+		title,
+		category,
+		body
 	};
 };
 
@@ -169,12 +176,12 @@ export function updatePost(data) {
  */
 export function updateComment(data) {
 	const commentId = data.id;
-	const author = data.author;
+	const timestamp = data.timestamp;
 	const body = data.body;
 	return {
 		type: UPDATE_COMMENT,
 		commentId,
-		author,
+		timestamp,
 		body
 	};
 };
@@ -312,6 +319,12 @@ export function addVoteToComment(commentId, vote) {
 export function editSinglePost(postId, newPost) {
 	return function(dispatch) {
 		return editPost(postId, newPost)
+			.then(() => (
+				getSinglePost(postId)
+					.then((data) => (
+						dispatch(updatePost(data))
+					))
+			))
 			// .then((data) => (
 			// 	console.log(data)
 			// ))
@@ -323,7 +336,8 @@ export function editSinglePost(postId, newPost) {
  */
 export function editSingleComment(commentId, newComment) {
 	return function(dispatch) {
-		return editComment(commentId, newComment)
+		const timestamp = Date.now();
+		return editComment(commentId, { ...newComment, timestamp: timestamp })
 			.then(() => (
 				getSingleComment(commentId)
 					.then((data) => (

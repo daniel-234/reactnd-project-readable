@@ -119,7 +119,12 @@ function post(state = initialState, action) {
 		case UPDATE_POST:
 			return {
 				...state,
-				[postId]: post
+				[postId]: {
+					...state[postId],
+					title: action.title,
+					category: action.category,
+					body: action.body
+				}
 			};
 		// Update the `voteScore` for a single post.
 		case UPDATE_POST_SCORE:
@@ -177,7 +182,7 @@ function comments(state = initialState.comments, action) {
 				...state,
 				[commentId]: {
 					...state[commentId],
-					author: action.author,
+					timestamp: action.timestamp,
 					body: action.body
 				}
 			};
