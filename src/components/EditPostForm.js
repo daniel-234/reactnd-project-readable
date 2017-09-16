@@ -30,7 +30,7 @@ class EditPostForm extends Component {
     });
 
     /*
-     * After the new post is submitted, get the state synchronized
+     * After the new post is submitted, get the store state synchronized
      * with the server.
      */
     this.props.getAllPosts();

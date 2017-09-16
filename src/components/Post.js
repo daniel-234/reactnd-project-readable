@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
 import SelectCategory from './SelectCategory';
 import EditPostButtonLink from './EditPostButtonLink';
+import EditCommentForm from './EditCommentForm';
+// import InitializeCommentForm from './InitializeCommentForm';
 import CommentForm from './CommentForm';
+
 import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
 import HomeButton from 'react-icons/lib/fa/home';
@@ -13,6 +17,32 @@ import AddTextIcon from 'react-icons/lib/fa/plus-circle';
 
 
 class Post extends Component {
+	constructor() {
+		super();
+		this.state = {
+			showModal: false,
+			commentId: null
+		};
+
+		this.handleOpenModal = this.handleOpenModal.bind(this);
+		this.handleCloseModal = this.handleCloseModal.bind(this);
+	}
+
+	handleOpenModal = ({ commentId }) => {
+		this.setState(() => ({
+			showModal: true,
+			commentId
+		}));
+		console.log(this.state.commentId);
+	}
+
+	handleCloseModal = () => {
+		this.setState(() => ({
+			showModal: false,
+			commentId: null
+		}));
+	}
+
 	// Upvote a post.
 	upvote = (postId) => {
 		this.props.votePosts(postId, 'upVote');
@@ -35,10 +65,16 @@ class Post extends Component {
 		this.props.deletePost(postId);
 	}
 
-	editThisPost = (postId) => {
-		// this.props.editPost(postId, this.props.post);
-		console.log('EDIT')
-	}
+	// editThisComment = (commentId) => (
+	// 	<InitializeCommentForm />
+	// 	)
+	// // 	console.log(commentId);
+
+	// }
+
+	editThisComment = (commentId) => (
+		this.handleOpenModal({ commentId })
+	);
 
 	deleteThisComment = (commentId) => {
 		const parentId = this.props.commentsToPost[commentId].parentId;
@@ -60,6 +96,20 @@ class Post extends Component {
      * action `addComment` from the reducer passing the comment
      * object and the related post id as arguments.
      */
+    console.log(this.props);
+    const commentsToPost = this.props.commentsToPost
+
+    // for (let i = 0; i < commentsToPost.length; i++) {
+    // 	if (commentId === commentsToPost.id) {
+    // 		this.props.editComment(
+		  //     commentId,
+		  //   {
+	   //      author: values.author,
+	   //      body: values.body,
+	   //      parentId: postId
+		  //   });
+    // 	}
+    // }
     const postId = this.props.post.id;
     this.props.addAComment({
     	author: values.author,
@@ -69,6 +119,9 @@ class Post extends Component {
   }
 
 	render() {
+		console.log(this.props);
+
+
 		// Get the current post.
 		const post = this.props.post;
 		// Check if the post has been deleted
@@ -210,7 +263,7 @@ class Post extends Component {
 					        <p className='comment-separator'>
 					          |
 					        </p>
-					        <p className='comment-edit' onClick={() => this.editThisComment(postId)}>
+					        <p className='comment-edit' onClick={() => this.editThisComment(commentId)}>
 					          edit
 					        </p>
 					        <p className='comment-separator'>
@@ -226,11 +279,29 @@ class Post extends Component {
 	      </div>
 
 	      <div className='comment-form-container'>
-				    <h2>Add a comment</h2>
-				    <CommentForm
+			    <h2>Add a comment</h2>
+			    <CommentForm
+			    	onSubmit={this.submitComment}
+			    />
+				</div>
+
+
+				<Modal
+					// className='modal'
+					isOpen={this.state.showModal}
+					contentLabel='Edit Comment Modal'
+				>
+					{console.log(this.state.commentId)}
+					<button onClick={this.handleCloseModal}>Close Modal</button>
+					<div className='edit-comment-modal-container'>
+				    <EditCommentForm
 				    	onSubmit={this.submitComment}
+				    	commentId={this.state.commentId}
+				    	editComment={this.props.editComment}
+				    	updateComment={this.props.updateComment}
 				    />
 					</div>
+				</Modal>
 			</div>
 		);
 	}

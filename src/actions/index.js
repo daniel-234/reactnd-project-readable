@@ -9,6 +9,7 @@ import {
 	votePost,
 	voteComment,
 	editPost,
+	editComment,
 	deletePost,
 	deleteComment
 } from '../utils/ReadableAPI';
@@ -20,6 +21,8 @@ import {
 export const SET_CATEGORY = 'SET_CATEGORY';
 export const RECEIVE_ALL_POSTS = 'RECEIVE_ALL_POSTS';
 export const RECEIVE_ALL_COMMENTS = 'RECEIVE_ALL_COMMENTS';
+export const UPDATE_POST = 'UPDATE_POST';
+export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE';
 export const ORDER_POSTS = 'ORDER_POSTS';
 export const CHANGE_SORTING_ORDER = 'CHANGE_SORTING_ORDER';
@@ -147,6 +150,32 @@ export function receiveAllComments(data, parentId) {
 		dataObj,
 		dataArray,
 		parentId
+	};
+};
+
+/*
+ * Get a single post object as data and update its contents.
+ */
+export function updatePost(data) {
+	const post = data;
+	return {
+		type: UPDATE_POST,
+		post
+	};
+};
+
+/*
+ * Get a single comment object as data and update its contents.
+ */
+export function updateComment(data) {
+	const commentId = data.id;
+	const author = data.author;
+	const body = data.body;
+	return {
+		type: UPDATE_COMMENT,
+		commentId,
+		author,
+		body
 	};
 };
 
@@ -283,9 +312,27 @@ export function addVoteToComment(commentId, vote) {
 export function editSinglePost(postId, newPost) {
 	return function(dispatch) {
 		return editPost(postId, newPost)
-			.then((data) => (
-				console.log(data)
+			// .then((data) => (
+			// 	console.log(data)
+			// ))
+	};
+};
+
+/*
+ * Edit the selected comment.
+ */
+export function editSingleComment(commentId, newComment) {
+	return function(dispatch) {
+		return editComment(commentId, newComment)
+			.then(() => (
+				getSingleComment(commentId)
+					.then((data) => (
+						dispatch(updateComment(data))
+					))
 			))
+			// .then((data) => (
+			// 	console.log(data)
+			// ))
 	};
 };
 

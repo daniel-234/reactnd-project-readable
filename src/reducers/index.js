@@ -8,6 +8,8 @@ import {
 	SET_CATEGORY,
 	RECEIVE_ALL_POSTS,
 	RECEIVE_ALL_COMMENTS,
+	UPDATE_POST,
+	UPDATE_COMMENT,
 	UPDATE_POST_SCORE,
 	UPDATE_COMMENT_SCORE,
 	UPDATE_POSTS_VISIBILITY,
@@ -84,6 +86,8 @@ function sortOrder(state = initialState.sortOrder, action) {
 
 // Post reducer. Pass it the posts object state slice.
 function post(state = initialState, action) {
+	const postId = action.postId;
+	const post = action.post;
 	switch (action.type) {
 		/*
 		 * When all the posts from the server are received, return the
@@ -112,9 +116,13 @@ function post(state = initialState, action) {
 					]
 				}
 			};
+		case UPDATE_POST:
+			return {
+				...state,
+				[postId]: post
+			};
 		// Update the `voteScore` for a single post.
 		case UPDATE_POST_SCORE:
-			const postId = action.postId;
 			const postScore = action.postScore;
 			return {
 				...state,
@@ -124,14 +132,10 @@ function post(state = initialState, action) {
 					voteScore: postScore
 				}
 			};
-
-
-			case UPDATE_POSTS_VISIBILITY:
+		case UPDATE_POSTS_VISIBILITY:
 			return [
 				...action.allPosts
-			]
-
-
+			];
 		case UPDATE_COMMENTS_VISIBILITY:
 			const commentsIds = action.commentsIds;
 			const parentPostId = action.parentPostId;
@@ -153,6 +157,8 @@ function post(state = initialState, action) {
 
 // Comments reducer.
 function comments(state = initialState.comments, action) {
+	const commentId = action.commentId;
+	// const comment = action.comment;
 	switch (action.type) {
 		/*
 		 * When all the comments from the server are received, return the
@@ -165,9 +171,19 @@ function comments(state = initialState.comments, action) {
 				...state,
 				...comments
 			};
+		case UPDATE_COMMENT:
+			console.log(action);
+			return {
+				...state,
+				[commentId]: {
+					...state[commentId],
+					author: action.author,
+					body: action.body
+				}
+			};
+
 		// Update the `voteScore` for a single comment.
 		case UPDATE_COMMENT_SCORE:
-			const commentId = action.commentId;
 			const commentScore = action.commentScore;
 			return {
 				// Return the state as it was before.

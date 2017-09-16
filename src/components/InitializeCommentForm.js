@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm, reset } from 'redux-form';
 import { connect } from 'react-redux';
 
-let postId;
+let commentId;
 
 /*
  * Synchronous client-side form validation.
@@ -15,13 +15,6 @@ let postId;
  */
 const validate = (values) => {
   const errors = {};
-  if (!values.title) {
-    errors.title = 'Required';
-  } else if (values.title.length > 50) {
-    errors.title = 'Must be 30 characters or less';
-  } else if (!isNaN(Number(values.title))) {
-    errors.title = 'Invalid title. You inserted a number';
-  }
   if (!values.author) {
     errors.author = 'Required';
   } else if (values.author.length > 30) {
@@ -30,9 +23,9 @@ const validate = (values) => {
     errors.author = 'Invalid title. You inserted a number';
   }
   if (!values.body) {
-    errors.body = 'You must insert a post body';
-  } else if (values.body.length > 2000) {
-    errors.body = 'Post body must be 1000 characters or less'
+    errors.body = 'You must insert a comment body';
+  } else if (values.body.length > 1000) {
+    errors.body = 'Comment body must be 1000 characters or less'
   } else if (!isNaN(Number(values.body))) {
     errors.body = 'Invalid body. You inserted a number';
   }
@@ -87,11 +80,10 @@ const textAreaField = ({
   </div>
 )
 
-let InitializePostForm = ((props) => {
-  console.log(props.initialValues);
+let InitializeCommentForm = ((props) => {
   console.log(props);
-  postId = props.post.id
-  console.log(postId)
+
+  commentId = props.commentId;
 	const { handleSubmit, load, submitting } = props;
 	return (
     /*
@@ -107,44 +99,21 @@ let InitializePostForm = ((props) => {
      */
 		<form onSubmit={ handleSubmit }>
       <Field
-        className='form-input-title'
-        name='title'
-        type='text'
-        component={renderField}
-        label='Title'
-      />
-      <Field
-        className='form-input-author'
+        className='comment-input-author'
         name='author'
         type='text'
         component={renderField}
         label='Author'
       />
-      <div>
-        <label>
-          Select category
-        </label>
-        <div>
-          <Field
-            className='category-select'
-            name='category'
-            component='select'
-            label='Select category'>
-              <option value='react'>React</option>
-              <option value='redux'>Redux</option>
-              <option value='udacity'>Udacity</option>
-          </Field>
-        </div>
-      </div>
 
       <Field
-        className='post-body-textarea'
+        className='comment-body-textarea'
         name='body'
         component={textAreaField}
-        label='Insert post body'
+        label='Insert comment body'
       />
       <button
-        className='post-submit-button'
+        className='comment-submit-button'
         type='submit'
         disabled={submitting}
       >
@@ -156,7 +125,7 @@ let InitializePostForm = ((props) => {
 
 // Clear the form after submitting.
 const afterSubmit = (result, dispatch) => (
-	dispatch(reset('posts'))
+	dispatch(reset('comment'))
 );
 
 /*
@@ -169,17 +138,17 @@ const afterSubmit = (result, dispatch) => (
  * What that does is it creates what's called a higher-order Component
  * that wraps our form Component and can provide it props and functionality.
  */
-InitializePostForm = reduxForm({
-	form: 'posts',
+InitializeCommentForm = reduxForm({
+	form: 'comment',
   validate,
   enableReinitialize: true,
 	onSubmitSuccess: afterSubmit
-})(InitializePostForm)
+})(InitializeCommentForm)
 
-InitializePostForm = connect(
+InitializeCommentForm = connect(
   state => ({
-    initialValues: state.posts[postId]
+    initialValues: state.comments[commentId]
   })
-)(InitializePostForm)
+)(InitializeCommentForm)
 
-export default InitializePostForm;
+export default InitializeCommentForm;
