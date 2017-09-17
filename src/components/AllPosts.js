@@ -37,6 +37,7 @@ class AllPosts extends Component {
 
 	render() {
     // Extract posts passed via props from the container component.
+    console.log(this.props.posts);
     const posts = this.props.posts;
     const sortedIds = this.props.sortedIds;
 

@@ -137,10 +137,13 @@ function post(state = initialState, action) {
 					voteScore: postScore
 				}
 			};
-		case UPDATE_POSTS_VISIBILITY:
-			return [
-				...action.allPosts
-			];
+
+		// case UPDATE_POSTS_VISIBILITY:
+		// 	console.log(action.allPosts)
+		// 	return [
+		// 		...action.allPosts
+		// 	];
+
 		case UPDATE_COMMENTS_VISIBILITY:
 			const commentsIds = action.commentsIds;
 			const parentPostId = action.parentPostId;

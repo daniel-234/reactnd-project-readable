@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PostForm from './PostForm';
+import SelectCategory from './SelectCategory';
 // import CommentForm from './CommentForm';
 import HomeButton from 'react-icons/lib/fa/home';
 
@@ -35,12 +36,13 @@ class CreatePostForm extends Component {
   	return (
   		<div className='container'>
   			<Link
-						to={'/'}
-					>
-						<HomeButton
-		      		size='40'
-		      	/>
-		      </Link>
+					to={'/'}
+				>
+					<HomeButton
+	      		size='40'
+	      	/>
+	      </Link>
+	      <SelectCategory />
 	  		<div className='create-post-form'>
 	  			{
 	  				/*
