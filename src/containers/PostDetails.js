@@ -11,7 +11,7 @@ import {
 } from '../actions';
 import Post from '../components/Post';
 
-const getPostFromPath = (ids, posts, path) => {
+const getPostFromPath = (ids, posts, comments, path) => {
 	/*
 	 * As the current path for a Post View is made up of the category
 	 * and the post id, take the string and get the id after the last `/`
@@ -20,11 +20,17 @@ const getPostFromPath = (ids, posts, path) => {
 	const postId = path.slice(path.lastIndexOf('/') + 1);
 
 	if (ids.indexOf(postId) === -1) {
-		console.log('NO');
+		// console.log('NO');
 		return {};
 	}
-	// Create a new post object.
-  const post = {...posts[postId]};
+
+	const commentsToPost = posts[postId].comments;
+
+  let sortedCommentsToPost;
+  sortedCommentsToPost = commentsToPost.sort(function(a, b) { return comments[b].voteScore - comments[a].voteScore });
+
+  // Create a new post object.
+  const post = {...posts[postId], comments: sortedCommentsToPost};
 
   return post;
 }
@@ -34,7 +40,7 @@ const mapStateToProps = (state, ownProps) => ({
 	 * Pass `ownProps` as second argument to `mapStateToProps` to get
 	 * access to the props passed to the container component.
 	 */
-	post: getPostFromPath(state.allPosts, state.posts, ownProps.path),
+	post: getPostFromPath(state.allPosts, state.posts, state.comments, ownProps.path),
 	commentsToPost: state.comments
 });
 
