@@ -27,7 +27,7 @@ class CreatePostForm extends Component {
      * After the new post is submitted, get the state synchronized
      * with the server.
      */
-    this.props.getAllPosts();
+    // this.props.getAllPosts();
     // this.props.getAllComments();
   }
 

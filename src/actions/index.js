@@ -21,6 +21,8 @@ import {
 export const SET_CATEGORY = 'SET_CATEGORY';
 export const RECEIVE_ALL_POSTS = 'RECEIVE_ALL_POSTS';
 export const RECEIVE_ALL_COMMENTS = 'RECEIVE_ALL_COMMENTS';
+export const INSERT_POST = 'INSERT_POST';
+export const INSERT_COMMENT = 'INSERT_COMMENT';
 export const UPDATE_POST = 'UPDATE_POST';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE';
@@ -71,7 +73,13 @@ export function addPost(post) {
 		// Generate a UUID for this post.
 		const id = generateUUID();
 		const timestamp = Date.now();
-		return addToPosts({ ...post, id: id, timestamp: timestamp });
+		return addToPosts({ ...post, id: id, timestamp: timestamp })
+			.then(() => (
+				getSinglePost(id)
+					.then((data) => (
+						dispatch(insertPost(data))
+					))
+			));
 	};
 };
 
@@ -88,13 +96,13 @@ export function addComment(comment) {
 		const id = generateUUID();
 		const timestamp = Date.now();
 		const postId = comment.parentId;
-		return addToComments({ ...comment, id: id })
-		.then(() => (
-			getComments(postId)
-			.then((data) => (
-				dispatch(receiveAllComments(data, postId))
+		return addToComments({ ...comment, id: id, timestamp: timestamp })
+			.then(() => (
+				getSingleComment(id)
+					.then((data) => (
+						dispatch(insertComment(data))
+					))
 			))
-		));
 	};
 };
 
@@ -151,6 +159,35 @@ export function receiveAllComments(data, parentId) {
 		dataObj,
 		dataArray,
 		parentId
+	};
+};
+
+/*
+ * Pass a single post object to the store.
+ */
+export function insertPost(data) {
+	const postId = data.id;
+	const post = data;
+	return {
+		type: INSERT_POST,
+		postId,
+		post
+	};
+};
+
+/*
+ * Pass a single post object to the store.
+ */
+export function insertComment(data) {
+	console.log(data);
+	const parentId = data.parentId;
+	const commentId = data.id;
+	const comment = data;
+	return {
+		type: INSERT_COMMENT,
+		parentId,
+		commentId,
+		comment
 	};
 };
 

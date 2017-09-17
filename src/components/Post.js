@@ -4,9 +4,7 @@ import Modal from 'react-modal';
 import SelectCategory from './SelectCategory';
 import EditPostButtonLink from './EditPostButtonLink';
 import EditCommentForm from './EditCommentForm';
-// import InitializeCommentForm from './InitializeCommentForm';
 import CommentForm from './CommentForm';
-
 import { convertToReadableDate } from '../utils/convertDate';
 import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
@@ -21,25 +19,47 @@ class Post extends Component {
 	constructor() {
 		super();
 		this.state = {
-			showModal: false,
+			showAddCommentModal: false,
+			showEditCommentModal: false,
 			commentId: null
 		};
 
-		this.handleOpenModal = this.handleOpenModal.bind(this);
-		this.handleCloseModal = this.handleCloseModal.bind(this);
+		this.handleOpenAddCommentModal = this.handleOpenAddCommentModal.bind(this);
+		this.handleOpenEditCommentModal = this.handleOpenEditCommentModal.bind(this);
+		this.handleCloseAddCommentModal = this.handleCloseAddCommentModal.bind(this);
+		this.handleCloseEditCommentModal = this.handleCloseEditCommentModal.bind(this);
 	}
 
-	handleOpenModal = ({ commentId }) => {
+	handleOpenAddCommentModal = ({ commentId }) => {
 		this.setState(() => ({
-			showModal: true,
+			showAddCommentModal: true,
+			showEditCommentModal: false,
 			commentId
 		}));
 		console.log(this.state.commentId);
 	}
 
-	handleCloseModal = () => {
+	handleCloseAddCommentModal = () => {
 		this.setState(() => ({
-			showModal: false,
+			showAddCommentModal: false,
+			showEditCommentModal: false,
+			commentId: null
+		}));
+	}
+
+	handleOpenEditCommentModal = ({ commentId }) => {
+		this.setState(() => ({
+			showEditCommentModal: true,
+			showAddCommentModal: false,
+			commentId
+		}));
+		console.log(this.state.commentId);
+	}
+
+	handleCloseEditCommentModal = () => {
+		this.setState(() => ({
+			showEditCommentModal: false,
+			showAddCommentModal: false,
 			commentId: null
 		}));
 	}
@@ -73,8 +93,12 @@ class Post extends Component {
 
 	// }
 
+	addComment = (postId) => {
+		this.handleOpenAddCommentModal({ postId })
+	}
+
 	editThisComment = (commentId) => (
-		this.handleOpenModal({ commentId })
+		this.handleOpenEditCommentModal({ commentId })
 	);
 
 	deleteThisComment = (commentId) => {
@@ -98,7 +122,7 @@ class Post extends Component {
      * object and the related post id as arguments.
      */
     console.log(this.props);
-    const commentsToPost = this.props.commentsToPost
+    // const commentsToPost = this.props.commentsToPost
 
     // for (let i = 0; i < commentsToPost.length; i++) {
     // 	if (commentId === commentsToPost.id) {
@@ -213,6 +237,11 @@ class Post extends Component {
 			      value={postId}
     				onClick={() => this.downvote(postId)}
     			/>
+    			<AddTextIcon
+    				className='add-comment-button'
+	    			size={40}
+	    			onClick={() => this.addComment(postId)}
+	    		/>
     			<EditPostButtonLink
     				post={this.props.post}
 	      	/>
@@ -285,30 +314,50 @@ class Post extends Component {
 	      	</ul>
 	      </div>
 
-	      <div className='comment-form-container'>
+	      {
+	      	/*
+					 <div className='comment-form-container'>
 			    <h2>Add a comment</h2>
 			    <CommentForm
 			    	onSubmit={this.submitComment}
 			    />
 				</div>
+				*/ }
+
+
+	      <Modal
+	      	isOpen={this.state.showAddCommentModal}
+	      	contentLabel='Add Comment Modal'
+	      >
+	      	<button onClick={this.handleCloseAddCommentModal}>Close Add Comment Modal</button>
+					<div className='edit-comment-modal-container'>
+				    <CommentForm
+				    	onSubmit={this.submitComment}
+				    	addComment={this.props.addAComment}
+				    />
+					</div>
+	      </Modal>
+
 
 
 				<Modal
 					// className='modal'
-					isOpen={this.state.showModal}
+					isOpen={this.state.showEditCommentModal}
 					contentLabel='Edit Comment Modal'
 				>
 					{console.log(this.state.commentId)}
-					<button onClick={this.handleCloseModal}>Close Modal</button>
+					<button onClick={this.handleCloseEditCommentModal}>Close Edit Comment Modal</button>
 					<div className='edit-comment-modal-container'>
 				    <EditCommentForm
 				    	onSubmit={this.submitComment}
 				    	commentId={this.state.commentId}
 				    	editComment={this.props.editComment}
-				    	updateComment={this.props.updateComment}
+				    	// updateComment={this.props.updateComment}
 				    />
 					</div>
 				</Modal>
+
+
 			</div>
 		);
 	}

@@ -8,6 +8,8 @@ import {
 	SET_CATEGORY,
 	RECEIVE_ALL_POSTS,
 	RECEIVE_ALL_COMMENTS,
+	INSERT_POST,
+	INSERT_COMMENT,
 	UPDATE_POST,
 	UPDATE_COMMENT,
 	UPDATE_POST_SCORE,
@@ -86,6 +88,7 @@ function sortOrder(state = initialState.sortOrder, action) {
 
 // Post reducer. Pass it the posts object state slice.
 function post(state = initialState, action) {
+	const parentId = action.parentId;
 	const postId = action.postId;
 	const post = action.post;
 	switch (action.type) {
@@ -104,7 +107,7 @@ function post(state = initialState, action) {
 		 * object they refer to.
 		 */
 		case RECEIVE_ALL_COMMENTS:
-			const parentId = action.parentId;
+
 			const comments = action.dataArray;
 			return {
 				...state,
@@ -116,6 +119,23 @@ function post(state = initialState, action) {
 					]
 				}
 			};
+		case INSERT_POST:
+			return {
+				...state,
+				[postId]: post
+			}
+		case INSERT_COMMENT:
+			console.log(parentId)
+			return {
+				...state,
+				[parentId]: {
+					...state[parentId],
+					comments: [
+						...state[parentId].comments,
+						action.commentId
+					]
+				}
+			}
 		case UPDATE_POST:
 			return {
 				...state,
@@ -179,6 +199,12 @@ function comments(state = initialState.comments, action) {
 				...state,
 				...comments
 			};
+		case INSERT_COMMENT:
+			// console.log(parentId)
+			return {
+				...state,
+				[commentId]: action.comment
+			}
 		case UPDATE_COMMENT:
 			console.log(action);
 			return {
