@@ -7,7 +7,7 @@ import {
 	editSingleComment,
 	deleteSinglePost,
 	deleteSingleComment,
-	addComment
+	addCommentToServer
 } from '../actions';
 import Post from '../components/Post';
 
@@ -51,7 +51,7 @@ const mapDispatchToProps = {
 	editComment: editSingleComment,
 	deletePost: deleteSinglePost,
 	deleteComment: deleteSingleComment,
-	addAComment: addComment,
+	addAComment: addCommentToServer,
 };
 
 export const PostDetails = connect(

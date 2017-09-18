@@ -1,4 +1,5 @@
 import generateUUID from '../utils/generateID.js';
+
 import {
 	getCategories,
 	getPosts,
@@ -37,8 +38,6 @@ export const UPDATE_COMMENT_SCORE = 'UPDATE_COMMENT_SCORE';
  * Other constants.
  */
 
-// export const allCategories = ['react', 'redux', 'udacity'];
-
 export const sortingTypes = {
 	MOST_RECENT: 'MOST_RECENT',
 	LEAST_RECENT: 'LEAST_RECENT',
@@ -46,13 +45,49 @@ export const sortingTypes = {
 	LOWEST_POINTS: 'LOWEST_POINTS'
 };
 
+
 /*
  * Action creators.
  */
 
+/*
+ * Fetch all the posts from the server.
+ * Make use of the `getPosts` and `getComments` functions from
+ * the ReadableAPI.
+ */
+export function fetchAllPosts() {
+	return function(dispatch) {
+		// dispatch(getCategories())
+		// Get all the posts from the server.
+		return getCategories()
+			.then((data) => (
+				dispatch(retrieveCategories(data))
+			))
+			.then(() => (
+				getPosts()
+			))
+			// As data are returned, dispatch an action to dispose of them.
+			.then((data) => (
+				dispatch(receiveAllPosts(data))
+			))
+			// Take the allPosts array and return a new one based on its `post` ids items.
+			.then((data) => (
+				data.allPosts.map(postItem => (
+					// Get all the comments for the given `post` id from the server.
+					getComments(postItem)
+						// As comments objects are returned, dispatch an action to dispose of them.
+						.then((data) => (
+							// Pass the comments object and the post id to the function.
+							dispatch(receiveAllComments(data, postItem))
+						))
+					))
+				)
+			);
+	};
+};
 
 /*
- * Set the selected category.
+ * Retrieve the categories from the server.
  */
 export function retrieveCategories(data) {
 	const categories = data.categories.map((category) => (
@@ -64,60 +99,15 @@ export function retrieveCategories(data) {
 	};
 };
 
-
-
+/*
+ * Change the sorting order for the visible posts.
+ */
 export function changeSortingOrder(sortOrder) {
-	console.log('Change');
 	return {
 		type: CHANGE_SORTING_ORDER,
 		sortOrder
 	}
 }
-
-/*
- * Add a new post to the server, giving as its body the properties
- * returned from the spread operator plus the generated id.
- * Argument: post object returned by the form after a user has
- * submitted a new one.
- * Make use of the `getPosts` function from the ReadableAPI.
- */
-export function addPost(post) {
-	return function(dispatch) {
-		// Generate a UUID for this post.
-		const id = generateUUID();
-		const timestamp = Date.now();
-		return addToPosts({ ...post, id: id, timestamp: timestamp })
-			.then(() => (
-				getSinglePost(id)
-					.then((data) => (
-						dispatch(insertPost(data))
-					))
-			));
-	};
-};
-
-/*
- * Add a new comment to the server, giving as its body the properties
- * returned from the spread operator plus the generated id.
- * Argument: comment object returned by the form after a user has
- * submitted a new one.
- * Make use of the `getComments` function from the ReadableAPI.
- */
-export function addComment(comment) {
-	return function(dispatch) {
-		// Generate a UUID for this comment.
-		const id = generateUUID();
-		const timestamp = Date.now();
-		const postId = comment.parentId;
-		return addToComments({ ...comment, id: id, timestamp: timestamp })
-			.then(() => (
-				getSingleComment(id)
-					.then((data) => (
-						dispatch(insertComment(data))
-					))
-			))
-	};
-};
 
 /*
  * Get a data array of posts and return an object with a payload of all
@@ -172,6 +162,51 @@ export function receiveAllComments(data, parentId) {
 		dataObj,
 		dataArray,
 		parentId
+	};
+};
+
+/*
+ * Add a new post to the server, giving as its body the properties
+ * returned from the spread operator plus the generated id.
+ * Argument: post object returned by the form after a user has
+ * submitted a new one.
+ * Make use of the `getPosts` function from the ReadableAPI.
+ */
+export function addPostToServer(post) {
+	return function(dispatch) {
+		// Generate a UUID for this post.
+		const id = generateUUID();
+		const timestamp = Date.now();
+		return addToPosts({ ...post, id: id, timestamp: timestamp })
+			.then(() => (
+				getSinglePost(id)
+					.then((data) => (
+						dispatch(insertPost(data))
+					))
+			));
+	};
+};
+
+/*
+ * Add a new comment to the server, giving as its body the properties
+ * returned from the spread operator plus the generated id.
+ * Argument: comment object returned by the form after a user has
+ * submitted a new one.
+ * Make use of the `getComments` function from the ReadableAPI.
+ */
+export function addCommentToServer(comment) {
+	return function(dispatch) {
+		// Generate a UUID for this comment.
+		const id = generateUUID();
+		const timestamp = Date.now();
+		const postId = comment.parentId;
+		return addToComments({ ...comment, id: id, timestamp: timestamp })
+			.then(() => (
+				getSingleComment(id)
+					.then((data) => (
+						dispatch(insertComment(data))
+					))
+			))
 	};
 };
 
@@ -297,42 +332,6 @@ export function updateCommentsVisibility(data, parentId) {
 };
 
 /*
- * Fetch all the posts from the server.
- * Make use of the `getPosts` and `getComments` functions from
- * the ReadableAPI.
- */
-export function fetchAllPosts() {
-	return function(dispatch) {
-		// dispatch(getCategories())
-		// Get all the posts from the server.
-		return getCategories()
-			.then((data) => (
-				dispatch(retrieveCategories(data))
-			))
-			.then(() => (
-				getPosts()
-			))
-			// As data are returned, dispatch an action to dispose of them.
-			.then((data) => (
-				dispatch(receiveAllPosts(data))
-			))
-			// Take the allPosts array and return a new one based on its `post` ids items.
-			.then((data) => (
-				data.allPosts.map(postItem => (
-					// Get all the comments for the given `post` id from the server.
-					getComments(postItem)
-						// As comments objects are returned, dispatch an action to dispose of them.
-						.then((data) => (
-							// Pass the comments object and the post id to the function.
-							dispatch(receiveAllComments(data, postItem))
-						))
-					))
-				)
-			);
-	};
-};
-
-/*
  * Pass vote to the post with given postId. Vote can be either
  * positive or negative.
  */
@@ -382,9 +381,6 @@ export function editSinglePost(postId, newPost) {
 						dispatch(updatePost(data))
 					))
 			))
-			// .then((data) => (
-			// 	console.log(data)
-			// ))
 	};
 };
 
@@ -401,14 +397,8 @@ export function editSingleComment(commentId, newComment) {
 						dispatch(updateComment(data))
 					))
 			))
-			// .then((data) => (
-			// 	console.log(data)
-			// ))
 	};
 };
-
-// editPost = (postId, newPost)
-
 
 /*
  * Change the `deleted` flag to true of the post referenced by `postId`.

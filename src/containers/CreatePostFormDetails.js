@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addPost, addComment, fetchAllPosts } from '../actions';
+import { addPostToServer, addCommentToServer, fetchAllPosts } from '../actions';
 import CreatePostForm from '../components/CreatePostForm';
 
 const mapStateToProps = (state) => ({
@@ -9,8 +9,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-	setPostValues: addPost,
-  setCommentValues: addComment,
+	setPostValues: addPostToServer,
+  setCommentValues: addCommentToServer,
   getAllPosts: fetchAllPosts
 };
 

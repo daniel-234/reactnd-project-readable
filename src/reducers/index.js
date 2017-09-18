@@ -37,23 +37,12 @@ import {
  */
 
 const initialState = {
-	// selectedCategory: allCategories.REACT,
 	categories: [],
 	sortOrder: sortingTypes.MOST_RECENT,
 	posts: {},
 	comments: {},
 	allPosts: [],
-	postsByCategory: {
-		// react: {
-		// 	items: []
-		// },
-		// redux: {
-		// 	items: []
-		// },
-		// udacity: {
-		// 	items: []
-		// }
-	},
+	postsByCategory: {},
 };
 
 /*
@@ -249,6 +238,7 @@ function allPosts(state = [], action) {
 		// 		...state,
 		// 		postId
 		// 	];
+
 		/*
 		 * When the following action gets triggered by a user who deleted
 		 * a post, we just update the `allPosts` array to filter out the
@@ -277,96 +267,31 @@ function postsByCategory(state = initialState, action) {
 				}
 			})
 			return categoriesState;
+
 		case RECEIVE_ALL_POSTS:
 			const posts = action.dataObj;
 			const postsIds = action.allPosts;
 
-			// for (let i = 0; i < postsIds.length; i++) {
-
-			// 	console.log(posts[postsIds[i]]);
-			// 	// categoriesState[posts[postsIds[i]]].category.item.push(postsIds[i])
-			// }
-
-			// console.log(categoriesState);
-
-			// categories.map(category => console.log(category))
-
-			// postsIds.map((id) => {
-			// 	posts[id].category: {
-			// 		items.push(id)
-			// 	}
-			// })
 			let categoriesArray = [];
-
 			for (const category in state) {
 				categoriesArray.push(category);
 			}
 
-			console.log(categoriesArray);
-
-			let newCategory;
-			for (let category in state) {
-				state[category] = {
+			categoriesArray.map((category) => {
+				categoriesState[category] = {
 					items:
 						postsIds.filter((postId) => (
 							posts[postId].category === category
 						))
-
-					// postsIds.filter((postId) => (
-					// 	posts[postId].category === 'react'
-					// ))
 				}
+			})
 
-				categoriesArray.map((category) => {
-					categoriesState[category] = {
-						items:
-							postsIds.filter((postId) => (
-								posts[postId].category === category
-							))
-					}
-				})
-
-				// console.log(categoriesArray);
-
-
-				// console.log(category)
-				// categoriesState[newCategory] = newCategory;
-				console.log(categoriesState)
-			}
-
-			console.log(state)
-
-			// Return a new `postsByCategory` object.
-			// return state.map(category => {
-			// 	console.log(category)
-			// })
-				// 	category
-				// ))
-
-
-
-
-				// react: {
-				// 	items: postsIds.filter((postId) => (
-				// 		posts[postId].category === 'react'
-				// 	))
-				// },
-				// redux: {
-				// 	items: postsIds.filter((postId) => (
-				// 		posts[postId].category === 'redux'
-				// 	))
-				// },
-				// udacity: {
-				// 	items: postsIds.filter((postId) => (
-				// 		posts[postId].category === 'udacity'
-				// 	))
-				// }
-			// };
+			return categoriesState;
 
 		// case INSERT_POST:
 		// 	console.log(state)
 
-			return {...categoriesState};
+
 		default:
 			return state;
 	}
