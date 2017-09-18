@@ -55,7 +55,8 @@ const getVisiblePosts = (postIds, posts, sortOrder) => {
 // Define props to pass to the presentational component.
 const mapStateToProps = (state) => ({
 	sortedIds: getVisiblePosts(state.allPosts, state.posts, state.sortOrder),
-	posts: state.posts
+	posts: state.posts,
+	sortOrder: state.sortOrder
 });
 
 /*

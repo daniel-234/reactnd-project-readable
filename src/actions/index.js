@@ -18,7 +18,7 @@ import {
  * Action types.
  */
 
-export const SET_CATEGORY = 'SET_CATEGORY';
+export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const RECEIVE_ALL_POSTS = 'RECEIVE_ALL_POSTS';
 export const RECEIVE_ALL_COMMENTS = 'RECEIVE_ALL_COMMENTS';
 export const INSERT_POST = 'INSERT_POST';
@@ -36,11 +36,7 @@ export const UPDATE_COMMENT_SCORE = 'UPDATE_COMMENT_SCORE';
  * Other constants.
  */
 
-export const allCategories = {
-	REACT: 'REACT',
-	REDUX: 'REDUX',
-	UDACITY: 'UDACITY'
-};
+export const allCategories = ['react', 'redux', 'udacity'];
 
 export const sortingTypes = {
 	MOST_RECENT: 'MOST_RECENT',
@@ -52,6 +48,20 @@ export const sortingTypes = {
 /*
  * Action creators.
  */
+
+
+/*
+ * Set the selected category.
+ */
+export function getCategories() {
+	const categories = ['react', 'redux', 'udacity'];
+	return {
+		type: GET_CATEGORIES,
+		categories
+	};
+};
+
+
 
 export function changeSortingOrder(sortOrder) {
 	console.log('Change');
@@ -290,6 +300,7 @@ export function updateCommentsVisibility(data, parentId) {
  */
 export function fetchAllPosts() {
 	return function(dispatch) {
+		dispatch(getCategories())
 		// Get all the posts from the server.
 		return getPosts()
 			// As data are returned, dispatch an action to dispose of them.
@@ -419,32 +430,5 @@ export function deleteSingleComment(commentId, postId) {
 						dispatch(updateCommentsVisibility(data, postId))
 					))
 			));
-	};
-};
-
-
-
-
-// TODO check
-
-// See if it is useful
-// export function getPostDetails(postId) {
-// 	return function(dispatch) {
-// 		return getSinglePost(postId)
-// 			.then((data) => (
-// 				// console.log(data)
-// 				dispatch(receivePostDetails(data))
-// 			))
-// 	};
-// };
-
-
-/*
- * Set the selected category.
- */
-export function setCategory(category) {
-	return {
-		type: SET_CATEGORY,
-		category
 	};
 };

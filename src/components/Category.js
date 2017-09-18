@@ -8,6 +8,13 @@ import HomeButton from 'react-icons/lib/fa/home';
 import { convertToReadableDate } from '../utils/convertDate';
 
 class Category extends Component {
+	/*
+   * As the component mounts, populate the posts state.
+   */
+  componentDidMount() {
+    this.props.getAllPosts();
+  }
+
 	// Upvote a post.
 	upvote = (postId) => {
 		this.props.votePosts(postId, 'upVote');
@@ -66,7 +73,7 @@ class Category extends Component {
 	      		<label>
 	      			Sort posts by: {' '}
 	      		</label>
-	      		<select onChange={this.handleChange}>
+	      		<select value={this.props.sortOrder} onChange={this.handleChange}>
 		      		<option value='MOST_RECENT'>most recent</option>
 		      		<option value='LEAST_RECENT'>least recent</option>
 	      			<option value='HIGHEST_POINTS'>highest points</option>

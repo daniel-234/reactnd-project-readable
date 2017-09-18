@@ -37,9 +37,13 @@ class AllPosts extends Component {
 
 	render() {
     // Extract posts passed via props from the container component.
-    console.log(this.props.posts);
+    console.log(this.props);
     const posts = this.props.posts;
     const sortedIds = this.props.sortedIds;
+
+    // console.log(posts)
+    // console.log(sortedIds)
+
 
 		return (
 			<div className='container'>
@@ -65,7 +69,7 @@ class AllPosts extends Component {
 	      		<label>
 	      			Sort posts by: {' '}
 	      		</label>
-	      		<select onChange={this.handleChange}>
+	      		<select value= {this.props.sortOrder} onChange={this.handleChange}>
 		      		<option value='MOST_RECENT'>most recent</option>
 		      		<option value='LEAST_RECENT'>least recent</option>
 	      			<option value='HIGHEST_POINTS'>highest points</option>
@@ -95,6 +99,7 @@ class AllPosts extends Component {
 		      	}
 		        {sortedIds.map((postId) => (
 		          <li key={postId} className='single-post'>
+		          	{ /*console.log(posts[postId].comments) */}
 		          	<div className='single-post-wrapper'>
 		            	{
 		            		/*

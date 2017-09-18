@@ -5,7 +5,7 @@ import { reducer as formReducer } from 'redux-form';
 import {
 	allCategories,
 	sortingTypes,
-	SET_CATEGORY,
+	GET_CATEGORIES,
 	RECEIVE_ALL_POSTS,
 	RECEIVE_ALL_COMMENTS,
 	INSERT_POST,
@@ -35,22 +35,24 @@ import {
  * it was followed the pattern of putting the relational 'tables' under
  * a common parent key, named 'entities'.
  */
+
 const initialState = {
-	selectedCategory: allCategories.REACT,
+	// selectedCategory: allCategories.REACT,
+	categories: [],
 	sortOrder: sortingTypes.MOST_RECENT,
 	posts: {},
 	comments: {},
 	allPosts: [],
 	postsByCategory: {
-		react: {
-			items: []
-		},
-		redux: {
-			items: []
-		},
-		udacity: {
-			items: []
-		}
+		// react: {
+		// 	items: []
+		// },
+		// redux: {
+		// 	items: []
+		// },
+		// udacity: {
+		// 	items: []
+		// }
 	},
 };
 
@@ -60,16 +62,13 @@ const initialState = {
  * action and returns the next state.
  */
 
-// Extract the React category.
-const { REACT } = allCategories;
-
-const { HIGHEST_POINTS } = sortingTypes;
 
 // Set the selected category.
-function category(state = 'react', action) {
+function categories(state = [], action) {
 	switch (action.type) {
-		case SET_CATEGORY:
-			return action.category;
+		case GET_CATEGORIES:
+			console.log(action);
+			return action.categories;
 		default:
 			return state;
 	}
@@ -87,7 +86,7 @@ function sortOrder(state = initialState.sortOrder, action) {
 }
 
 // Post reducer. Pass it the posts object state slice.
-function post(state = initialState, action) {
+function post(state = initialState.posts, action) {
 	const parentId = action.parentId;
 	const postId = action.postId;
 	const post = action.post;
@@ -119,11 +118,12 @@ function post(state = initialState, action) {
 					]
 				}
 			};
-		case INSERT_POST:
-			return {
-				...state,
-				[postId]: post
-			}
+		// case INSERT_POST:
+		// 	console.log(state)
+		// 	return {
+		// 		...state,
+		// 		[postId]: post
+		// 	}
 		case INSERT_COMMENT:
 			console.log(parentId)
 			return {
@@ -236,11 +236,19 @@ function comments(state = initialState.comments, action) {
 
 // Populate the `allPosts` array.
 function allPosts(state = [], action) {
+	const postId = action.postId;
 	switch(action.type) {
 		case RECEIVE_ALL_POSTS:
 			return [
 				...action.allPosts
 			];
+		// case INSERT_POST:
+		// 	console.log(state);
+		// 	console.log(action);
+		// 	return [
+		// 		...state,
+		// 		postId
+		// 	];
 		/*
 		 * When the following action gets triggered by a user who deleted
 		 * a post, we just update the `allPosts` array to filter out the
@@ -249,7 +257,7 @@ function allPosts(state = [], action) {
 		case UPDATE_POSTS_VISIBILITY:
 			return [
 				...action.allPosts
-			]
+			];
 		default:
 			return state;
 	}
@@ -257,31 +265,108 @@ function allPosts(state = [], action) {
 
 // TODO refector it.
 // Assign the given post id to its category.
-function postsByCategory(state = initialState.postsByCategory, action) {
+function postsByCategory(state = initialState, action) {
+	const categories = action.categories;
+	let categoriesState = {};
 	switch (action.type) {
+		case GET_CATEGORIES:
+			// const categoriesState = {};
+			categories.map((category) => {
+				categoriesState[category] = {
+					items: []
+				}
+			})
+			return categoriesState;
 		case RECEIVE_ALL_POSTS:
 			const posts = action.dataObj;
 			const postsIds = action.allPosts;
 
-			// Return a new `postsByCategory` object.
-			return {
-				// Pass the previous state.
-				react: {
-					items: postsIds.filter((postId) => (
-						posts[postId].category === 'react'
-					))
-				},
-				redux: {
-					items: postsIds.filter((postId) => (
-						posts[postId].category === 'redux'
-					))
-				},
-				udacity: {
-					items: postsIds.filter((postId) => (
-						posts[postId].category === 'udacity'
-					))
+			// for (let i = 0; i < postsIds.length; i++) {
+
+			// 	console.log(posts[postsIds[i]]);
+			// 	// categoriesState[posts[postsIds[i]]].category.item.push(postsIds[i])
+			// }
+
+			// console.log(categoriesState);
+
+			// categories.map(category => console.log(category))
+
+			// postsIds.map((id) => {
+			// 	posts[id].category: {
+			// 		items.push(id)
+			// 	}
+			// })
+			let categoriesArray = [];
+
+			for (const category in state) {
+				categoriesArray.push(category);
+			}
+
+			console.log(categoriesArray);
+
+			let newCategory;
+			for (let category in state) {
+				state[category] = {
+					items:
+						postsIds.filter((postId) => (
+							posts[postId].category === category
+						))
+
+					// postsIds.filter((postId) => (
+					// 	posts[postId].category === 'react'
+					// ))
 				}
-			};
+
+				categoriesArray.map((category) => {
+					categoriesState[category] = {
+						items:
+							postsIds.filter((postId) => (
+								posts[postId].category === category
+							))
+					}
+				})
+
+				// console.log(categoriesArray);
+
+
+				// console.log(category)
+				// categoriesState[newCategory] = newCategory;
+				console.log(categoriesState)
+			}
+
+			console.log(state)
+
+			// Return a new `postsByCategory` object.
+			// return state.map(category => {
+			// 	console.log(category)
+			// })
+				// 	category
+				// ))
+
+
+
+
+				// react: {
+				// 	items: postsIds.filter((postId) => (
+				// 		posts[postId].category === 'react'
+				// 	))
+				// },
+				// redux: {
+				// 	items: postsIds.filter((postId) => (
+				// 		posts[postId].category === 'redux'
+				// 	))
+				// },
+				// udacity: {
+				// 	items: postsIds.filter((postId) => (
+				// 		posts[postId].category === 'udacity'
+				// 	))
+				// }
+			// };
+
+		// case INSERT_POST:
+		// 	console.log(state)
+
+			return {...categoriesState};
 		default:
 			return state;
 	}
@@ -289,7 +374,7 @@ function postsByCategory(state = initialState.postsByCategory, action) {
 
 // Combine all the reducers responsible for separate portions of the state.
 export default combineReducers({
-	selectedCategory: category,
+	categories,
 	sortOrder,
 	posts: post,
 	comments: comments,
