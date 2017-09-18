@@ -9,13 +9,6 @@ import HomeButton from 'react-icons/lib/fa/home';
 import { convertToReadableDate } from '../utils/convertDate';
 
 class AllPosts extends Component {
-	/*
-   * As the component mounts, populate the posts state.
-   */
-  componentDidMount() {
-    this.props.getAllPosts();
-  }
-
 	// Upvote a post.
 	upvote = (postId) => {
 		this.props.votePosts(postId, 'upVote');
@@ -109,7 +102,7 @@ class AllPosts extends Component {
 		            	}
 		            	<div className='post-voting-icons'>
 		          			<ArrowUp
-		          				className='up=arrow'
+		          				className='up-arrow'
 		          				size={20}
 		          				value={postId}
 		          				onClick={() => this.upvote(postId)}

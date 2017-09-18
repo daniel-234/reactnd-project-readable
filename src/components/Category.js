@@ -8,12 +8,12 @@ import HomeButton from 'react-icons/lib/fa/home';
 import { convertToReadableDate } from '../utils/convertDate';
 
 class Category extends Component {
-	/*
-   * As the component mounts, populate the posts state.
-   */
-  componentDidMount() {
-    this.props.getAllPosts();
-  }
+
+  //  * As the component mounts, populate the posts state.
+
+  // componentDidMount() {
+  //   this.props.getAllPosts();
+  // }
 
 	// Upvote a post.
 	upvote = (postId) => {

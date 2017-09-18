@@ -21,7 +21,6 @@ class Post extends Component {
 		this.state = {
 			showAddCommentModal: false,
 			showEditCommentModal: false,
-			commentId: null
 		};
 
 		this.handleOpenAddCommentModal = this.handleOpenAddCommentModal.bind(this);
@@ -34,16 +33,13 @@ class Post extends Component {
 		this.setState(() => ({
 			showAddCommentModal: true,
 			showEditCommentModal: false,
-			commentId
 		}));
-		console.log(this.state.commentId);
 	}
 
 	handleCloseAddCommentModal = () => {
 		this.setState(() => ({
 			showAddCommentModal: false,
 			showEditCommentModal: false,
-			commentId: null
 		}));
 	}
 
@@ -51,16 +47,13 @@ class Post extends Component {
 		this.setState(() => ({
 			showEditCommentModal: true,
 			showAddCommentModal: false,
-			commentId
 		}));
-		console.log(this.state.commentId);
 	}
 
 	handleCloseEditCommentModal = () => {
 		this.setState(() => ({
 			showEditCommentModal: false,
 			showAddCommentModal: false,
-			commentId: null
 		}));
 	}
 
@@ -85,13 +78,6 @@ class Post extends Component {
 	deleteThisPost = (postId) => {
 		this.props.deletePost(postId);
 	}
-
-	// editThisComment = (commentId) => (
-	// 	<InitializeCommentForm />
-	// 	)
-	// // 	console.log(commentId);
-
-	// }
 
 	addComment = (postId) => {
 		this.handleOpenAddCommentModal({ postId })
@@ -121,20 +107,6 @@ class Post extends Component {
      * action `addComment` from the reducer passing the comment
      * object and the related post id as arguments.
      */
-    console.log(this.props);
-    // const commentsToPost = this.props.commentsToPost
-
-    // for (let i = 0; i < commentsToPost.length; i++) {
-    // 	if (commentId === commentsToPost.id) {
-    // 		this.props.editComment(
-		  //     commentId,
-		  //   {
-	   //      author: values.author,
-	   //      body: values.body,
-	   //      parentId: postId
-		  //   });
-    // 	}
-    // }
     const postId = this.props.post.id;
     this.props.addAComment({
     	author: values.author,
@@ -144,9 +116,6 @@ class Post extends Component {
   }
 
 	render() {
-		console.log(this.props);
-
-
 		// Get the current post.
 		const post = this.props.post;
 		// Check if the post has been deleted
@@ -170,7 +139,6 @@ class Post extends Component {
 
 		// Get the post id.
 		const postId = post.id;
-
 		// Get the comments ids related to this post.
 		const idsOfCommentsToPost = post.comments;
 		/*
@@ -178,10 +146,8 @@ class Post extends Component {
 		 * from comments related to this post.
 		 */
 		const comments = this.props.commentsToPost;
-
 		// Get the number of comments to the post.
 		const commentsLength = post.comments ? post.comments.length : 0;
-		console.log(commentsLength);
 
 		return (
 			<div className='container'>
@@ -258,14 +224,6 @@ class Post extends Component {
 	      		{idsOfCommentsToPost.map((commentId) => (
 	      			<li key={commentId} className='single-comment'>
 		      			<div className='comment-details'>
-					      	{
-					        	/*
-					        	 * Provides navigation to this Post View (referenced by postId in
-					        	 * the URL).
-					        	 *
-					        	 * Wraps the post title as an anchor tag.
-					        	 */
-					        }
 					        <p className='comment-body'>
 					        	{ comments[commentId].body }
 					        </p>
@@ -316,20 +274,16 @@ class Post extends Component {
 
 	      {
 	      	/*
-					 <div className='comment-form-container'>
-			    <h2>Add a comment</h2>
-			    <CommentForm
-			    	onSubmit={this.submitComment}
-			    />
-				</div>
-				*/ }
-
-
+		       * Add Comment Modal.
+		       */
+	      }
 	      <Modal
 	      	isOpen={this.state.showAddCommentModal}
 	      	contentLabel='Add Comment Modal'
 	      >
-	      	<button onClick={this.handleCloseAddCommentModal}>Close Add Comment Modal</button>
+	      	<button
+	      		className='modal-button'
+	      		onClick={this.handleCloseAddCommentModal}>Close Add Comment Modal</button>
 					<div className='edit-comment-modal-container'>
 				    <CommentForm
 				    	onSubmit={this.submitComment}
@@ -338,26 +292,27 @@ class Post extends Component {
 					</div>
 	      </Modal>
 
-
-
+	      {
+	      	/*
+	      	 * Edit Comment Modal.
+	      	 */
+	      }
 				<Modal
-					// className='modal'
 					isOpen={this.state.showEditCommentModal}
 					contentLabel='Edit Comment Modal'
 				>
 					{console.log(this.state.commentId)}
-					<button onClick={this.handleCloseEditCommentModal}>Close Edit Comment Modal</button>
+					<button
+						className='modal-button'
+						onClick={this.handleCloseEditCommentModal}>Close Edit Comment Modal</button>
 					<div className='edit-comment-modal-container'>
 				    <EditCommentForm
 				    	onSubmit={this.submitComment}
 				    	commentId={this.state.commentId}
 				    	editComment={this.props.editComment}
-				    	// updateComment={this.props.updateComment}
 				    />
 					</div>
 				</Modal>
-
-
 			</div>
 		);
 	}

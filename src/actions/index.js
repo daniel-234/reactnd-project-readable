@@ -56,6 +56,7 @@ export const sortingTypes = {
  * the ReadableAPI.
  */
 export function fetchAllPosts() {
+	console.log('fetching');
 	return function(dispatch) {
 		// dispatch(getCategories())
 		// Get all the posts from the server.

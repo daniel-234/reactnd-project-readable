@@ -8,7 +8,6 @@ import HomeButton from 'react-icons/lib/fa/home';
 class CreatePostForm extends Component {
 	// Triggered by onSubmit in the post form.
   submitPost = (values) => {
-    console.log(values);
     /*
      * Call the `displayPost` property function passed
      * to props by `mapDispatchToProps`.
@@ -22,13 +21,6 @@ class CreatePostForm extends Component {
         category: values.category,
         body: values.body,
     });
-
-    /*
-     * After the new post is submitted, get the state synchronized
-     * with the server.
-     */
-    // this.props.getAllPosts();
-    // this.props.getAllComments();
   }
 
   render() {
