@@ -7,9 +7,6 @@ import HomeButton from 'react-icons/lib/fa/home';
 class EditPostForm extends Component {
 	// Triggered by onSubmit in the post form.
   submitPost = (values) => {
-    console.log(values);
-    console.log(this.props);
-
     const postId = values.id;
     /*
      * Call the `displayPost` property function passed
@@ -18,9 +15,6 @@ class EditPostForm extends Component {
      * action `addPost` from the reducer passing the post
      * object as argument.
      */
-
-    //  editSinglePost(postId, newPost)
-
     this.props.editPost(
       postId,
       {
@@ -29,27 +23,16 @@ class EditPostForm extends Component {
         body: values.body,
       }
     );
-
-    /*
-     * After the new post is submitted, get the store state synchronized
-     * with the server.
-     */
-    // this.props.getAllPosts();
-    // this.props.getAllComments();
   }
 
   // Get all the submitted posts from any category.
   getThePosts = () => {
-    // const allPosts = this.props.posts.allPosts;
     const allPosts = this.props.allPosts;
-    console.log(this.props.allPostsIds);
-    console.log(allPosts);
     return allPosts;
   }
 
   render() {
     const post = this.props.post;
-  	console.log(this.props);
   	return (
   		<div className='container'>
   			<Link

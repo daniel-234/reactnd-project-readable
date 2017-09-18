@@ -20,7 +20,6 @@ const getPostFromPath = (ids, posts, comments, path) => {
 	const postId = path.slice(path.lastIndexOf('/') + 1);
 
 	if (ids.indexOf(postId) === -1) {
-		// console.log('NO');
 		return {};
 	}
 

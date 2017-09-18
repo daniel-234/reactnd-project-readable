@@ -3,8 +3,7 @@ import { Field, reduxForm, reset } from 'redux-form';
 
 let CommentForm = props => {
 	const { handleSubmit, getPosts } = props;
-  // console.log(handleSubmit);
-  // console.log(getPosts());
+
 	return (
     /*
      * "Redux form provides a special `handleSubmit` function that we

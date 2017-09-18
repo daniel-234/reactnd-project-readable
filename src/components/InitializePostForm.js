@@ -81,10 +81,7 @@ const textAreaField = ({
 )
 
 let InitializePostForm = ((props) => {
-  console.log(props.initialValues);
-  console.log(props);
-  postId = props.post.id
-  console.log(postId)
+  postId = props.post.id;
 	const { handleSubmit, load, submitting } = props;
 	return (
     /*

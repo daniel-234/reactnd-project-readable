@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { editSinglePost, fetchAllPosts } from '../actions';
 import EditPostForm from '../components/EditPostForm';
 
-
 const getPostFromPath = (ids, posts, path) => {
 	/*
 	 * As the current path for a Post View is made up of the category

@@ -22,8 +22,7 @@ To install this application, instead, you can (fork and) download it and then ru
 
 ## Notes
 
-Note that at this stage the app is not complete. A very small part of the actions and reducers have been developed, as well as just some basic React code. The API file is largely incomplete at this stage, too. Just the main connections have been implemented, to make things work. Improvements will come soon.
-The work in progress is made under the development branch, but merges are made regularly. After the course lessons I switched to the official documentation to expand my knowledge on the subject and decided to keep a development branch to work on changes without experimenting too much on the master branch.
+This app has been created as a project for the React Nanodegree at Udacity. It reproduces a content and comment web application, making use of React and redux, with minimal CSS.
 
 ## License
 

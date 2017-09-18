@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SelectCategory from './SelectCategory';
 import PostFormLink from './PostFormLink';
-// import AddTextIcon from 'react-icons/lib/fa/quote-right';
 import ArrowUp from 'react-icons/lib/fa/sort-asc';
 import ArrowDown from 'react-icons/lib/fa/sort-desc';
 import HomeButton from 'react-icons/lib/fa/home';
@@ -30,13 +29,8 @@ class AllPosts extends Component {
 
 	render() {
     // Extract posts passed via props from the container component.
-    console.log(this.props);
     const posts = this.props.posts;
     const sortedIds = this.props.sortedIds;
-
-    // console.log(posts)
-    // console.log(sortedIds)
-
 
 		return (
 			<div className='container'>
@@ -96,7 +90,6 @@ class AllPosts extends Component {
 		      	}
 		        {sortedIds.map((postId) => (
 		          <li key={postId} className='single-post'>
-		          	{ /*console.log(posts[postId].comments) */}
 		          	<div className='single-post-wrapper'>
 		            	{
 		            		/*
@@ -110,14 +103,12 @@ class AllPosts extends Component {
 		          				size={20}
 		          				value={postId}
 		          				onClick={() => this.upvote(postId)}
-		          				// postId={postId}
 		          			/>
 		          			<ArrowDown
 		          				className='down-arrow'
 		          				size={20}
 		          				value={postId}
 		          				onClick={() => this.downvote(postId)}
-		          				// postId={postId}
 		          			/>
 		            	</div>
 		            	{

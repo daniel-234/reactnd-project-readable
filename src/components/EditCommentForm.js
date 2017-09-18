@@ -15,27 +15,16 @@ class EditCommentForm extends Component {
      * action `addPost` from the reducer passing the post
      * object as argument.
      */
-
-    //  editSinglePost(postId, newPost)
-
     this.props.editComment(
       commentId,
       {
         body: values.body
       }
     );
-
-    /*
-     * After the new post is submitted, get the state synchronized
-     * with the server.
-     */
-    // this.props.getAllPosts();
-    // // this.props.getAllComments();
   }
 
   render() {
     const commentId = this.props.commentId;
-  	console.log(this.props);
   	return (
   		<div className='container'>
 	  		<div className='edit-comment-form'>

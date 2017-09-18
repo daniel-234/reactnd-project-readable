@@ -57,7 +57,6 @@ const initialState = {
 function categories(state = [], action) {
 	switch (action.type) {
 		case GET_CATEGORIES:
-			console.log(action);
 			return action.categories;
 		default:
 			return state;
@@ -68,7 +67,6 @@ function categories(state = [], action) {
 function sortOrder(state = initialState.sortOrder, action) {
 	switch (action.type) {
 		case CHANGE_SORTING_ORDER:
-			console.log(action.sortOrder);
 			return action.sortOrder;
 		default:
 			return state;
@@ -108,7 +106,6 @@ function post(state = initialState.posts, action) {
 				}
 			};
 		case INSERT_POST:
-			// console.log(state)
 			return {
 				...state,
 				[postId]: {
@@ -119,9 +116,8 @@ function post(state = initialState.posts, action) {
 					 */
 					comments: []
 				}
-			}
+			};
 		case INSERT_COMMENT:
-			console.log(parentId)
 			return {
 				...state,
 				[parentId]: {
@@ -131,7 +127,7 @@ function post(state = initialState.posts, action) {
 						action.commentId
 					]
 				}
-			}
+			};
 		case UPDATE_POST:
 			return {
 				...state,
@@ -160,13 +156,10 @@ function post(state = initialState.posts, action) {
 					...state[postId],
 					deleted: true
 				}
-			}
-
+			};
 		case UPDATE_COMMENTS_VISIBILITY:
 			const commentsIds = action.commentsIds;
 			const parentPostId = action.parentPostId;
-			console.log(parentPostId);
-			console.log(commentsIds);
 			return {
 				...state,
 				[parentPostId]: {
@@ -175,7 +168,7 @@ function post(state = initialState.posts, action) {
 						...commentsIds
 					]
 				}
-			}
+			};
 		default:
 			return state;
 	}
@@ -184,7 +177,6 @@ function post(state = initialState.posts, action) {
 // Comments reducer.
 function comments(state = initialState.comments, action) {
 	const commentId = action.commentId;
-	// const comment = action.comment;
 	switch (action.type) {
 		/*
 		 * When all the comments from the server are received, return the
@@ -198,13 +190,11 @@ function comments(state = initialState.comments, action) {
 				...comments
 			};
 		case INSERT_COMMENT:
-			// console.log(parentId)
 			return {
 				...state,
 				[commentId]: action.comment
-			}
+			};
 		case UPDATE_COMMENT:
-			console.log(action);
 			return {
 				...state,
 				[commentId]: {
@@ -213,7 +203,6 @@ function comments(state = initialState.comments, action) {
 					body: action.body
 				}
 			};
-
 		// Update the `voteScore` for a single comment.
 		case UPDATE_COMMENT_SCORE:
 			const commentScore = action.commentScore;
@@ -241,13 +230,10 @@ function allPosts(state = initialState.allPosts, action) {
 				...action.allPosts
 			];
 		case INSERT_POST:
-			// console.log(state);
-			// console.log(action);
 			return [
 				...state,
 				postId
 			];
-
 		/*
 		 * When the following action gets triggered by a user who deleted
 		 * a post, we just update the `allPosts` array to filter out the
@@ -262,14 +248,12 @@ function allPosts(state = initialState.allPosts, action) {
 	}
 }
 
-// TODO refector it.
-// Assign the given post id to its category.
+// Divide posts by categories.
 function postsByCategory(state = initialState.postsByCategory, action) {
 	const categories = action.categories;
 	let categoriesState = {};
 	switch (action.type) {
 		case GET_CATEGORIES:
-			// const categoriesState = {};
 			categories.map((category) => {
 				categoriesState[category] = {
 					items: []
@@ -303,8 +287,7 @@ function postsByCategory(state = initialState.postsByCategory, action) {
 						...state, postId
 					]
 				}
-			}
-
+			};
 		default:
 			return state;
 	}

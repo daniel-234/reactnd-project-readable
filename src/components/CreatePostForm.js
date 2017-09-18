@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PostForm from './PostForm';
 import SelectCategory from './SelectCategory';
-// import CommentForm from './CommentForm';
 import HomeButton from 'react-icons/lib/fa/home';
 
 class CreatePostForm extends Component {

@@ -25,10 +25,7 @@ class App extends Component {
     }
   }
 
-
   render() {
-    console.log(this.props);
-
     /*
      * Get the `match` object from Route props (see '../index.js').
      * A `match` object contains information about how a <Route path>
@@ -39,7 +36,6 @@ class App extends Component {
     const urlParams = this.props.match.params;
     // Get the category value from the params properties.
     const category = urlParams.category;
-
     /*
      * A `location` object is a <Switch> prop used for matching children
      * elements instead of the current history location.

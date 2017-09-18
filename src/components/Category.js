@@ -8,13 +8,6 @@ import HomeButton from 'react-icons/lib/fa/home';
 import { convertToReadableDate } from '../utils/convertDate';
 
 class Category extends Component {
-
-  //  * As the component mounts, populate the posts state.
-
-  // componentDidMount() {
-  //   this.props.getAllPosts();
-  // }
-
 	// Upvote a post.
 	upvote = (postId) => {
 		this.props.votePosts(postId, 'upVote');
@@ -123,14 +116,12 @@ class Category extends Component {
 		          				size={20}
 		          				value={postId}
 		          				onClick={() => this.upvote(postId)}
-		          				// postId={postId}
 		          			/>
 		          			<ArrowDown
 		          				className='down-arrow'
 		          				size={20}
 		          				value={postId}
 		          				onClick={() => this.downvote(postId)}
-		          				// postId={postId}
 		          			/>
 		            	</div>
 		            	{

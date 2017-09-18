@@ -305,7 +305,6 @@ class Post extends Component {
 					isOpen={this.state.showEditCommentModal}
 					contentLabel='Edit Comment Modal'
 				>
-					{console.log(this.state.commentId)}
 					<button
 						className='modal-button'
 						onClick={this.handleCloseEditCommentModal}>Close Edit Comment Modal</button>
