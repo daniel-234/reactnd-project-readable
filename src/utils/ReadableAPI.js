@@ -11,6 +11,16 @@ const headers = {
 }
 
 /*
+ * Get all the categories stored in the server.
+ */
+export const getCategories = () =>
+  fetch(`${api}/categories`, { headers })
+    .then(
+      res => res.json(),
+      error => console.log('An error occurred', error)
+    )
+
+/*
  * Get all the posts stored in the server.
  */
 export const getPosts = () =>

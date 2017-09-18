@@ -1,5 +1,6 @@
 import generateUUID from '../utils/generateID.js';
 import {
+	getCategories,
 	getPosts,
 	getComments,
 	addToPosts,
@@ -36,7 +37,7 @@ export const UPDATE_COMMENT_SCORE = 'UPDATE_COMMENT_SCORE';
  * Other constants.
  */
 
-export const allCategories = ['react', 'redux', 'udacity'];
+// export const allCategories = ['react', 'redux', 'udacity'];
 
 export const sortingTypes = {
 	MOST_RECENT: 'MOST_RECENT',
@@ -53,8 +54,10 @@ export const sortingTypes = {
 /*
  * Set the selected category.
  */
-export function getCategories() {
-	const categories = ['react', 'redux', 'udacity'];
+export function retrieveCategories(data) {
+	const categories = data.categories.map((category) => (
+		category.name
+	));
 	return {
 		type: GET_CATEGORIES,
 		categories
@@ -300,9 +303,15 @@ export function updateCommentsVisibility(data, parentId) {
  */
 export function fetchAllPosts() {
 	return function(dispatch) {
-		dispatch(getCategories())
+		// dispatch(getCategories())
 		// Get all the posts from the server.
-		return getPosts()
+		return getCategories()
+			.then((data) => (
+				dispatch(retrieveCategories(data))
+			))
+			.then(() => (
+				getPosts()
+			))
 			// As data are returned, dispatch an action to dispose of them.
 			.then((data) => (
 				dispatch(receiveAllPosts(data))
