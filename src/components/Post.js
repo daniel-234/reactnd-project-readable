@@ -131,7 +131,6 @@ class Post extends Component {
 		      	/>
 		      </Link>
 	      	<div className='success-delete-message'>
-						<h2>Post deleted successfully!</h2>
 					</div>
 				</div>
 			);
@@ -151,14 +150,19 @@ class Post extends Component {
 
 		return (
 			<div className='container'>
-				<Link
-					to={'/'}
-				>
-					<HomeButton
-	      		size='40'
-	      	/>
-	      </Link>
-				<SelectCategory />
+				<section className='post-details-nav'>
+					<Link
+						to={'/'}
+					>
+						<div className='button-home'>
+							<HomeButton
+			      		size='40'
+			      	/>
+						</div>
+		      </Link>
+					<SelectCategory />
+				</section>
+
 				<div className='single-post-details'>
 	      	{
 	        	/*

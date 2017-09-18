@@ -52,35 +52,44 @@ class Category extends Component {
 		return (
 			<div className='container'>
 				<h2>{visibleCategoryName} {' Posts'} </h2>
-				<Link
-					to={'/'}
-				>
-					<HomeButton
-	      		size='40'
-	      	/>
-	      </Link>
-				<SelectCategory />
-				{
+				<div className='button-home'>
+					<Link
+						to={'/'}
+					>
+						<HomeButton
+		      		size='40'
+		      	/>
+		      </Link>
+				</div>
+				<section className='navigation'>
+					{
+					/*
+					 * Navigation links to select a category View.
+					 */
+					}
+		      <SelectCategory />
+		      <div className='sort-select-form'>
+		      	<form onSubmit={this.handleSubmit}>
+		      		<label>
+		      			Sort posts by: {' '}
+		      		</label>
+		      		<select value= {this.props.sortOrder} onChange={this.handleChange}>
+			      		<option value='MOST_RECENT'>most recent</option>
+			      		<option value='LEAST_RECENT'>least recent</option>
+		      			<option value='HIGHEST_POINTS'>highest points</option>
+		      			<option value='LOWEST_POINTS'>lowest points</option>
+		      		</select>
+		      	</form>
+		      </div>
+		      {
 	      	/*
 	      	 * `Plus` icon that links to the create post form View.
 	      	 */
-	      }
-	      <div className='post-icons'>
-	      	<PostFormLink />
-	      </div>
-	      <div className='sort-select-form'>
-	      	<form onSubmit={this.handleSubmit}>
-	      		<label>
-	      			Sort posts by: {' '}
-	      		</label>
-	      		<select value={this.props.sortOrder} onChange={this.handleChange}>
-		      		<option value='MOST_RECENT'>most recent</option>
-		      		<option value='LEAST_RECENT'>least recent</option>
-	      			<option value='HIGHEST_POINTS'>highest points</option>
-	      			<option value='LOWEST_POINTS'>lowest points</option>
-	      		</select>
-	      	</form>
-	      </div>
+		      }
+		      <div className='post-icons'>
+		      	<PostFormLink />
+		      </div>
+				</section>
 	      {
 	      	/*
 	      	 * Posts list.

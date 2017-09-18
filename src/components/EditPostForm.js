@@ -55,9 +55,11 @@ class EditPostForm extends Component {
   			<Link
 					to={'/'}
 				>
-					<HomeButton
-	      		size='40'
-	      	/>
+					<div className='button-home'>
+            <HomeButton
+              size='40'
+            />
+          </div>
 	      </Link>
         <SelectCategory />
 	  		<div className='create-post-form'>

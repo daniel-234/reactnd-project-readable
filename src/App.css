@@ -1,8 +1,10 @@
 .App {
-  text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .App-header {
+  text-align: center;
   background-color: #222;
   height: 150px;
   padding: 20px;
@@ -11,6 +13,32 @@
 
 .App-intro {
   font-size: large;
+}
+
+.container {
+  text-align: center;
+}
+
+.navigation
+{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sort-select-form
+{
+  flex: 1;
+}
+
+.button-home {
+  margin-top: 1.6em;
+  margin-bottom: 1.4em;
+}
+
+.all-posts-list {
+  margin-top: 2em;
 }
 
 .comment-label-post-reference,
@@ -161,6 +189,12 @@ form>div>div>span {
 
 .post-title {
   margin-bottom: 2px;
+  font-weight: bold;
+}
+
+.post-body {
+  font-size: 0.8em;
+  margin-bottom: 2em;
 }
 
 .select-category {
@@ -180,6 +214,10 @@ form>div>div>span {
 
 .single-post-details {
   font-size: 1.5em;
+}
+
+.single-comment {
+  margin-bottom: 4em;
 }
 
 .up-arrow,
