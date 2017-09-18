@@ -33,6 +33,7 @@ export const CHANGE_SORTING_ORDER = 'CHANGE_SORTING_ORDER';
 export const UPDATE_POSTS_VISIBILITY = 'UPDATE_POSTS_VISIBILITY';
 export const UPDATE_COMMENTS_VISIBILITY = 'UPDATE_COMMENTS_VISIBILITY';
 export const UPDATE_COMMENT_SCORE = 'UPDATE_COMMENT_SCORE';
+export const FLAG_POST_AS_DELETED = 'FLAG_POST_AS_DELETED';
 
 /*
  * Other constants.
@@ -299,6 +300,16 @@ export function updateCommentScore(data) {
 };
 
 /*
+ *	Change the `deleted` property in the deleted post.
+ */
+export function flagPostAsDeleted(postId) {
+	return {
+		type: FLAG_POST_AS_DELETED,
+		postId
+	};
+};
+
+/*
  * Get a data array of posts and return, as payload, an object with
  * an array of all the posts ids filtered to not include the deleted
  * posts.
@@ -407,6 +418,9 @@ export function editSingleComment(commentId, newComment) {
 export function deleteSinglePost(postId) {
 	return function (dispatch) {
 		return deletePost(postId)
+			.then(() => (
+				dispatch(flagPostAsDeleted(postId))
+			))
 			.then(() => (
 				getPosts()
 					// As data are returned, dispatch an action to dispose of them.

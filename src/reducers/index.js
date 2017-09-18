@@ -14,6 +14,7 @@ import {
 	UPDATE_COMMENT,
 	UPDATE_POST_SCORE,
 	UPDATE_COMMENT_SCORE,
+	FLAG_POST_AS_DELETED,
 	UPDATE_POSTS_VISIBILITY,
 	UPDATE_COMMENTS_VISIBILITY,
 	ORDER_POSTS,
@@ -95,7 +96,6 @@ function post(state = initialState.posts, action) {
 		 * object they refer to.
 		 */
 		case RECEIVE_ALL_COMMENTS:
-
 			const comments = action.dataArray;
 			return {
 				...state,
@@ -107,12 +107,19 @@ function post(state = initialState.posts, action) {
 					]
 				}
 			};
-		// case INSERT_POST:
-		// 	console.log(state)
-		// 	return {
-		// 		...state,
-		// 		[postId]: post
-		// 	}
+		case INSERT_POST:
+			// console.log(state)
+			return {
+				...state,
+				[postId]: {
+					...post,
+					/*
+					 * Add a `comments` property to the post just added to the
+					 * store.
+					 */
+					comments: []
+				}
+			}
 		case INSERT_COMMENT:
 			console.log(parentId)
 			return {
@@ -146,12 +153,14 @@ function post(state = initialState.posts, action) {
 					voteScore: postScore
 				}
 			};
-
-		// case UPDATE_POSTS_VISIBILITY:
-		// 	console.log(action.allPosts)
-		// 	return [
-		// 		...action.allPosts
-		// 	];
+		case FLAG_POST_AS_DELETED:
+			return {
+				...state,
+				[postId]: {
+					...state[postId],
+					deleted: true
+				}
+			}
 
 		case UPDATE_COMMENTS_VISIBILITY:
 			const commentsIds = action.commentsIds;
@@ -224,20 +233,20 @@ function comments(state = initialState.comments, action) {
 }
 
 // Populate the `allPosts` array.
-function allPosts(state = [], action) {
+function allPosts(state = initialState.allPosts, action) {
 	const postId = action.postId;
 	switch(action.type) {
 		case RECEIVE_ALL_POSTS:
 			return [
 				...action.allPosts
 			];
-		// case INSERT_POST:
-		// 	console.log(state);
-		// 	console.log(action);
-		// 	return [
-		// 		...state,
-		// 		postId
-		// 	];
+		case INSERT_POST:
+			// console.log(state);
+			// console.log(action);
+			return [
+				...state,
+				postId
+			];
 
 		/*
 		 * When the following action gets triggered by a user who deleted
@@ -255,7 +264,7 @@ function allPosts(state = [], action) {
 
 // TODO refector it.
 // Assign the given post id to its category.
-function postsByCategory(state = initialState, action) {
+function postsByCategory(state = initialState.postsByCategory, action) {
 	const categories = action.categories;
 	let categoriesState = {};
 	switch (action.type) {
@@ -267,16 +276,13 @@ function postsByCategory(state = initialState, action) {
 				}
 			})
 			return categoriesState;
-
 		case RECEIVE_ALL_POSTS:
 			const posts = action.dataObj;
 			const postsIds = action.allPosts;
-
 			let categoriesArray = [];
 			for (const category in state) {
 				categoriesArray.push(category);
 			}
-
 			categoriesArray.map((category) => {
 				categoriesState[category] = {
 					items:
@@ -285,12 +291,19 @@ function postsByCategory(state = initialState, action) {
 						))
 				}
 			})
-
 			return categoriesState;
-
-		// case INSERT_POST:
-		// 	console.log(state)
-
+		case INSERT_POST:
+			const postId = action.postId;
+			const post = action.post;
+			const category = post.category;
+			return {
+				...state,
+				[category]: {
+					items: [
+						...state, postId
+					]
+				}
+			}
 
 		default:
 			return state;
