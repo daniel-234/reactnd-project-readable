@@ -67,7 +67,7 @@ class EditPostForm extends Component {
 				  </div>
 	  		</div>
   		</div>
-  	)
+  	);
   }
 }
 

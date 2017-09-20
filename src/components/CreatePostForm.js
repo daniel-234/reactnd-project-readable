@@ -57,7 +57,7 @@ class CreatePostForm extends Component {
 				   </div>
 	  		</div>
   		</div>
-  	)
+  	);
   }
 }
 

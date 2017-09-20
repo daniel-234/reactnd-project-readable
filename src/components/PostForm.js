@@ -26,6 +26,9 @@ const validate = (values) => {
   } else if (!isNaN(Number(values.author))) {
     errors.author = 'Invalid author. You inserted a number';
   }
+  if (!values.category) {
+    errors.category = 'You must select a category';
+  }
   if (!values.body) {
     errors.body = 'You must insert a post body';
   } else if (values.body.length > 1000) {
@@ -49,6 +52,35 @@ const renderField = ({
     </label>
     <div>
       <input {...input} placeholder={label} type={type} />
+      {touched &&
+        ((error &&
+          <span>
+            {error}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+)
+
+// Custom component to render a `select` component type.
+const selectField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error }
+}) => (
+  <div>
+    <label>
+      {label}
+    </label>
+    <div>
+      <select {...input} placeholder={label} type={type}>
+        <option />
+        <option value='react'>React</option>
+        <option value='redux'>Redux</option>
+        <option value='udacity'>Udacity</option>
+      </select>
       {touched &&
         ((error &&
           <span>
@@ -113,23 +145,12 @@ let PostForm = ((props) => {
         component={renderField}
         label='Author'
       />
-      <div>
-        <label>
-          Select category
-        </label>
-        <div>
-          <Field
-            className='category-select'
-            name='category'
-            component='select'
-            label='Select category'>
-              <option value='react'>React</option>
-              <option value='redux'>Redux</option>
-              <option value='udacity'>Udacity</option>
-          </Field>
-        </div>
-      </div>
-
+      <Field
+        className='post-body-select'
+        name='category'
+        component={selectField}
+        label='Category'
+      />
       <Field
         className='post-body-textarea'
         name='body'
