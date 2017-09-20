@@ -24,7 +24,7 @@ const validate = (values) => {
   } else if (values.author.length > 25) {
     errors.author = 'Must be 25 characters or less';
   } else if (!isNaN(Number(values.author))) {
-    errors.author = 'Invalid title. You inserted a number';
+    errors.author = 'Invalid author. You inserted a number';
   }
   if (!values.body) {
     errors.body = 'You must insert a post body';

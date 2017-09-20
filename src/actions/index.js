@@ -224,7 +224,7 @@ export function insertPost(data) {
 };
 
 /*
- * Pass a single post object to the store.
+ * Pass a single comment object to the store.
  */
 export function insertComment(data) {
 	console.log(data);

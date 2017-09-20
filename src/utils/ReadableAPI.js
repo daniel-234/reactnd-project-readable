@@ -80,8 +80,8 @@ export const getSinglePost = (postId) =>
 /*
  * Get the details of a single comment.
  */
-export const getSingleComment = (postId) =>
-  fetch(`${api}/comments/` + postId, { headers })
+export const getSingleComment = (commentId) =>
+  fetch(`${api}/comments/` + commentId, { headers })
     .then(
       res => res.json(),
       error => console.log('An error occurred', error)

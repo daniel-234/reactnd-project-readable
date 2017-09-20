@@ -19,6 +19,8 @@ class Post extends Component {
 		this.state = {
 			showAddCommentModal: false,
 			showEditCommentModal: false,
+			// Reference the id of the comment to be managed by the open modal.
+			commentId: null
 		};
 
 		this.handleOpenAddCommentModal = this.handleOpenAddCommentModal.bind(this);
@@ -27,10 +29,11 @@ class Post extends Component {
 		this.handleCloseEditCommentModal = this.handleCloseEditCommentModal.bind(this);
 	}
 
-	handleOpenAddCommentModal = ({ commentId }) => {
+	handleOpenAddCommentModal = () => {
 		this.setState(() => ({
 			showAddCommentModal: true,
 			showEditCommentModal: false,
+			commentId: null
 		}));
 	}
 
@@ -38,13 +41,21 @@ class Post extends Component {
 		this.setState(() => ({
 			showAddCommentModal: false,
 			showEditCommentModal: false,
+			commentId: null
 		}));
 	}
 
+	/*
+	 * Change the local state of the `Post` component to manage the
+	 * opening operation of the Modal in edit mode.
+	 * Keep close the Modal in add mode and assign the id value of the
+	 * comment to be edited to the relative state property.
+	 */
 	handleOpenEditCommentModal = ({ commentId }) => {
 		this.setState(() => ({
 			showEditCommentModal: true,
 			showAddCommentModal: false,
+			commentId
 		}));
 	}
 
@@ -52,6 +63,7 @@ class Post extends Component {
 		this.setState(() => ({
 			showEditCommentModal: false,
 			showAddCommentModal: false,
+			commentId: null
 		}));
 	}
 
@@ -77,13 +89,18 @@ class Post extends Component {
 		this.props.deletePost(postId);
 	}
 
-	addComment = (postId) => {
-		this.handleOpenAddCommentModal({ postId })
+	addComment = () => {
+		this.handleOpenAddCommentModal()
 	}
 
-	editThisComment = (commentId) => (
+ /*
+  * Call a function to handle the operation of opening the Modal
+  * in editing mode and pass it the commentId that reference the
+  * actual comment to be edited.
+  */
+	editThisComment = (commentId) => {
 		this.handleOpenEditCommentModal({ commentId })
-	);
+	}
 
 	deleteThisComment = (commentId) => {
 		const parentId = this.props.commentsToPost[commentId].parentId;
@@ -108,7 +125,7 @@ class Post extends Component {
     const postId = this.props.post.id;
     this.props.addAComment({
     	author: values.author,
-      body: values.comment,
+      body: values.body,
       parentId: postId
     });
   }
@@ -259,6 +276,12 @@ class Post extends Component {
 					        <p className='comment-separator'>
 					          |
 					        </p>
+					        {
+					        	/*
+										 * As the `edit` menu option is clicked, call `editThisComment`, passing
+										 * the commentId as argument.
+					        	 */
+					        }
 					        <p className='comment-edit' onClick={() => this.editThisComment(commentId)}>
 					          edit
 					        </p>
@@ -286,10 +309,10 @@ class Post extends Component {
 	      	<button
 	      		className='modal-button'
 	      		onClick={this.handleCloseAddCommentModal}>Close Add Comment Modal</button>
-					<div className='edit-comment-modal-container'>
+					<div className='add-comment-modal-container'>
 				    <CommentForm
 				    	onSubmit={this.submitComment}
-				    	addComment={this.props.addAComment}
+				    	// addComment={this.props.addComment}
 				    />
 					</div>
 	      </Modal>

@@ -4,9 +4,6 @@ import InitializeCommentForm from '../containers/InitializeCommentForm';
 class EditCommentForm extends Component {
 	// Triggered by onSubmit in the post form.
   submitComment = (values) => {
-    console.log(values);
-    console.log(this.props);
-
     const commentId = values.id;
     /*
      * Call the `displayPost` property function passed

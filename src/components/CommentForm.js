@@ -17,7 +17,7 @@ const validate = (values) => {
   } else if (values.author.length > 25) {
     errors.author = 'Must be 25 characters or less';
   } else if (!isNaN(Number(values.author))) {
-    errors.author = 'Invalid title. You inserted a number';
+    errors.author = 'Invalid author. You inserted a number';
   }
   if (!values.body) {
     errors.body = 'You must insert a comment body';
@@ -121,7 +121,7 @@ let CommentForm = ((props) => {
 
 // Clear the form after submitting.
 const afterSubmit = (result, dispatch) => (
-	dispatch(reset('posts'))
+	dispatch(reset('comment'))
 );
 
 /*
@@ -135,7 +135,7 @@ const afterSubmit = (result, dispatch) => (
  * that wraps our form Component and can provide it props and functionality.
  */
 CommentForm = reduxForm({
-	form: 'posts',
+	form: 'comment',
   validate,
 	onSubmitSuccess: afterSubmit
 })(CommentForm)

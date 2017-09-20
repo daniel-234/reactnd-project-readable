@@ -121,14 +121,14 @@ form>div>div>span {
   color: #700;
 }
 
-.comment-form-container>form>div>label,
+.add-comment-modal-container>form>div>label,
 .edit-comment-modal-container>form>div>label
 {
   min-width: 20%;
   padding: 6px 0.25%;
 }
 
-.comment-form-container>form>div>div,
+.add-comment-modal-container>form>div>label,
 .edit-comment-modal-container>form>div>div
 {
   max-width: 70%;
