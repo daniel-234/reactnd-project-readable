@@ -82,3 +82,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Adding features to a container component:
 * [GithHub - Allow connect to more than one component](https://github.com/reactjs/react-redux/issues/647)
 * [Stackoverflow - Passing `props` to React-Redux Container Component](https://stackoverflow.com/questions/37778153/passing-props-to-react-redux-container-component)
+* Latest fix to the code:
+* [Stackoverflow - Cannot resolve module 'react-dom'](https://stackoverflow.com/questions/42574648/cannot-resolve-module-react-dom)
+* [Stackoverflow - How to get rid of underline for Link component of React Router](https://stackoverflow.com/questions/37669391/how-to-get-rid-of-underline-for-link-component-of-react-router)
+* [Stackoverflow - How do I keep `document.title` updated in React Router](https://stackoverflow.com/questions/26266675/how-do-i-keep-document-title-updated-in-react-app)
