@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InitializeCommentForm from './InitializeCommentForm';
+import InitializeCommentForm from '../containers/InitializeCommentForm';
 
 class EditCommentForm extends Component {
 	// Triggered by onSubmit in the post form.

@@ -1,8 +1,84 @@
 import React from 'react';
 import { Field, reduxForm, reset } from 'redux-form';
 
-let CommentForm = props => {
-	const { handleSubmit } = props;
+/*
+ * Synchronous client-side form validation.
+ *
+ * Provide the redux-form with a validation function that takes an
+ * object of form values and returns an object of errors.
+ * This is done by providing the validation function to the decorator
+ * as a config parameter, or to the decorated form component as a prop.
+ * See redux-form Synchronous Validation Example.
+ */
+const validate = (values) => {
+  const errors = {};
+  if (!values.author) {
+    errors.author = 'Required';
+  } else if (values.author.length > 25) {
+    errors.author = 'Must be 25 characters or less';
+  } else if (!isNaN(Number(values.author))) {
+    errors.author = 'Invalid title. You inserted a number';
+  }
+  if (!values.body) {
+    errors.body = 'You must insert a comment body';
+  } else if (values.body.length > 1000) {
+    errors.body = 'Comment body must be 1000 characters or less'
+  } else if (!isNaN(Number(values.body))) {
+    errors.body = 'Invalid body. You inserted a number';
+  }
+  return errors;
+};
+
+// Custom component to render an `input` component type.
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error }
+}) => (
+  <div>
+    <label>
+      {label}
+    </label>
+    <div>
+      <input {...input} placeholder={label} type={type} />
+      {touched &&
+        ((error &&
+          <span>
+            {error}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+)
+
+// Custom component to render a `textarea` component type.
+const textAreaField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error }
+}) => (
+  <div>
+    <label>
+      {label}
+    </label>
+    <div>
+      <textarea {...input} placeholder={label} type={type} />
+      {touched &&
+        ((error &&
+          <span>
+            {error}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+)
+
+let CommentForm = ((props) => {
+	const { handleSubmit, submitting } = props;
 
 	return (
     /*
@@ -16,23 +92,32 @@ let CommentForm = props => {
      * form Component, you can give it your own function and it will use
      * that instead".
      */
-		<form onSubmit={ handleSubmit }>
-      <div>
-        <label className='comment-author-label'>Author</label>
-        <div>
-          <Field className='comment-author-input' name='author' component='input' />
-        </div>
-      </div>
-      <div>
-        <label className='comment-body-label'>Body</label>
-        <div>
-          <Field className='comment-body-textarea' name='comment' component='textarea' />
-        </div>
-      </div>
-      <button className='comment-submit-button' type='submit'>Submit</button>
-		</form>
-	)
-}
+    <form onSubmit={ handleSubmit }>
+      <Field
+        className='comment-input-author'
+        name='author'
+        type='text'
+        component={renderField}
+        label='Author'
+      />
+      <Field
+        className='comment-body-textarea'
+        name='body'
+        component={textAreaField}
+        label='Insert comment body'
+      />
+      <button
+        className='comment-submit-button'
+        type='submit'
+        disabled={submitting}
+      >
+        Submit
+      </button>
+    </form>
+
+
+	);
+});
 
 // Clear the form after submitting.
 const afterSubmit = (result, dispatch) => (
@@ -51,6 +136,7 @@ const afterSubmit = (result, dispatch) => (
  */
 CommentForm = reduxForm({
 	form: 'posts',
+  validate,
 	onSubmitSuccess: afterSubmit
 })(CommentForm)
 

@@ -50,8 +50,6 @@ const textAreaField = ({
 )
 
 let InitializeCommentForm = ((props) => {
-  console.log(props);
-
   commentId = props.commentId;
 	const { handleSubmit, submitting } = props;
 	return (
