@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm, reset } from 'redux-form';
 
 let CommentForm = props => {
-	const { handleSubmit, getPosts } = props;
+	const { handleSubmit } = props;
 
 	return (
     /*

@@ -121,6 +121,12 @@ form>div>div>span {
   color: #700;
 }
 
+.comment-author-label,
+.comment-body-label
+{
+  padding: 6px 0.25%;
+}
+
 .post-submit-button,
 .comment-submit-button
 {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { addPostToServer, addCommentToServer, fetchAllPosts } from '../actions';
 import CreatePostForm from '../components/CreatePostForm';

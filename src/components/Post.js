@@ -9,8 +9,6 @@ import { convertToReadableDate } from '../utils/convertDate';
 import ThumbsUp from 'react-icons/lib/fa/thumbs-o-up';
 import ThumbsDown from 'react-icons/lib/fa/thumbs-o-down';
 import HomeButton from 'react-icons/lib/fa/home';
-import CommentsButton from 'react-icons/lib/fa/comments-o';
-import EditButton from 'react-icons/lib/fa/edit';
 import DeleteButton from 'react-icons/lib/fa/trash-o';
 import AddTextIcon from 'react-icons/lib/fa/plus-circle';
 

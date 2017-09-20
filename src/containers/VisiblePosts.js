@@ -49,7 +49,7 @@ const getVisiblePosts = (postIds, posts, sortOrder) => {
 			return sortedIds;
 		default:
 			return ids;
-	};
+	}
 };
 
 // Define props to pass to the presentational component.

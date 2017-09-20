@@ -200,7 +200,6 @@ export function addCommentToServer(comment) {
 		// Generate a UUID for this comment.
 		const id = generateUUID();
 		const timestamp = Date.now();
-		const postId = comment.parentId;
 		return addToComments({ ...comment, id: id, timestamp: timestamp })
 			.then(() => (
 				getSingleComment(id)

@@ -82,7 +82,7 @@ const textAreaField = ({
 
 let InitializePostForm = ((props) => {
   postId = props.post.id;
-	const { handleSubmit, load, submitting } = props;
+	const { handleSubmit, submitting } = props;
 	return (
     /*
      * "Redux form provides a special `handleSubmit` function that we

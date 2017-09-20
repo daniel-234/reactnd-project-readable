@@ -53,7 +53,7 @@ let InitializeCommentForm = ((props) => {
   console.log(props);
 
   commentId = props.commentId;
-	const { handleSubmit, load, submitting } = props;
+	const { handleSubmit, submitting } = props;
 	return (
     /*
      * "Redux form provides a special `handleSubmit` function that we

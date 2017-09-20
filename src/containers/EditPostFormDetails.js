@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { editSinglePost, fetchAllPosts } from '../actions';
 import EditPostForm from '../components/EditPostForm';
